@@ -40,7 +40,7 @@ Outlines how contributors should interact with each other. Please read and follo
 
 ## Licensing 
 
-This project leverages an open source license. For more details, please check out the `LICENSE.md` file.
+This project leverages an open source license. For more details, please check out the `LICENSE` file.
 
 ## Contact Information
 
