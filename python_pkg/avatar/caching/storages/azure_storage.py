@@ -63,23 +63,19 @@ class AzureStorage(BaseCacheStorage):
 
     async def delete(self, path: str) -> None:
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
-        print("Deleting ..", path)
         async with blob_service_client:
             container_client = blob_service_client.get_container_client(self.container_name)
             try:
                 blob_client = container_client.get_blob_client(path)
             except ResourceNotFoundError:
-                print("Blob not found")
                 return
             
             await blob_client.delete_blob()
 
     async def deleteAll(self, avatarId: str) -> None:
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
-        print("Deleting all ..", avatarId)
         async with blob_service_client:
             container_client = blob_service_client.get_container_client(self.container_name)
             blobs = container_client.list_blobs(name_starts_with=avatarId)
-            print("Blobs", blobs)
             async for blob in blobs:
-                await container_client.delete_blob(blob)
+                await container_client.delete_blob(blob.name)

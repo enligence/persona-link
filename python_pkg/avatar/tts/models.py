@@ -19,10 +19,3 @@ class AudioInstance(BaseModel):
     content: bytes | AsyncGenerator[bytes, None]
     visemes: Optional[List[Viseme]]
     word_timestamps: Optional[List[WordTimestamp]]
-
-    @model_validator(mode = 'after')
-    def check_content(cls, values):
-        streaming, content = values.get('streaming'), values.get('content')
-        if streaming and not isinstance(content, AsyncGenerator[bytes, None]):
-            raise ValueError('If streaming is True, content must be of BytesIO type')
-        return values

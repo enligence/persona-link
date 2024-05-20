@@ -20,6 +20,8 @@ from avatar.caching.base.models import (
 )
 from avatar.caching.hashing import md5hash
 from avatar.tts.models import Viseme
+from avatar.tts.azure_tts import AzureTTS, AzureTTSVoiceSettings
+from avatar.tts.models import AudioInstance
 
 load_dotenv()
 
@@ -72,4 +74,24 @@ async def test_cache():
     assert await cache.get("avatarId", "text") == None
     await azure_storage.deleteAll("avatarId")
     await sqlite_db.deleteAll("avatarId")
+    
+    # test azure TTS
+    settings = AzureTTSVoiceSettings(
+        subscription_key=os.getenv("AZURE_SPEECH_KEY"),
+        region=os.getenv("AZURE_SPEECH_REGION"),
+        name="en-US-JennyNeural",
+        visemes=True,
+        word_timestamps=True,
+        streaming=False
+    )
+    
+    tts = AzureTTS()
+    text = "This is a test."
+    audio: AudioInstance = await tts.synthesize_speech(text, settings=settings)
+    assert audio.content is not None and len(audio.content) > 0
+    assert audio.visemes is not None and len(audio.visemes) > 0
+    assert audio.word_timestamps is not None and len(audio.word_timestamps) > 0
+    
+    
+    
     
