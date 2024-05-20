@@ -107,7 +107,14 @@ class Cache:
         return record
 
     async def delete(self, key: str) -> None:
-        await self.storage.delete(key)
+        record: Record = await self.db.get(key)
+        if record is None:
+            return
+        await self.storage.delete(record.storage_paths.media_path)
+        if record.storage_paths.viseme_path:
+            await self.storage.delete(record.storage_paths.viseme_path)
+        if record.storage_paths.word_timestamp_path:
+            await self.storage.delete(record.storage_paths.word_timestamp_path)
         await self.db.delete(key)
 
     async def deleteAll(self, avatarId: str) -> None:

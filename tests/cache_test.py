@@ -8,6 +8,7 @@ sys.path.insert(
 )
 
 from avatar.caching.storages.local_storage import LocalStorage
+from avatar.caching.storages.azure_storage import AzureStorage
 from avatar.caching.db.relational import RelationalDB
 from avatar.caching.cache import Cache
 from avatar.caching.base.models import (
@@ -29,6 +30,7 @@ print(sys.path)
 @pytest.mark.asyncio
 async def test_cache():
     local_storage = LocalStorage()
+    azure_storage = AzureStorage()
     sqlite_db = RelationalDB()
     await sqlite_db.init_db()
     await local_storage.deleteAll("avatarId")
@@ -50,3 +52,24 @@ async def test_cache():
     assert urls.word_timestamp_url is None
     await cache.delete(record.key)
     assert await cache.get("avatarId", "text") == None
+    
+    # test azure storage
+    #await azure_storage.deleteAll("avatarId")
+    await local_storage.deleteAll("avatarId")
+    await sqlite_db.deleteAll("avatarId")
+    
+    cache = Cache(azure_storage, sqlite_db, md5hash)
+    await cache.put("avatarId", "text", data)
+    record: Record = await cache.get("avatarId", "text")
+    assert record is not None
+    assert record.avatarId == "avatarId"
+    urls: Urls = await cache.get_urls(record)
+    print(urls)
+    assert urls.media_url is not None
+    assert urls.viseme_url is not None
+    assert urls.word_timestamp_url is None
+    await cache.delete(record.key)
+    assert await cache.get("avatarId", "text") == None
+    await azure_storage.deleteAll("avatarId")
+    await sqlite_db.deleteAll("avatarId")
+    
