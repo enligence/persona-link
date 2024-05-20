@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from python_pkg.avatar.caching.base.models import Record
+from avatar.caching.base.models import Record
 
 class BaseCacheDB(ABC):
     """
@@ -28,7 +28,14 @@ class BaseCacheDB(ABC):
         Increment the usage count of the record for the given key
         """
         pass
-
+    
+    @abstractmethod
+    async def getUsageCount(self, key: str) -> int:
+        """
+        Get the usage count of the record for the given key
+        """
+        pass
+    
     @abstractmethod
     async def delete(self, key: str) -> None:
         """

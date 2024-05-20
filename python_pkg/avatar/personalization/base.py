@@ -6,7 +6,7 @@ text that can be play before or after the main message.
 
 from abc import ABC, abstractmethod
 
-from python_pkg.avatar.personalization.models import Personalization
+from avatar.personalization.models import Personalization
 
 
 class PersonalizationBase(ABC):

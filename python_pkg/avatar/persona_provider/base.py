@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from python_pkg.avatar.persona_provider.models import SpokenAvatarInstance
+from avatar.persona_provider.models import SpokenAvatarInstance
 
 
 """

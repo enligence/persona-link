@@ -1,4 +1,4 @@
-from python_pkg.avatar.persona_provider.base import AvatarType, PersonaBase, SpokenAvatarInstance, TTSBase
+from avatar.persona_provider.base import AvatarType, PersonaBase, SpokenAvatarInstance, TTSBase
 
 
 class AudioAvatar(PersonaBase):

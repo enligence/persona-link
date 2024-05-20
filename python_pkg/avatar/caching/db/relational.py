@@ -1,49 +1,56 @@
-import asyncio
 from tortoise import Tortoise
 from tortoise.exceptions import DoesNotExist
 from avatar.caching.base.models import Record
 from avatar.caching.base.base_db import BaseCacheDB
-from avatar.caching.base.models import DBRecord
+from avatar.caching.db.models import Record as DBRecord, UsageLog
 import os
 from typing import Optional
 
 class RelationalDB(BaseCacheDB):
 
     def __init__(self):
-        self.DB_URL = os.getenv("DB_URL")
-        if self.DB_URL is None:
+        self.DB_URL = os.getenv("DB_URL", None)
+        if not self.DB_URL:
             raise ValueError("DB_URL must be set in ENV")
-        
-        self.init_future = asyncio.ensure_future(self.init_db())
     
     async def init_db(self):
         await Tortoise.init(
             db_url=self.DB_URL,
-            modules={'models': ['models']}
+            modules={'models': ['avatar.caching.db.models']}
         )
         await Tortoise.generate_schemas()
 
     async def get(self, key: str) -> Optional[Record]:
         try:
-            record = await DBRecord.get(key=key)
-            return Record.from_db(record.dict())
+            record: DBRecord = await DBRecord.get(key=key)
+            return Record.model_validate(record.__dict__)
         except DoesNotExist:
             return None
 
     async def put(self, record: Record) -> None:
         record_dict = record.model_dump()
-        record_dict["filetypes"] = ','.join(record_dict["filetypes"])
-        db_record = DBRecord(**record_dict)
-        await db_record.save()
+        
+        if record.storage_paths:
+            record_dict['storage_paths'] = record.storage_paths.model_dump()
+        if record.metadata:
+            record_dict['metadata'] = record.metadata.model_dump()
+            
+        await DBRecord.create(**record_dict)
 
     async def incrementUsage(self, key: str) -> None:
-        record = await self.get(key)
-        if record:
-            record.timesUsed += 1
-            await record.save()
+        record: DBRecord = await DBRecord.get_or_none(key=key)
+        if not record:
+            print(f"No record found with key {key}")
+        await UsageLog.create(record=record)
+        
+    async def getUsageCount(self, key: str) -> int:
+        record = await DBRecord.get_or_none(key=key)
+        if record is None:
+            return 0
+        return await UsageLog.filter(record=record).count()
 
     async def delete(self, key: str) -> None:
-        record = await self.get(key)
+        record = await DBRecord.get_or_none(key=key)
         if record:
             await record.delete()
 

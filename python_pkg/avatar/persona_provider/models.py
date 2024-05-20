@@ -1,10 +1,10 @@
 # Enumeration for the type of avatar
 from enum import Enum
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, model_validator, ConfigDict
 from io import BytesIO
 from typing import AsyncGenerator, List, Optional
 
-from python_pkg.avatar.tts.models import Viseme
+from avatar.tts.models import Viseme
 
 class AvatarType(str, Enum):
     """
@@ -15,12 +15,13 @@ class AvatarType(str, Enum):
 
 
 class SpokenAvatarInstance(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed = True)  #skip the validation for any custom/unrecognized types. like AsyncGenerator
     avatar_type: AvatarType = AvatarType.AUDIO
     streaming: bool = False
     content: bytes | AsyncGenerator[bytes, None]
     visemes: Optional[List[Viseme]]
 
-    @model_validator(pre=True)
+    @model_validator(mode="after")
     def check_content_and_visemes(cls, values):
         avatar_type, visemes, streaming, content = values.get('avatar_type'), values.get('visemes'), values.get('streaming'), values.get('content')
         if avatar_type == AvatarType.AUDIO and not visemes:

@@ -51,3 +51,7 @@ If you have any questions, comments, or concerns, feel free to contact us. We ar
 By contributing to Persona Link, you're helping shape the future of digital human technology. Together, we can create new connections, new experiences, and ultimately, a new world.
 
 Thank you for your interest in Persona Link. We can't wait to build the future with you!
+
+```
+poetry install --extras "azure postgres azure-tts local-storage"
+```

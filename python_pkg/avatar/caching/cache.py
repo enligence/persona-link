@@ -1,41 +1,118 @@
-from base import BaseCacheStorage, BaseCacheDB
+from avatar.caching.base.base_storage import BaseCacheStorage
+from avatar.caching.base.base_db import BaseCacheDB
 from typing import Any, Callable, Optional
 from datetime import datetime
+import json
+
+from avatar.caching.base.models import (
+    Record,
+    DataToStore,
+    EXTENSION_MAPPING,
+    ContentType,
+    StoragePaths,
+    Urls,
+)
+
 
 class Cache:
     """
-    Class for caching of Avatar video / audio as per the 
-    avatar type. Caching requires a blob storage for files, 
+    Class for caching of Avatar video / audio as per the
+    avatar type. Caching requires a blob storage for files,
     database for metadata, and a hashing method to generate
     unique keys for the data.
     """
-    def __init__(self, storage: BaseCacheStorage, db: BaseCacheDB, hashFn: Callable[[Any], str]):
+
+    def __init__(
+        self, storage: BaseCacheStorage, db: BaseCacheDB, hashFn: Callable[[Any], str]
+    ):
+        if storage is None:
+            raise ValueError("storage cannot be None")
         self.storage = storage
+        if db is None:
+            raise ValueError("db cannot be None")
         self.db = db
+        if hashFn is None:
+            raise ValueError("hashFn cannot be None")
         self.hashFn = hashFn
 
-    def get(self, avatarId: str, text: str) -> Optional[str]:
+    async def get(self, avatarId: str, text: str) -> Optional[Record]:
         key = self.hashFn(avatarId + text)
-        record = self.db.get(key)
+        record = await self.db.get(key)
         if record is None:
             return None
-        self.db.incrementUsage(key)
-        # get the url from storage
-        return self.storage.getUrl(record.path)
+        await self.db.incrementUsage(key)
+        return record
     
-    def put(self, avatarId: str, text: str, data: bytes, isPersonalization: bool = False) -> None:
+    async def get_urls(self, record: Record) -> Urls:
+        return Urls(
+            media_url = await self.storage.get(record.storage_paths.media_path),
+            viseme_url = await self.storage.get(record.storage_paths.viseme_path) if record.storage_paths.viseme_path else None,
+            word_timestamp_url = await self.storage.get(record.storage_paths.word_timestamp_path) if record.storage_paths.word_timestamp_path else None,
+        )
+        
+    async def getUsageCount(self, key: str) -> int:
+        return await self.db.getUsageCount(key)
+
+    async def put(
+        self,
+        avatarId: str,
+        text: str,
+        data: DataToStore,
+        isPersonalization: bool = False,
+    ) -> Record:
         key = self.hashFn(avatarId + text)
-        self.storage.put(path, data)
-        record = Record(id=path, avatarId=avatarId, text=text, path=path, created=datetime.now(), isPersonalization=isPersonalization)
-        self.db.put(record)
+        media_path = await self.storage.put(
+            avatarId,
+            data.binary_data,
+            f"{key}{EXTENSION_MAPPING[data.content_type]}",
+            data.content_type,
+        )
+        visemes_path = None
+        word_timestamps_path = None
+        if data.visemes is not None:
+            viseme_bytes = json.dumps([v.model_dump() for v in data.visemes]).encode(
+                "utf-8"
+            )  # Convert Viseme instances to dict, then to JSON string, then to bytes
+            visemes_path = await self.storage.put(
+                avatarId, viseme_bytes, f"{key}-visemes.json", ContentType.JSON
+            )
 
-    def delete(self, key: str) -> None:
-        self.storage.delete(key)
-        self.db.delete(key)
+        if data.word_timestamps is not None:
+            word_timestamps_bytes = json.dumps(
+                [w.model_dump() for w in data.word_timestamps]
+            ).encode("utf-8")
+            word_timestamps_path = await self.storage.put(
+                avatarId,
+                word_timestamps_bytes,
+                f"{key}-word-timestamps.json",
+                ContentType.JSON,
+            )
 
-    def deleteAll(self, avatarId: str) -> None:
-        self.storage.deleteAll(avatarId)
-        self.db.deleteAll(avatarId)
-    
-    def incrementUsage(self, key: str) -> None:
-        self.db.incrementUsage(key)
+        record = Record(
+            key=key,
+            avatarId=avatarId,
+            text=text,
+            created=datetime.now(),
+            isPersonalization=isPersonalization,
+            metadata=data.metadata,
+            storage_paths=StoragePaths(
+                media_path=media_path,
+                viseme_path=visemes_path,
+                word_timestamp_path=word_timestamps_path,
+            ),
+        )
+
+        await self.db.put(record)
+        
+        return record
+
+    async def delete(self, key: str) -> None:
+        await self.storage.delete(key)
+        await self.db.delete(key)
+
+    async def deleteAll(self, avatarId: str) -> None:
+        await self.storage.deleteAll(avatarId)
+        await self.db.deleteAll(avatarId)
+
+    async def incrementUsage(self, key: str) -> None:
+        await self.db.incrementUsage(key)

@@ -6,8 +6,10 @@ import os
 from typing import AsyncGenerator
 from avatar.caching.base import BaseCacheStorage
 from azure.storage.blob.aio import BlobServiceClient, BlobClient
-from azure.storage.blob import generate_blob_sas, BlobSasPermissions
+from azure.storage.blob import generate_blob_sas, BlobSasPermissions, ContentSettings
 from datetime import datetime, timedelta
+
+from avatar.caching.base.models import ContentType
 
 class AzureStorage(BaseCacheStorage):
     """
@@ -39,15 +41,15 @@ class AzureStorage(BaseCacheStorage):
         if self.container_name is None:
             raise ValueError("AZURE_STORAGE_CONTAINER_NAME must be set in ENV")
 
-    async def put(self, avatarId: str, data: bytes | AsyncGenerator[bytes, None], key: str, extension: str) -> None:
-        path = f"{avatarId}/{key}.{extension}"
+    async def put(self, avatarId: str, data: bytes | AsyncGenerator[bytes, None], filename: str, content_type: ContentType) -> str:
+        path = f"{avatarId}/{filename}"
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
 
         async with blob_service_client:
             container_client = blob_service_client.get_container_client(self.container_name)
-
-            await container_client.upload_blob(path, data, overwrite=True)
-
+            await container_client.upload_blob(path, data, overwrite=True, content_settings=ContentSettings(content_type=content_type))
+        return path
+    
     async def get(self, path: str) -> str:
         # get temporary url to the resource that is publicly accessible for streaming
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)

@@ -1,4 +1,4 @@
-from python_pkg.avatar.persona_provider.models import AvatarType, PersonaBase, SpokenAvatarInstance
+from avatar.persona_provider.models import AvatarType, PersonaBase, SpokenAvatarInstance
 from pydantic import BaseModel, model_validator
 import asyncio
 from typing import Optional
@@ -16,7 +16,7 @@ class HeygenAvatarSettings(BaseModel):
     test: bool = True
     api_token: str
 
-    @model_validator(pre=True)
+    @model_validator(mode="after")
     def validate_background_settings(cls, values):
         background_color, background_type, background_asset_id = values.get('background_color'), values.get('background_type'), values.get('background_asset_id')
         if background_type == "color" and not background_color:

@@ -1,7 +1,7 @@
 from io import BytesIO
-from python_pkg.avatar.persona_provider.base import AudioInstance, TTSBase
+from avatar.persona_provider.base import AudioInstance, TTSBase
 import os
-from azure.cognitiveservices.speech import SpeechConfig, SpeechSynthesisVisemeEventArgs
+from azure.cognitiveservices.speech import SpeechConfig, SpeechSynthesisVisemeEventArgs, SpeechSynthesisWordBoundaryEventArgs
 import azure.cognitiveservices.speech as speechsdk
 from pydantic import BaseModel
 
@@ -41,6 +41,19 @@ class AzureTTS(TTSBase):
                     visemes.append(viseme_info)
 
                 speech_synthesizer.viseme_received.connect(viseme_cb)
+                
+            if settings.het("word_timestamps", False):
+                word_timestamps = []
+                def word_boundary_cb(evt: SpeechSynthesisWordBoundaryEventArgs):
+                    word_timestamps.append({
+                        "text": evt.text,
+                        "offset": evt.audio_offset / 10000,
+                        "duration": evt.duration / 10000,
+                        "text_offset": evt.text_offset,
+                        "word_length": evt.word_length
+                    })
+
+                speech_synthesizer.word_boundary.connect(word_boundary_cb)
 
 
             result = speech_synthesizer.speak_text_async(text).get()
@@ -51,7 +64,8 @@ class AzureTTS(TTSBase):
             return AudioInstance(
                 streaming = stream,
                 content = result.audio_data if stream else BytesIO(result.audio_data),
-                visemes = visemes if settings.get("visemes", False) else None
+                visemes = visemes if settings.get("visemes", False) else None,
+                word_timestamps = word_timestamps if settings.get("word_timestamps", False) else None
             )
         except Exception as e:
             raise Exception(f"Error in Azure TTS: {str(e)}")
