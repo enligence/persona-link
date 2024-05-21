@@ -1,35 +1,9 @@
-from avatar.persona_provider.models import AvatarType, PersonaBase, SpokenAvatarInstance
-from pydantic import BaseModel, model_validator
+from avatar.persona_provider.models import AvatarType, SpeakingAvatarInstance
+from avatar.persona_provider.base import PersonaBase
 import asyncio
-from typing import Optional
 from api_client import APIClient
+from avatar.persona_provider.heygen.models import HeygenAvatarSettings
 
-class HeygenAvatarSettings(BaseModel):
-    avatar_id: str
-    avatar_style: str
-    voice_id: str
-    background_color: Optional[str] = None
-    background_type: str = "color"
-    background_asset_id: Optional[str] = None
-    width: int = 640
-    height: int = 480
-    test: bool = True
-    api_token: str
-
-    @model_validator(mode="after")
-    def validate_background_settings(cls, values):
-        background_color, background_type, background_asset_id = values.get('background_color'), values.get('background_type'), values.get('background_asset_id')
-        if background_type == "color" and not background_color:
-            raise ValueError('background_color must be provided for color background type')
-        if (background_type == "image" or background_type == "video") and not background_asset_id:
-            raise ValueError('background_asset_id must be provided for asset background type')
-        if background_type not in ["color", "image", "video"]:
-            raise ValueError('background_type must be one of color, image or video')
-        
-        avatar_style = values.get('avatar_style')
-        if avatar_style not in ["normal", "circle", "closeUp"]:
-            raise ValueError('avatar_style must be one of normal, circle or closeUp')
-        return values
 
 class HeygenAvatar(PersonaBase):
     """
@@ -74,7 +48,7 @@ class HeygenAvatar(PersonaBase):
                 {
                     "character": {
                         "type": "avatar",
-                        "avatar_id": settings.avatar_id,
+                        "avatar_id": settings.heygen_id,
                         "avatar_style": settings.avatar_style
                     },
                     "voice": {
@@ -92,20 +66,18 @@ class HeygenAvatar(PersonaBase):
             "test": settings.test
         }
 
-    async def speak(self, text: str, settings: dict = {}) -> SpokenAvatarInstance:
+    async def generate(self, text: str, settings: HeygenAvatarSettings) -> SpeakingAvatarInstance:
         """
         Speak the given text
         """
 
-        heygen_settings = HeygenAvatarSettings(**settings)
-
         headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "x-api-key": heygen_settings.api_token
+            "x-api-key": settings.api_token
         }
 
-        payload = self.formPayload(text, heygen_settings)
+        payload = self.formPayload(text, settings)
         result = await APIClient().post_request(self.generate_url, headers, payload)
         
         if "error" in result and result["error"] is not None:
@@ -116,7 +88,7 @@ class HeygenAvatar(PersonaBase):
         retrieve_url = f"{self.retrieve_url}?video_id={video_id}"
         video_url = await self.get_video_url(retrieve_url, headers)
 
-        return SpokenAvatarInstance(
+        return SpeakingAvatarInstance(
             avatar_type = AvatarType.VIDEO,
             streaming = True,
             content = await APIClient().download(video_url)

@@ -14,14 +14,17 @@ from avatar.caching.cache import Cache
 from avatar.caching.base.models import (
     ContentType,
     DataToStore,
-    DataType,
-    Record,
-    Urls,
+    Record
 )
 from avatar.caching.hashing import md5hash
-from avatar.tts.models import Viseme
-from avatar.tts.azure_tts import AzureTTS, AzureTTSVoiceSettings
-from avatar.tts.models import AudioInstance
+from avatar.persona_provider.models import (
+    Viseme, 
+    AudioInstance,
+    Urls,
+    AvatarType,
+)
+from avatar.tts.azure.models import AzureTTSVoiceSettings
+from avatar.tts.azure.azure_tts import AzureTTS
 
 load_dotenv()
 
@@ -41,7 +44,7 @@ async def test_cache():
     data: DataToStore = DataToStore(
         binary_data=b"data",
         content_type=ContentType.MP3,
-        data_type=DataType.AUDIO,
+        data_type=AvatarType.AUDIO,
         visemes=[Viseme(offset=0, viseme=21)],
     )
     await cache.put("avatarId", "text", data)
@@ -66,7 +69,6 @@ async def test_cache():
     assert record is not None
     assert record.avatarId == "avatarId"
     urls: Urls = await cache.get_urls(record)
-    print(urls)
     assert urls.media_url is not None
     assert urls.viseme_url is not None
     assert urls.word_timestamp_url is None
@@ -91,6 +93,26 @@ async def test_cache():
     assert audio.content is not None and len(audio.content) > 0
     assert audio.visemes is not None and len(audio.visemes) > 0
     assert audio.word_timestamps is not None and len(audio.word_timestamps) > 0
+    
+    data: DataToStore = DataToStore(
+        binary_data=audio.content,
+        content_type=ContentType.MP3,
+        data_type=AvatarType.AUDIO,
+        visemes=audio.visemes,
+        word_timestamps=audio.word_timestamps
+    )
+    
+    await cache.put("avatarId", text, data)
+    record: Record = await cache.get("avatarId", text)
+    assert record is not None
+    assert record.avatarId == "avatarId"
+    urls: Urls = await cache.get_urls(record)
+    print(urls)
+    assert urls.media_url is not None
+    assert urls.viseme_url is not None
+    assert urls.word_timestamp_url is not None
+    await cache.delete(record.key)
+    assert await cache.get("avatarId", text) == None
     
     
     

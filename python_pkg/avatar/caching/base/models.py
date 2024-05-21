@@ -2,7 +2,7 @@ from pydantic import BaseModel, model_validator, ConfigDict
 from datetime import datetime
 from typing import List, Dict, Optional
 from enum import Enum
-from avatar.tts.models import Viseme, WordTimestamp
+from avatar.persona_provider.models import AvatarType, Metadata, Viseme, WordTimestamp
 
 class ContentType(Enum):
     MP4 = 'video/mp4'
@@ -18,12 +18,6 @@ EXTENSION_MAPPING = {
     ContentType.WEBM: '.webm',
     ContentType.JSON: '.json'
 }
-
-# enum whether data is video or audio based
-class DataType(Enum):
-    AUDIO = 'audio'
-    VIDEO = 'video'
-    
 class PathType(Enum):
     MEDIA = 'media'
     VISEMES = 'visemes'
@@ -32,14 +26,10 @@ class StoragePaths(BaseModel):
     media_path: str
     viseme_path: Optional[str]
     word_timestamp_path: Optional[str]
-class Metadata(BaseModel):
-    duration: int # The duration of the media in seconds
-    sampling_rate: Optional[str] = None
-    bit_depth: Optional[str] = None
-    frame_rate: Optional[str] = None
-    resolution: Optional[str] = None
+
+    
 class DataToStore(BaseModel):
-    data_type: DataType
+    data_type: AvatarType
     binary_data: bytes
     content_type: ContentType
     visemes:  Optional[List[Viseme]] = None
@@ -51,7 +41,7 @@ class DataToStore(BaseModel):
     """
     @model_validator(mode="after")
     def validate_data_type(cls, data):
-        if data.data_type == DataType.AUDIO and data.visemes is None:
+        if data.data_type == AvatarType.AUDIO and data.visemes is None:
             raise ValueError("Visemes must be present for audio data")
         return data
 
@@ -84,11 +74,5 @@ class UsageLog(BaseModel):
     def from_db(cls, record: Dict) -> "UsageLog":
         return cls(**record)
     
-class Urls(BaseModel):
-    """
-    A class to store the urls for the cached files
-    """
-    media_url: str
-    viseme_url: Optional[str] = None
-    word_timestamp_url: Optional[str] = None
+
     

@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from avatar.tts.models import AudioInstance
+from avatar.persona_provider.models import AudioInstance, AudioProviderSettings
 
     
 class TTSBase(ABC):
     @abstractmethod
-    async def synthesize_speech(self, text: str, settings: dict = {}) -> AudioInstance:
+    async def synthesize_speech(self, text: str, settings: AudioProviderSettings) -> AudioInstance:
         """
         Get the audio bytes for the given text with max 300 words
         if settings have visemes set, then return visemes array too.
@@ -15,3 +15,13 @@ class TTSBase(ABC):
         and challenging terminologies may still be incorrectly spoken.
         """
         pass
+    
+def tts_factory(settings: AudioProviderSettings) -> TTSBase:
+    """
+    Factory method to get the TTS provider
+    """
+    if provider == "azure":
+        from avatar.tts.azure.azure_tts import AzureTTS
+        return AzureTTS()
+    else:
+        raise ValueError("Invalid TTS provider")

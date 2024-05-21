@@ -10,8 +10,9 @@ from avatar.caching.base.models import (
     EXTENSION_MAPPING,
     ContentType,
     StoragePaths,
-    Urls,
 )
+
+from avatar.persona_provider.models import Urls
 
 
 class Cache:
@@ -40,7 +41,6 @@ class Cache:
         record = await self.db.get(key)
         if record is None:
             return None
-        await self.db.incrementUsage(key)
         return record
     
     async def get_urls(self, record: Record) -> Urls:
