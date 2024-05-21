@@ -21,11 +21,14 @@ from avatar.persona_provider.models import (
     AudioInstance,
     Urls,
     AvatarType,
+    VideoFormat,
+    VideoCodecs
 )
 from avatar.tts import AzureTTSVoiceSettings, AzureTTS
 
 from avatar.persona_provider.sprite import SpriteAvatar
 from avatar.persona_provider.heygen import HeygenAvatar, HeygenAvatarSettings
+from avatar.persona_provider.azure import AzureAvatar, AzureAvatarSettings, AzureAvatarStyle, AzureAvatarPose
 
 load_dotenv()
 
@@ -129,32 +132,59 @@ async def test_cache():
     # await cache.delete(record.key)
     
     # test heygen
-    havatar = HeygenAvatar()
+    # havatar = HeygenAvatar()
+    # """
+    # class HeygenAvatarSettings(VideoProviderSettings):
+    # heygen_id: str
+    # avatar_style: str
+    # voice_id: str
+    # background_color: Optional[str] = None
+    # background_type: str = "color"
+    # background_asset_id: Optional[str] = None
+    # test: bool = True
+    # api_token: str
+    # """
+    # heygen_settings = HeygenAvatarSettings(
+    #     heygen_id="Karolin_public_20230109",
+    #     avatar_style="normal",
+    #     voice_id="131a436c47064f708210df6628ef8f32",
+    #     background_color="#ffff00",
+    #     background_type="color",
+    #     background_asset_id=None,
+    #     test=True,
+    #     api_token=os.getenv("HEYGEN_API_TOKEN")
+    # )
+    
+    # hspeech = await havatar.speak(cache, "karolin", text, heygen_settings)
+    # assert hspeech is not None
+    # assert hspeech.urls.media_url is not None
+    
+    # Test Azure Avatar
     """
-    class HeygenAvatarSettings(VideoProviderSettings):
-    heygen_id: str
-    avatar_style: str
-    voice_id: str
-    background_color: Optional[str] = None
-    background_type: str = "color"
-    background_asset_id: Optional[str] = None
-    test: bool = True
-    api_token: str
-    """
-    heygen_settings = HeygenAvatarSettings(
-        heygen_id="Karolin_public_20230109",
-        avatar_style="normal",
-        voice_id="131a436c47064f708210df6628ef8f32",
-        background_color="#ffff00",
-        background_type="color",
-        background_asset_id=None,
-        test=True,
-        api_token=os.getenv("HEYGEN_API_TOKEN")
+    voice: str = "en-IN-NeerjaNeural"
+    character: str = "lisa"
+    style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
+    pose: AzureAvatarPose = AzureAvatarPose.SITTING
+    video_format: VideoFormat = VideoFormat.WEBM
+    background_color: str = "#00000000"
+    video_codec = "vp9"""
+    azure_avatar_settings = AzureAvatarSettings(
+        voice="en-IN-NeerjaNeural",
+        character="lisa",
+        style=AzureAvatarStyle.GRACEFUL,
+        pose=AzureAvatarPose.SITTING,
+        video_format=VideoFormat.WEBM,
+        background_color="#00000000",
+        video_codec=VideoCodecs.VP9
     )
     
-    hspeech = await havatar.speak(cache, "karolin", text, heygen_settings)
-    assert hspeech is not None
-    assert hspeech.urls.media_url is not None
+    azure_avatar = AzureAvatar()
+    text = "Hi, I am Lisa. I am a graceful avatar. I am sitting. I am speaking in English. I hope you like my voice. Can I know more about you please?"
+    aspeech = await azure_avatar.speak(cache, "lisa", text, azure_avatar_settings)
+    
+    assert aspeech is not None
+    assert aspeech.urls.media_url is not None
+        
     
     
     

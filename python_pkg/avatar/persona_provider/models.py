@@ -31,6 +31,11 @@ class VideoFormat(str, Enum):
     MP4 = "mp4"
     WEBM = "webm"
     OGG = "ogg"
+    
+class VideoCodecs(Enum):
+    VP9 = "vp9"
+    H264 = "h264"
+    HEVC = "hevc"
 
 class CommonVideoSettings(BaseModel):
     word_timestamps: bool = False
