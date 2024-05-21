@@ -7,8 +7,8 @@ import os
 from typing import AsyncGenerator
 import aiofiles
 import aiofiles.os
-from avatar.caching.base.base_storage import BaseCacheStorage
-from avatar.caching.base.models import ContentType
+from .base_storage import BaseCacheStorage
+from avatar.caching.models import ContentType
 
 class LocalStorage(BaseCacheStorage):
     """

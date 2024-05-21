@@ -1,7 +1,7 @@
 from tortoise import Tortoise
 from tortoise.exceptions import DoesNotExist
-from avatar.caching.base.models import Record
-from avatar.caching.base.base_db import BaseCacheDB
+from avatar.caching.models import Record
+from .base_db import BaseCacheDB
 from avatar.caching.db.models import Record as DBRecord, UsageLog
 import os
 from typing import Optional

@@ -1,10 +1,10 @@
-from avatar.caching.base.base_storage import BaseCacheStorage
-from avatar.caching.base.base_db import BaseCacheDB
+from .storages import BaseCacheStorage
+from .db import BaseCacheDB
 from typing import Any, Callable, Optional
 from datetime import datetime
 import json
 
-from avatar.caching.base.models import (
+from .models import (
     Record,
     DataToStore,
     EXTENSION_MAPPING,

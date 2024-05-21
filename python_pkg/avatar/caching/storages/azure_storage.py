@@ -4,13 +4,13 @@ Azure storage for cache
 
 import os
 from typing import AsyncGenerator
-from avatar.caching.base.base_storage import BaseCacheStorage
+from .base_storage import BaseCacheStorage
 from azure.storage.blob.aio import BlobServiceClient, BlobClient
 from azure.storage.blob import generate_blob_sas, BlobSasPermissions, ContentSettings
 from azure.core.exceptions import ResourceNotFoundError
 from datetime import datetime, timedelta, UTC
 
-from avatar.caching.base.models import ContentType
+from avatar.caching.models import ContentType
 
 class AzureStorage(BaseCacheStorage):
     """

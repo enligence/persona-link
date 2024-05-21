@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from avatar.caching.base.models import Record
+from avatar.caching.models import Record
 
 class BaseCacheDB(ABC):
     """

@@ -1,7 +1,7 @@
 from avatar.persona_provider.models import AvatarType, SpeakingAvatarInstance
 from avatar.persona_provider.base import PersonaBase
 import asyncio
-from api_client import APIClient
+from avatar.api_client import APIClient
 from avatar.persona_provider.heygen.models import HeygenAvatarSettings
 
 
@@ -22,7 +22,7 @@ class HeygenAvatar(PersonaBase):
                     if status == "completed":
                         return result["data"]["video_url"]
                     elif status == "failed":
-                        raise Exception(f"Video processing failed with error: {result['data']['error']["message"]}")
+                        raise Exception(f"Video processing failed with error: {result['data']['error']['message']}")
                     else:
                         await asyncio.sleep(1)
                 else:

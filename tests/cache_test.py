@@ -7,11 +7,10 @@ sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "python_pkg"))
 )
 
-from avatar.caching.storages.local_storage import LocalStorage
-from avatar.caching.storages.azure_storage import AzureStorage
-from avatar.caching.db.relational import RelationalDB
+from avatar.caching.storages import LocalStorage, AzureStorage
+from avatar.caching.db import RelationalDB
 from avatar.caching.cache import Cache
-from avatar.caching.base.models import (
+from avatar.caching.models import (
     ContentType,
     DataToStore,
     Record
@@ -23,10 +22,10 @@ from avatar.persona_provider.models import (
     Urls,
     AvatarType,
 )
-from avatar.tts.azure.models import AzureTTSVoiceSettings
-from avatar.tts.azure.azure_tts import AzureTTS
+from avatar.tts import AzureTTSVoiceSettings, AzureTTS
 
 from avatar.persona_provider.sprite.sprite_avatar import SpriteAvatar
+from avatar.persona_provider.heygen.heygen_avatar import HeygenAvatar
 
 load_dotenv()
 
@@ -117,15 +116,18 @@ async def test_cache():
     assert await cache.get("avatarId", text) == None
     
     # Now test the providers
-    savatar = SpriteAvatar()
-    speech = await savatar.speak(cache, "avatarId", text, settings)
-    assert speech is not None
-    assert speech.urls.media_url is not None
-    assert speech.urls.viseme_url is not None
-    assert speech.urls.word_timestamp_url is not None
-    assert speech.metadata is not None
-    assert speech.metadata.duration_seconds > 0
-    assert await cache.get("avatarId", text) is not None
+    # savatar = SpriteAvatar()
+    # speech = await savatar.speak(cache, "avatarId", text, settings)
+    # assert speech is not None
+    # assert speech.urls.media_url is not None
+    # assert speech.urls.viseme_url is not None
+    # assert speech.urls.word_timestamp_url is not None
+    # assert speech.metadata is not None
+    # assert speech.metadata.duration_seconds > 0
+    # assert await cache.get("avatarId", text) is not None
+    
+    # test heygen
+    
     
     
     

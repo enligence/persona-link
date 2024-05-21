@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import AsyncGenerator, Optional
-from avatar.caching.base.models import ContentType
-from avatar.caching.base.models import Record
+from avatar.caching.models import ContentType
 
     
 class BaseCacheStorage(ABC):

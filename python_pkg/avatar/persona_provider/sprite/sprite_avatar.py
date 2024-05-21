@@ -1,7 +1,7 @@
 from avatar.persona_provider.base import AvatarType, PersonaBase
-from avatar.caching.base.models import ContentType, DataToStore, Metadata
+from avatar.caching.models import ContentType, DataToStore, Metadata
 from avatar.persona_provider.models import AudioInstance, AudioProviderSettings
-from avatar.tts.base import tts_factory
+from avatar.tts import tts_factory
 
 class SpriteAvatar(PersonaBase):
     """

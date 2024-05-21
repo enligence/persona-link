@@ -7,7 +7,7 @@ from avatar.persona_provider.models import (
     AvatarType
 )
 from avatar.caching.cache import Cache
-from avatar.caching.base.models import (
+from avatar.caching.models import (
     DataToStore,
     Record,
 )

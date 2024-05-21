@@ -1,5 +1,4 @@
 from io import BytesIO
-from avatar.tts.base import TTSBase
 
 from avatar.persona_provider.models import (
     AudioInstance,
@@ -7,7 +6,8 @@ from avatar.persona_provider.models import (
     WordTimestamp,
     AudioFormat,
 )
-from avatar.tts.azure.models import AzureTTSVoiceSettings
+from avatar.tts.base import TTSBase
+from .models import AzureTTSVoiceSettings
 
 from azure.cognitiveservices.speech import (
     SpeechSynthesisOutputFormat,
