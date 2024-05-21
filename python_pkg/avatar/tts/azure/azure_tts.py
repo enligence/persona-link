@@ -25,9 +25,12 @@ class AzureTTS(TTSBase):
     """
     Azure TTS provider
     """
-
-    def __init__(self):
-        pass
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(AzureTTS, cls).__new__(cls)
+        return cls._instance
 
     def getAudioFormat(
         self, settings: AzureTTSVoiceSettings

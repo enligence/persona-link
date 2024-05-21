@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from avatar.persona_provider.models import AudioInstance, AudioProviderSettings
-
+from avatar.tts.azure.models import AzureTTSVoiceSettings
     
 class TTSBase(ABC):
     @abstractmethod
@@ -20,7 +20,7 @@ def tts_factory(settings: AudioProviderSettings) -> TTSBase:
     """
     Factory method to get the TTS provider
     """
-    if provider == "azure":
+    if isinstance(settings, AzureTTSVoiceSettings):
         from avatar.tts.azure.azure_tts import AzureTTS
         return AzureTTS()
     else:

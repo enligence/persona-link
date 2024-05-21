@@ -26,6 +26,8 @@ from avatar.persona_provider.models import (
 from avatar.tts.azure.models import AzureTTSVoiceSettings
 from avatar.tts.azure.azure_tts import AzureTTS
 
+from avatar.persona_provider.sprite.sprite_avatar import SpriteAvatar
+
 load_dotenv()
 
 
@@ -114,6 +116,16 @@ async def test_cache():
     await cache.delete(record.key)
     assert await cache.get("avatarId", text) == None
     
+    # Now test the providers
+    savatar = SpriteAvatar()
+    speech = await savatar.speak(cache, "avatarId", text, settings)
+    assert speech is not None
+    assert speech.urls.media_url is not None
+    assert speech.urls.viseme_url is not None
+    assert speech.urls.word_timestamp_url is not None
+    assert speech.metadata is not None
+    assert speech.metadata.duration_seconds > 0
+    assert await cache.get("avatarId", text) is not None
     
     
     

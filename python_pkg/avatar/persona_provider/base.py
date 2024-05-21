@@ -3,14 +3,13 @@ from avatar.persona_provider.models import (
     SpeakingAvatarInstance,
     AudioProviderSettings,
     VideoProviderSettings,
+    Urls,
+    AvatarType
 )
 from avatar.caching.cache import Cache
 from avatar.caching.base.models import (
-    ContentType,
     DataToStore,
-    AvatarType,
     Record,
-    Urls,
 )
 
 """
@@ -33,7 +32,7 @@ class PersonaBase(ABC):
         settings: AudioProviderSettings | VideoProviderSettings,
         isPersonalization: bool = False,
     ) -> SpeakingAvatarInstance:
-        record: Record = await self.cache.get(avatar_id, text)
+        record: Record = await cache.get(avatar_id, text)
         
         avatar_type: AvatarType = (
             AvatarType.AUDIO

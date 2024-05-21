@@ -1,8 +1,7 @@
-from avatar.persona_provider.base import AvatarType, PersonaBase, SpeakingAvatarInstance, TTSBase
-from avatar.caching.cache import Cache
+from avatar.persona_provider.base import AvatarType, PersonaBase
 from avatar.caching.base.models import ContentType, DataToStore, Metadata
 from avatar.persona_provider.models import AudioInstance, AudioProviderSettings
-from avatar.tts.base import TTSBase
+from avatar.tts.base import tts_factory
 
 class SpriteAvatar(PersonaBase):
     """
@@ -10,7 +9,7 @@ class SpriteAvatar(PersonaBase):
     """
     async def generate(self, text: str, settings: AudioProviderSettings) -> DataToStore:
         
-        audio: AudioInstance = await self.tts.synthesize_speech(text, settings=settings)
+        audio: AudioInstance = await tts_factory(settings).synthesize_speech(text, settings=settings)
         
         return DataToStore(
             binary_data=audio.content,
@@ -20,7 +19,7 @@ class SpriteAvatar(PersonaBase):
             word_timestamps=audio.word_timestamps,
             metadata = Metadata(
                 bit_rate_kbp = settings.bit_rate_kbps,
-                sample_rate_hz = settings.sample_rate_hz,
+                sampling_rate_hz = settings.sampling_rate_hz,
                 duration_seconds = audio.duration_seconds
             )
         )
