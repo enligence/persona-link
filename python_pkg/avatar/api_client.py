@@ -1,4 +1,4 @@
-import aiohttp
+from aiohttp import ClientSession
 from typing import AsyncGenerator
 
 class APIClient:
@@ -7,7 +7,7 @@ class APIClient:
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super(APIClient, cls).__new__(cls, *args, **kwargs)
-            cls._instance.session = aiohttp.ClientSession()
+            cls._instance.session = ClientSession()
         return cls._instance
 
     async def cleanup(self):
@@ -16,7 +16,8 @@ class APIClient:
     async def post_request(self, url, headers, payload):
         async with self.session.post(url, headers=headers, json=payload) as resp:
             if resp.status != 200:
-                raise Exception(f"Error in API: {resp.status}")
+                server_resp = await resp.text()
+                raise Exception(f"Error in API: {server_resp}")
             return await resp.json()
 
     async def get_request(self, url, headers):

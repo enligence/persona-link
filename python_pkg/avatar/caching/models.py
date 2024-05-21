@@ -1,6 +1,6 @@
 from pydantic import BaseModel, model_validator, ConfigDict
 from datetime import datetime
-from typing import List, Dict, Optional
+from typing import AsyncGenerator, List, Dict, Optional
 from enum import Enum
 from avatar.persona_provider.models import AvatarType, Metadata, Viseme, WordTimestamp
 
@@ -29,8 +29,10 @@ class StoragePaths(BaseModel):
 
     
 class DataToStore(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    
     data_type: AvatarType
-    binary_data: bytes
+    binary_data: bytes | AsyncGenerator[bytes, None]    # binary data to be stored
     content_type: ContentType
     visemes:  Optional[List[Viseme]] = None
     word_timestamps: Optional[List[WordTimestamp]] = None

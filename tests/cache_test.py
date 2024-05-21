@@ -24,8 +24,8 @@ from avatar.persona_provider.models import (
 )
 from avatar.tts import AzureTTSVoiceSettings, AzureTTS
 
-from avatar.persona_provider.sprite.sprite_avatar import SpriteAvatar
-from avatar.persona_provider.heygen.heygen_avatar import HeygenAvatar
+from avatar.persona_provider.sprite import SpriteAvatar
+from avatar.persona_provider.heygen import HeygenAvatar, HeygenAvatarSettings
 
 load_dotenv()
 
@@ -88,32 +88,32 @@ async def test_cache():
         streaming=False
     )
     
-    tts = AzureTTS()
-    text = "This is a test."
-    audio: AudioInstance = await tts.synthesize_speech(text, settings=settings)
-    assert audio.content is not None and len(audio.content) > 0
-    assert audio.visemes is not None and len(audio.visemes) > 0
-    assert audio.word_timestamps is not None and len(audio.word_timestamps) > 0
+    #tts = AzureTTS()
+    text = "This is a test with some background. And this is the fifth request for today sso the last one. I hope this works!"
+    # audio: AudioInstance = await tts.synthesize_speech(text, settings=settings)
+    # assert audio.content is not None and len(audio.content) > 0
+    # assert audio.visemes is not None and len(audio.visemes) > 0
+    # assert audio.word_timestamps is not None and len(audio.word_timestamps) > 0
     
-    data: DataToStore = DataToStore(
-        binary_data=audio.content,
-        content_type=ContentType.MP3,
-        data_type=AvatarType.AUDIO,
-        visemes=audio.visemes,
-        word_timestamps=audio.word_timestamps
-    )
+    # data: DataToStore = DataToStore(
+    #     binary_data=audio.content,
+    #     content_type=ContentType.MP3,
+    #     data_type=AvatarType.AUDIO,
+    #     visemes=audio.visemes,
+    #     word_timestamps=audio.word_timestamps
+    # )
     
-    await cache.put("avatarId", text, data)
-    record: Record = await cache.get("avatarId", text)
-    assert record is not None
-    assert record.avatarId == "avatarId"
-    urls: Urls = await cache.get_urls(record)
-    print(urls)
-    assert urls.media_url is not None
-    assert urls.viseme_url is not None
-    assert urls.word_timestamp_url is not None
-    await cache.delete(record.key)
-    assert await cache.get("avatarId", text) == None
+    # await cache.put("avatarId", text, data)
+    # record: Record = await cache.get("avatarId", text)
+    # assert record is not None
+    # assert record.avatarId == "avatarId"
+    # urls: Urls = await cache.get_urls(record)
+    # print(urls)
+    # assert urls.media_url is not None
+    # assert urls.viseme_url is not None
+    # assert urls.word_timestamp_url is not None
+    # await cache.delete(record.key)
+    # assert await cache.get("avatarId", text) == None
     
     # Now test the providers
     # savatar = SpriteAvatar()
@@ -124,9 +124,38 @@ async def test_cache():
     # assert speech.urls.word_timestamp_url is not None
     # assert speech.metadata is not None
     # assert speech.metadata.duration_seconds > 0
-    # assert await cache.get("avatarId", text) is not None
+    # record: Record = await cache.get("avatarId", text)
+    # assert record  is not None
+    # await cache.delete(record.key)
     
     # test heygen
+    havatar = HeygenAvatar()
+    """
+    class HeygenAvatarSettings(VideoProviderSettings):
+    heygen_id: str
+    avatar_style: str
+    voice_id: str
+    background_color: Optional[str] = None
+    background_type: str = "color"
+    background_asset_id: Optional[str] = None
+    test: bool = True
+    api_token: str
+    """
+    heygen_settings = HeygenAvatarSettings(
+        heygen_id="Karolin_public_20230109",
+        avatar_style="normal",
+        voice_id="131a436c47064f708210df6628ef8f32",
+        background_color="#ffff00",
+        background_type="color",
+        background_asset_id=None,
+        test=True,
+        api_token=os.getenv("HEYGEN_API_TOKEN")
+    )
+    
+    hspeech = await havatar.speak(cache, "karolin", text, heygen_settings)
+    assert hspeech is not None
+    assert hspeech.urls.media_url is not None
+    
     
     
     

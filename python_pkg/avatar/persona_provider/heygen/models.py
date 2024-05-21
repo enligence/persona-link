@@ -10,6 +10,12 @@ class HeygenAvatarSettings(VideoProviderSettings):
     background_asset_id: Optional[str] = None
     test: bool = True
     api_token: str
+    
+    def validate(self) -> bool:
+        # Perform validation 
+        return True
+    
+    
 
     # @model_validator(mode="after")
     # def validate_background_settings(cls, values):

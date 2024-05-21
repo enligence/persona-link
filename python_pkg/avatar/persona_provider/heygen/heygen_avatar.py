@@ -2,8 +2,8 @@ from avatar.persona_provider.models import AvatarType, SpeakingAvatarInstance
 from avatar.persona_provider.base import PersonaBase
 import asyncio
 from avatar.api_client import APIClient
-from avatar.persona_provider.heygen.models import HeygenAvatarSettings
-
+from .models import HeygenAvatarSettings
+from avatar.caching.models import ContentType, DataToStore, Metadata
 
 class HeygenAvatar(PersonaBase):
     """
@@ -13,7 +13,7 @@ class HeygenAvatar(PersonaBase):
         self.generate_url = "https://api.heygen.com/v2/video/generate"
         self.retrieve_url = "https://api.heygen.com/v1/video_status.get"
 
-    async def get_video_url(url, headers) -> str:
+    async def get_video_url(self, url, headers) -> str:
         try:
             while True:
                 result = await APIClient().get_request(url, headers)
@@ -43,7 +43,7 @@ class HeygenAvatar(PersonaBase):
             bg["video_asset_id"] = settings.background_asset_id
             bg["play_style"] = "loop"
 
-        return {
+        payload = {
             "video_inputs": [
                 {
                     "character": {
@@ -63,8 +63,12 @@ class HeygenAvatar(PersonaBase):
                 "width": settings.width,
                 "height": settings.height
             },
-            "test": settings.test
+            "test": settings.test,
+            "caption": False
         }
+        
+        # return as json string
+        return payload
 
     async def generate(self, text: str, settings: HeygenAvatarSettings) -> SpeakingAvatarInstance:
         """
@@ -72,24 +76,32 @@ class HeygenAvatar(PersonaBase):
         """
 
         headers = {
-            "accept": "application/json",
-            "content-type": "application/json",
-            "x-api-key": settings.api_token
+            "Content-Type": "application/json",
+            "X-Api-Key": settings.api_token
         }
 
         payload = self.formPayload(text, settings)
+        
         result = await APIClient().post_request(self.generate_url, headers, payload)
         
         if "error" in result and result["error"] is not None:
             print(f"Error in response: {result['error']}")
             return None
+        
         video_id = result["data"]["video_id"]
 
         retrieve_url = f"{self.retrieve_url}?video_id={video_id}"
         video_url = await self.get_video_url(retrieve_url, headers)
-
-        return SpeakingAvatarInstance(
-            avatar_type = AvatarType.VIDEO,
-            streaming = True,
-            content = await APIClient().download(video_url)
+        print(video_url)
+        
+        content = APIClient().download(video_url)
+        
+        return DataToStore(
+            binary_data=content,
+            content_type=ContentType.MP4,
+            data_type=AvatarType.VIDEO,
+            metadata = Metadata(
+                width = settings.width,
+                height = settings.height,
+            )
         )

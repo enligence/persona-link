@@ -1,0 +1,1 @@
+from .sprite_avatar import SpriteAvatar
