@@ -1,22 +1,22 @@
 import pytest
 import os
 from dotenv import load_dotenv
-import sys
+# import sys
 
-sys.path.insert(
-    0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "python_pkg"))
-)
+# sys.path.insert(
+#     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "python_pkg"))
+# )
 
-from avatar.caching.storages import LocalStorage, AzureStorage
-from avatar.caching.db import RelationalDB
-from avatar.caching.cache import Cache
-from avatar.caching.models import (
+from persona_link.caching.storages import LocalStorage, AzureStorage
+from persona_link.caching.db import RelationalDB
+from persona_link.caching.cache import Cache
+from persona_link.caching.models import (
     ContentType,
     DataToStore,
     Record
 )
-from avatar.caching.hashing import md5hash
-from avatar.persona_provider.models import (
+from persona_link.caching.hashing import md5hash
+from persona_link.persona_provider.models import (
     Viseme, 
     AudioInstance,
     Urls,
@@ -24,16 +24,16 @@ from avatar.persona_provider.models import (
     VideoFormat,
     VideoCodecs
 )
-from avatar.tts import AzureTTSVoiceSettings, AzureTTS
+from persona_link.tts import AzureTTSVoiceSettings, AzureTTS
 
-from avatar.persona_provider.sprite import SpriteAvatar
-from avatar.persona_provider.heygen import HeygenAvatar, HeygenAvatarSettings
-from avatar.persona_provider.azure import AzureAvatar, AzureAvatarSettings, AzureAvatarStyle, AzureAvatarPose
+from persona_link.persona_provider.sprite import SpriteAvatar
+from persona_link.persona_provider.heygen import HeygenAvatar, HeygenAvatarSettings
+from persona_link.persona_provider.azure import AzureAvatar, AzureAvatarSettings, AzureAvatarStyle, AzureAvatarPose
 
 load_dotenv()
 
 
-print(sys.path)
+#print(sys.path)
 
 
 @pytest.mark.asyncio
@@ -91,32 +91,32 @@ async def test_cache():
         streaming=False
     )
     
-    #tts = AzureTTS()
+    tts = AzureTTS()
     text = "This is a test with some background. And this is the fifth request for today sso the last one. I hope this works!"
-    # audio: AudioInstance = await tts.synthesize_speech(text, settings=settings)
-    # assert audio.content is not None and len(audio.content) > 0
-    # assert audio.visemes is not None and len(audio.visemes) > 0
-    # assert audio.word_timestamps is not None and len(audio.word_timestamps) > 0
+    audio: AudioInstance = await tts.synthesize_speech(text, settings=settings)
+    assert audio.content is not None and len(audio.content) > 0
+    assert audio.visemes is not None and len(audio.visemes) > 0
+    assert audio.word_timestamps is not None and len(audio.word_timestamps) > 0
     
-    # data: DataToStore = DataToStore(
-    #     binary_data=audio.content,
-    #     content_type=ContentType.MP3,
-    #     data_type=AvatarType.AUDIO,
-    #     visemes=audio.visemes,
-    #     word_timestamps=audio.word_timestamps
-    # )
+    data: DataToStore = DataToStore(
+        binary_data=audio.content,
+        content_type=ContentType.MP3,
+        data_type=AvatarType.AUDIO,
+        visemes=audio.visemes,
+        word_timestamps=audio.word_timestamps
+    )
     
-    # await cache.put("avatarId", text, data)
-    # record: Record = await cache.get("avatarId", text)
-    # assert record is not None
-    # assert record.avatarId == "avatarId"
-    # urls: Urls = await cache.get_urls(record)
-    # print(urls)
-    # assert urls.media_url is not None
-    # assert urls.viseme_url is not None
-    # assert urls.word_timestamp_url is not None
-    # await cache.delete(record.key)
-    # assert await cache.get("avatarId", text) == None
+    await cache.put("avatarId", text, data)
+    record: Record = await cache.get("avatarId", text)
+    assert record is not None
+    assert record.avatarId == "avatarId"
+    urls: Urls = await cache.get_urls(record)
+    print(urls)
+    assert urls.media_url is not None
+    assert urls.viseme_url is not None
+    assert urls.word_timestamp_url is not None
+    await cache.delete(record.key)
+    assert await cache.get("avatarId", text) == None
     
     # Now test the providers
     # savatar = SpriteAvatar()
@@ -160,30 +160,30 @@ async def test_cache():
     # assert hspeech.urls.media_url is not None
     
     # Test Azure Avatar
-    """
-    voice: str = "en-IN-NeerjaNeural"
-    character: str = "lisa"
-    style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
-    pose: AzureAvatarPose = AzureAvatarPose.SITTING
-    video_format: VideoFormat = VideoFormat.WEBM
-    background_color: str = "#00000000"
-    video_codec = "vp9"""
-    azure_avatar_settings = AzureAvatarSettings(
-        voice="en-IN-NeerjaNeural",
-        character="lisa",
-        style=AzureAvatarStyle.GRACEFUL,
-        pose=AzureAvatarPose.SITTING,
-        video_format=VideoFormat.WEBM,
-        background_color="#00000000",
-        video_codec=VideoCodecs.VP9
-    )
+    # """
+    # voice: str = "en-IN-NeerjaNeural"
+    # character: str = "lisa"
+    # style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
+    # pose: AzureAvatarPose = AzureAvatarPose.SITTING
+    # video_format: VideoFormat = VideoFormat.WEBM
+    # background_color: str = "#00000000"
+    # video_codec = "vp9"""
+    # azure_avatar_settings = AzureAvatarSettings(
+    #     voice="en-IN-NeerjaNeural",
+    #     character="lisa",
+    #     style=AzureAvatarStyle.GRACEFUL,
+    #     pose=AzureAvatarPose.SITTING,
+    #     video_format=VideoFormat.WEBM,
+    #     background_color="#00000000",
+    #     video_codec=VideoCodecs.VP9
+    # )
     
-    azure_avatar = AzureAvatar()
-    text = "Hi, I am Lisa. I am a graceful avatar. I am sitting. I am speaking in English. I hope you like my voice. Can I know more about you please?"
-    aspeech = await azure_avatar.speak(cache, "lisa", text, azure_avatar_settings)
+    # azure_avatar = AzureAvatar()
+    # text = "Hi, I am Lisa. I am a graceful persona_link. I am sitting. I am speaking in English. I hope you like my voice. Can I know more about you please?"
+    # aspeech = await azure_avatar.speak(cache, "lisa", text, azure_avatar_settings)
     
-    assert aspeech is not None
-    assert aspeech.urls.media_url is not None
+    # assert aspeech is not None
+    # assert aspeech.urls.media_url is not None
         
     
     

@@ -28,7 +28,7 @@ This components will play the avatar as the backend requests (connection via a w
 When user is done, the backend will either process the response or call a webhook for the calling app that is utilizing the avatar services. The app will have the logic to process the user's input and produce a response. It will ask the avatar to speak.
 
 ---
-Given above workflow we need to then create a web application for the same. The application must have sign-in / sign-up as usual (supertokens can be used for that) and some monetization logic (yet to decide). And one can create an avatar or edit existing avatar. Pick avatar type (video / sprite) and configure each appropriately. This avatar will be stored with a avatarid in the database. For each avatar configures, the user will also provide webhook to call
+Given above workflow we need to then create a web application for the same. The application must have sign-in / sign-up as usual (supertokens can be used for that) and some monetization logic (yet to decide). And one can create an avatar or edit existing persona_link. Pick avatar type (video / sprite) and configure each appropriately. This avatar will be stored with a avatarid in the database. For each avatar configures, the user will also provide webhook to call
 
 We need to create a basic demo of using this. Then release the opensource project and the corresponding managed paid webapp.
 
