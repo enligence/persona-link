@@ -1,12 +1,22 @@
 from persona_link.persona_provider.base import AvatarType, PersonaBase
-from persona_link.caching.models import ContentType, DataToStore, Metadata
+from persona_link.cache.models import ContentType, DataToStore, Metadata
 from persona_link.persona_provider.models import AudioInstance, AudioProviderSettings
 from persona_link.tts import tts_factory
-
+from persona_link.persona_provider import persona_link_provider
+@persona_link_provider
 class SpriteAvatar(PersonaBase):
     """
     Audio avatar class
     """
+    name = "Sprite"
+    description = "Sprite Avatar"
+    
+    @classmethod
+    def validate(cls, settings: dict) -> AudioProviderSettings:
+        return AudioProviderSettings.get_provider(settings)
+    
+    
+        
     async def generate(self, text: str, settings: AudioProviderSettings) -> DataToStore:
         
         audio: AudioInstance = await tts_factory(settings).synthesize_speech(text, settings=settings)

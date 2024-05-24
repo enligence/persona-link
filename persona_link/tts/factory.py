@@ -10,3 +10,9 @@ def tts_factory(settings: AudioProviderSettings) -> TTSBase:
         return AzureTTS()
     else:
         raise ValueError("Invalid TTS provider")
+    
+def tts_validate(settings: dict) -> AudioProviderSettings:
+    """
+    Validates the TTS settings
+    """
+    return AzureTTSVoiceSettings.validate(settings)

@@ -1,14 +1,22 @@
+from persona_link.persona_provider import persona_link_provider
 from persona_link.persona_provider.models import AvatarType, SpeakingAvatarInstance
 from persona_link.persona_provider.base import PersonaBase
 import asyncio
 from persona_link.api_client import APIClient
 from .models import HeygenAvatarSettings
-from persona_link.caching.models import ContentType, DataToStore, Metadata
-
+from persona_link.cache.models import ContentType, DataToStore, Metadata
+@persona_link_provider
 class HeygenAvatar(PersonaBase):
     """
     Audio avatar class
     """
+    name = "Heygen"
+    description = "Heygen Avatar"
+    
+    @classmethod
+    def validate(cls, settings: dict) -> HeygenAvatarSettings | None:
+        return HeygenAvatarSettings.validate(settings)
+    
     def __init__(self):
         self.generate_url = "https://api.heygen.com/v2/video/generate"
         self.retrieve_url = "https://api.heygen.com/v1/video_status.get"

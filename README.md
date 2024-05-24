@@ -53,5 +53,12 @@ By contributing to Persona Link, you're helping shape the future of digital huma
 Thank you for your interest in Persona Link. We can't wait to build the future with you!
 
 ```
-poetry install --extras "azure postgres azure-tts local-storage"
+poetry install --with server,azure,postgres,local-storage,dev,test
+
+First time:
+aerich init -t server.settings.TORTOISE_ORM
+aerich init-db 
+
+Then onwords for any model changes
+aerich migrate
 ```

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from persona_link.caching.models import Record
+from persona_link.cache.models import Record
 
 class BaseCacheDB(ABC):
     """

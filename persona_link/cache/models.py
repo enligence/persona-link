@@ -59,7 +59,6 @@ class Record(BaseModel):
     storage_paths: StoragePaths
     created: datetime
     updated: Optional[datetime] = None
-    isPersonalization: bool = False # whether the text is main message or for personalization
     metadata: Optional[Metadata] = None
 
     @classmethod

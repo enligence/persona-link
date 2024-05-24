@@ -7,15 +7,15 @@ from dotenv import load_dotenv
 #     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "python_pkg"))
 # )
 
-from persona_link.caching.storages import LocalStorage, AzureStorage
-from persona_link.caching.db import RelationalDB
-from persona_link.caching.cache import Cache
-from persona_link.caching.models import (
+from persona_link.cache.storage import LocalStorage, AzureStorage
+from persona_link.cache.db import RelationalDB
+from persona_link.cache.cache import Cache
+from persona_link.cache.models import (
     ContentType,
     DataToStore,
     Record
 )
-from persona_link.caching.hashing import md5hash
+from persona_link.cache.hashing import md5hash
 from persona_link.persona_provider.models import (
     Viseme, 
     AudioInstance,
@@ -57,8 +57,8 @@ async def test_cache():
     assert record.avatarId == "avatarId"
     urls: Urls = await cache.get_urls(record)
     assert urls.media_url is not None
-    assert urls.viseme_url is not None
-    assert urls.word_timestamp_url is None
+    assert urls.visemes_url is not None
+    assert urls.word_timestamps_url is None
     await cache.delete(record.key)
     assert await cache.get("avatarId", "text") == None
     
@@ -74,8 +74,8 @@ async def test_cache():
     assert record.avatarId == "avatarId"
     urls: Urls = await cache.get_urls(record)
     assert urls.media_url is not None
-    assert urls.viseme_url is not None
-    assert urls.word_timestamp_url is None
+    assert urls.visemes_url is not None
+    assert urls.word_timestamps_url is None
     await cache.delete(record.key)
     assert await cache.get("avatarId", "text") == None
     await azure_storage.deleteAll("avatarId")
@@ -113,8 +113,8 @@ async def test_cache():
     urls: Urls = await cache.get_urls(record)
     print(urls)
     assert urls.media_url is not None
-    assert urls.viseme_url is not None
-    assert urls.word_timestamp_url is not None
+    assert urls.visemes_url is not None
+    assert urls.word_timestamps_url is not None
     await cache.delete(record.key)
     assert await cache.get("avatarId", text) == None
     

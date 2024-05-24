@@ -13,12 +13,12 @@ class APIClient:
     async def cleanup(self):
         await self.session.close()
 
-    async def post_request(self, url, headers, payload):
+    async def post_request(self, url, headers, payload, response_format="json"):
         async with self.session.post(url, headers=headers, json=payload) as resp:
             if resp.status >= 400:
                 server_resp = await resp.text()
                 raise Exception(f"Error in API: {server_resp}")
-            return await resp.json()
+            return await resp.json() if response_format == "json" else await resp.text()
         
     async def put_request(self, url, headers, payload):
         async with self.session.put(url, headers=headers, json=payload) as resp:

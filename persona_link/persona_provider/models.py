@@ -1,7 +1,8 @@
 from enum import Enum
 from abc import ABC, abstractmethod
 from typing import AsyncGenerator, List, Optional
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, ValidationError
+from typing import Optional
 
 class AvatarType(Enum):
     AUDIO = 'audio'
@@ -20,8 +21,8 @@ class Urls(BaseModel):
     A class to store the urls for the cached files
     """
     media_url: str
-    viseme_url: Optional[str] = None
-    word_timestamp_url: Optional[str] = None
+    visemes_url: Optional[str] = None
+    word_timestamps_url: Optional[str] = None
 class SpeakingAvatarInstance(BaseModel):
     avatar_type: AvatarType = AvatarType.AUDIO
     urls: Urls
@@ -46,8 +47,9 @@ class CommonVideoSettings(BaseModel):
     video_format: VideoFormat = VideoFormat.MP4
 
 class VideoProviderSettings(CommonVideoSettings, ABC):
+    @classmethod
     @abstractmethod
-    def validate(self) -> bool:
+    def validate(cls, settings: dict) -> Optional['VideoProviderSettings']:
         pass
 
 class Viseme(BaseModel):
@@ -81,7 +83,28 @@ class CommonAudioSettings(BaseModel):
     bit_rate_kbps: int = 32
     audio_format: AudioFormat = AudioFormat.MP3
 
+registered_audio_provider_settings = {}
 class AudioProviderSettings(CommonAudioSettings, ABC):
+    provider_name: str
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        if not cls.provider_name:
+            raise ValueError("Provider name is required")
+        
+        registered_audio_provider_settings[cls.provider_name] = cls
+
+    @classmethod
+    def get_provider(cls, settings: dict) -> Optional['AudioProviderSettings']:
+        Provider = cls._registry.get(settings.get("provider_name"))
+        if Provider:
+            try:
+                return Provider.validate(settings)
+            except ValidationError:
+                pass
+        return None
+    
+    @classmethod
     @abstractmethod
-    def validate(self) -> bool:
+    def validate(cls, settings: dict) -> Optional['AudioProviderSettings']:
         pass 

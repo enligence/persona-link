@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
-from persona_link.persona_provider.models import (
+from .models import (
     SpeakingAvatarInstance,
     AudioProviderSettings,
     VideoProviderSettings,
     Urls,
     AvatarType
 )
-from persona_link.caching.cache import Cache
-from persona_link.caching.models import (
+from persona_link.cache.cache import Cache
+from persona_link.cache.models import (
     DataToStore,
     Record,
 )
@@ -18,6 +18,11 @@ Base class for persona provider
 
 
 class PersonaBase(ABC):
+    @classmethod
+    @abstractmethod
+    def validate(cls, settings: dict) -> AudioProviderSettings | VideoProviderSettings | None:
+        pass
+    
     @abstractmethod
     async def generate(
         self, text: str, settings: AudioProviderSettings | VideoProviderSettings
@@ -29,8 +34,7 @@ class PersonaBase(ABC):
         cache: Cache,
         avatar_id: str,
         text: str,
-        settings: AudioProviderSettings | VideoProviderSettings,
-        isPersonalization: bool = False,
+        settings: AudioProviderSettings | VideoProviderSettings
     ) -> SpeakingAvatarInstance:
         record: Record = await cache.get(avatar_id, text)
         
@@ -42,7 +46,7 @@ class PersonaBase(ABC):
         
         if record is None:
             data: DataToStore = await self.generate(text, settings)
-            record = await cache.put(avatar_id, text, data, isPersonalization)
+            record = await cache.put(avatar_id, text, data)
             urls: Urls = await cache.get_urls(record)
 
             instance = SpeakingAvatarInstance(

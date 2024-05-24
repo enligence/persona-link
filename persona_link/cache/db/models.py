@@ -11,9 +11,16 @@ class Record(Model):
     storage_paths = fields.JSONField()   # paths where the media and related files are stored
     created = fields.DatetimeField(auto_now_add=True)
     updated = fields.DatetimeField(auto_now=True, null=True)
-    isPersonalization = fields.BooleanField(default=False)  # whether the text is main message or for personalization
     metadata = fields.JSONField(null=True)  # metadata about the record
     
+    class Meta:
+        table = "records"
+        app = "persona_link"
+    
 class UsageLog(Model):
-    record = fields.ForeignKeyField('models.Record', related_name='usage_logs', on_delete='CASCADE')
+    record = fields.ForeignKeyField('persona_link.Record', related_name='usage_logs', on_delete='CASCADE')
     timestamp = fields.DatetimeField(auto_now_add=True)
+    
+    class Meta:
+        app = "persona_link"
+        table = "usage_logs"

@@ -1,4 +1,4 @@
-from .storages import BaseCacheStorage
+from .storage import BaseCacheStorage
 from .db import BaseCacheDB
 from typing import Any, Callable, Optional
 from datetime import datetime
@@ -58,7 +58,6 @@ class Cache:
         avatarId: str,
         text: str,
         data: DataToStore,
-        isPersonalization: bool = False,
     ) -> Record:
         key = self.hashFn(avatarId + text)
         media_path = await self.storage.put(
@@ -93,7 +92,6 @@ class Cache:
             avatarId=avatarId,
             text=text,
             created=datetime.now(),
-            isPersonalization=isPersonalization,
             metadata=data.metadata,
             storage_paths=StoragePaths(
                 media_path=media_path,

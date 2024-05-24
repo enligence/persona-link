@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import AsyncGenerator, Optional
-from persona_link.caching.models import ContentType
+from persona_link.cache.models import ContentType
 
     
 class BaseCacheStorage(ABC):

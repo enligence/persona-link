@@ -1,5 +1,6 @@
 from persona_link.persona_provider.models import VideoProviderSettings
 from typing import Optional
+from pydantic import ValidationError
     
 class HeygenAvatarSettings(VideoProviderSettings):
     heygen_id: str
@@ -11,9 +12,13 @@ class HeygenAvatarSettings(VideoProviderSettings):
     test: bool = True
     api_token: str
     
-    def validate(self) -> bool:
-        # Perform validation 
-        return True
+    @classmethod
+    def validate(cls, settings: dict) -> Optional['HeygenAvatarSettings']:
+        try:
+            return cls(**settings)  # Attempts to parse and validate the passed in settings
+        except ValidationError as e:
+            return None
+        
     
     
 

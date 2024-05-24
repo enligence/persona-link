@@ -1,3 +1,4 @@
+from persona_link.persona_provider import persona_link_provider
 from persona_link.persona_provider.models import (
     AvatarType,
     SpeakingAvatarInstance
@@ -6,15 +7,22 @@ from persona_link.persona_provider.base import PersonaBase
 import asyncio
 from persona_link.api_client import APIClient
 import os
-from persona_link.caching.models import ContentType, DataToStore, Metadata
+from persona_link.cache.models import ContentType, DataToStore, Metadata
 from uuid import uuid4
 from .models import AzureAvatarSettings
 # https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech-avatar/what-is-text-to-speech-avatar
+@persona_link_provider
 class AzureAvatar(PersonaBase):
     """
     Audio avatar class
     """
-
+    name = "Azure"
+    description = "Azure Avatar"
+    
+    @classmethod
+    def validate(cls, settings: dict) -> AzureAvatarSettings | None:
+        return AzureAvatarSettings.validate(settings)
+    
     def __init__(self):
         self.speech_endpoint = os.getenv("AZURE_AVATAR_ENDPOINT")
         self.api_version = os.getenv("AZURE_AVATAR_API_VERSION")

@@ -10,7 +10,7 @@ from azure.storage.blob import generate_blob_sas, BlobSasPermissions, ContentSet
 from azure.core.exceptions import ResourceNotFoundError
 from datetime import datetime, timedelta, UTC
 
-from persona_link.caching.models import ContentType
+from persona_link.cache.models import ContentType
 
 class AzureStorage(BaseCacheStorage):
     """

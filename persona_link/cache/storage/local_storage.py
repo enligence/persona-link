@@ -8,7 +8,7 @@ from typing import AsyncGenerator
 import aiofiles
 import aiofiles.os
 from .base_storage import BaseCacheStorage
-from persona_link.caching.models import ContentType
+from persona_link.cache.models import ContentType
 
 class LocalStorage(BaseCacheStorage):
     """
