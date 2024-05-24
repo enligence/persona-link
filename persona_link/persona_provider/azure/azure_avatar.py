@@ -40,6 +40,7 @@ class AzureAvatar(PersonaBase):
         try:
             while True:
                 result = await APIClient().get_request(url, self.headers)
+                #print(result)
                 if "status" in result and result["status"] == "Succeeded":
                     return result["outputs"]["result"]
                 else:
@@ -79,12 +80,10 @@ class AzureAvatar(PersonaBase):
         payload = self.formPayload(text, settings)
         job_id = uuid4().hex
         url = self.generate_url(job_id)
-        print(url)
         result = await APIClient().put_request(url, self.headers, payload)
         if not "id" in result:
             print(f"Error in response: {result}")
             return None
-        #video_id = result["id"]
         bitrate_kbps = result["avatarConfig"]["bitrateKbps"]
         video_url = await self.get_video_url(url)
 

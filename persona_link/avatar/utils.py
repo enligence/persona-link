@@ -12,7 +12,7 @@ async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingA
     if not settings:
         raise ValueError(f"Settings for provider '{avatar.provider}' are invalid")
     
-    return await instance.speak(cache, avatar.slug, input.text, settings, False)
+    return await instance.speak(cache, avatar.slug, input.text, settings)
 
 async def call_webhook(avatar_slug: str, data: WebhookResponseData):
     avatar: Avatar = await Avatar.get_or_none(slug=avatar_slug)

@@ -57,9 +57,9 @@ class Webhook(Model):
         app = "persona_link"
         
 class AvatarPydantic(BaseModel):
-    name: str
-    provider: str
-    settings: dict
+    name: Optional[str] = None
+    provider: Optional[str] = None
+    settings: Optional[dict] = None
     
 class Avatar(Model):
     id = fields.IntField(pk=True, description="Primary Key")
@@ -72,16 +72,25 @@ class Avatar(Model):
     updated_at = fields.DatetimeField(auto_now=True, description="Last update timestamp")
     
     def instance(self):
-        return persona_link_providers[self.provider]()
+        return persona_link_providers[self.provider.value]()
     
     @classmethod
     async def create_avatar(cls, data: AvatarPydantic, webhook: WebhookPydantic | None = None):
+        if not data.provider:
+            raise ValueError("Provider not specified")
+        
         if data.provider not in persona_link_providers:
             raise ValueError(f"Provider '{data.provider}' not found")
         
         provider = persona_link_providers[data.provider]
         if not provider.validate(data.settings):
             raise ValueError(f"Settings for provider '{data.provider}' are invalid")
+        
+        if not data.name:
+            raise ValueError("Name not specified")
+        
+        if not data.settings:
+            raise ValueError("Settings not specified")
         
         w = None
         if webhook is not None:
@@ -97,20 +106,22 @@ class Avatar(Model):
         return avatar
     
     async def update_avatar(self, data: AvatarPydantic, webhook: WebhookPydantic | None = None):
-        if data.provider not in persona_link_providers:
+        if data.provider and data.provider not in persona_link_providers:
             raise ValueError(f"Provider '{data.provider}' not found")
         
-        provider = persona_link_providers[data.provider]
-        if not provider.validate(data.settings):
+        provider = persona_link_providers[self.provider.value]
+        if data.settings and not provider.validate(data.settings):
             raise ValueError(f"Settings for provider '{data.provider}' are invalid")
         
         if webhook is not None:
             await self.fetch_related('webhook')
-            await self.webhook.update_from_dict(webhook.model_bump())
+            await self.webhook.update_from_dict(webhook.model_dump())
             await self.webhook.save()
             
-        self.name = data.name
-        self.settings = data.settings
+        if data.name: 
+            self.name = data.name
+        if data.settings:
+            self.settings = data.settings
         await self.save()
         return self
     

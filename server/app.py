@@ -65,6 +65,7 @@ async def update_avatar(avatar_slug: str, data: ConnectedAvatar):
     avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
+    print(data)
     avatar = await avatar.update_avatar(data.avatar_settings, data.webhook_settings)
     return avatar
 
@@ -96,7 +97,7 @@ async def list_messages(conversation_id: str) -> List[MessagePydantic]:
 @app.put("/conversation/{avatar_slug}/", response_model=ConversationPydantic)
 async def create_conversation(avatar_slug: str) -> Conversation:
     from uuid import uuid4
-    conversation_id = uuid4.hex()
+    conversation_id = uuid4().hex
     conversation = await Conversation.create(conversation_id=conversation_id, avatar_slug=avatar_slug)
     return await ConversationPydantic.from_tortoise_orm(conversation)
 
@@ -163,4 +164,42 @@ async def feedback(message_id: int, feedback: FeedbackPydantic):
 """
 Run as 
 uvicorn server.app:app --port 9000 --reload
+
+CREATE AVATAR:
+
+curl -X 'PUT' \
+  'http://localhost:9000/avatar/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "avatar_settings": {
+    "name": "lisa",
+    "provider": "Azure",
+    "settings": {
+        "voice":"en-IN-NeerjaNeural",
+        "character":"lisa",
+        "style":"graceful",
+        "pose":"sitting",
+        "video_format":"webm",
+        "background_color":"#ffffff",
+        "video_codec":"hevc"
+    }
+  },
+  "webhook_settings": {
+    "url": "https://localhost:8000/process",
+    "headers": {},
+    "method": "POST",
+    "get_text": true,
+    "get_audio": false,
+    "get_video": false,
+    "video_width": 320,
+    "video_height": 240,
+    "video_frame_rate": 25,
+    "audio_bit_rate": 32,
+    "audio_sampling_rate": 22050
+  }
+}'
+
+# CREATE CONVERSATION
+
 """

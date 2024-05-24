@@ -161,22 +161,22 @@ async def test_cache():
     
     # Test Azure Avatar
     # """
-    # voice: str = "en-IN-NeerjaNeural"
-    # character: str = "lisa"
-    # style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
-    # pose: AzureAvatarPose = AzureAvatarPose.SITTING
-    # video_format: VideoFormat = VideoFormat.WEBM
-    # background_color: str = "#00000000"
-    # video_codec = "vp9"""
-    # azure_avatar_settings = AzureAvatarSettings(
-    #     voice="en-IN-NeerjaNeural",
-    #     character="lisa",
-    #     style=AzureAvatarStyle.GRACEFUL,
-    #     pose=AzureAvatarPose.SITTING,
-    #     video_format=VideoFormat.WEBM,
-    #     background_color="#00000000",
-    #     video_codec=VideoCodecs.VP9
-    # )
+    voice: str = "en-IN-NeerjaNeural"
+    character: str = "lisa"
+    style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
+    pose: AzureAvatarPose = AzureAvatarPose.SITTING
+    video_format: VideoFormat = VideoFormat.WEBM
+    background_color: str = "#00000000"
+    video_codec = "vp9"""
+    azure_avatar_settings = AzureAvatarSettings(
+        voice="en-IN-NeerjaNeural",
+        character="lisa",
+        style=AzureAvatarStyle.GRACEFUL,
+        pose=AzureAvatarPose.SITTING,
+        video_format=VideoFormat.WEBM,
+        background_color="#ffffff",
+        video_codec=VideoCodecs.HEVC
+    )
     
     # azure_avatar = AzureAvatar()
     # text = "Hi, I am Lisa. I am a graceful persona_link. I am sitting. I am speaking in English. I hope you like my voice. Can I know more about you please?"

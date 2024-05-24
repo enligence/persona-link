@@ -1,7 +1,7 @@
 from persona_link.avatar import AvatarPydantic, WebhookPydantic
 from persona_link.persona_provider.models import AvatarType
 from pydantic import BaseModel, ConfigDict
-
+from typing import Optional
 from tortoise.models import Model
 from tortoise import fields
 from tortoise.contrib.pydantic import pydantic_model_creator
@@ -10,8 +10,8 @@ from tortoise.contrib.pydantic import pydantic_model_creator
 from enum import Enum
 
 class ConnectedAvatar(BaseModel):
-    avatar_settings: AvatarPydantic
-    webhook_setings: WebhookPydantic
+    avatar_settings: Optional[AvatarPydantic] = None
+    webhook_settings: Optional[WebhookPydantic] = None
     
 class AvatarListModel(BaseModel):
     name: str

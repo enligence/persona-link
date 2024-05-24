@@ -12,7 +12,7 @@ TORTOISE_ORM = {
             "default_connection": "default",
         },
         "persona_link": {
-            "models": ["persona_link.avatar.models"],
+            "models": ["persona_link.avatar.models", "persona_link.cache.db.models"],
             "default_connection": "default",
         }
     },

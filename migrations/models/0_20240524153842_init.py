@@ -65,6 +65,21 @@ CREATE TABLE IF NOT EXISTS "avatars" (
     "created_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Creation timestamp */,
     "updated_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Last update timestamp */,
     "webhook_id" INT REFERENCES "webhooks" ("id") ON DELETE CASCADE /* Webhook to send the avatar to */
+);
+CREATE TABLE IF NOT EXISTS "records" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "key" VARCHAR(255) NOT NULL UNIQUE,
+    "avatarId" VARCHAR(255) NOT NULL,
+    "text" TEXT NOT NULL,
+    "storage_paths" JSON NOT NULL,
+    "created" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+    "updated" TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
+    "metadata" JSON
+) /* A single cache record in the database */;
+CREATE TABLE IF NOT EXISTS "usage_logs" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "timestamp" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+    "record_id" INT NOT NULL REFERENCES "records" ("id") ON DELETE CASCADE
 );"""
 
 
