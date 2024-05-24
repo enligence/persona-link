@@ -27,6 +27,16 @@ from .ws import connections, router
 
 app = FastAPI()
 
+# add cors policy to allow localhost:3000 and localhost:8000
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:8000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 cache = Cache(AzureStorage(), RelationalDB(), md5hash)
 
 register_tortoise(

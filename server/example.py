@@ -16,3 +16,40 @@ The workflow is as follows:
 10. The client backend can process or intiate and call api endpoint of persona link to respond. personal link will find the websocket associated and generate the appropriate avatar info to play on the frontend.
 """
 
+from fastapi import FastAPI
+from persona_link.avatar.models import WebhookResponseData, AvatarInput
+from persona_link import APIClient
+app = FastAPI()
+
+# add cors policy to allow localhost:3000 and localhost:9000
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:9000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+avatar_slug = "lisa"
+
+@app.get("/create_conversation/")
+async def create_conversation():
+    "the app may want to stor it and reuse it for the same user"
+    return await APIClient().put_request(f"http://localhost:9000/conversation/{avatar_slug}/")
+
+@app.post("/process/")
+async def process(data: WebhookResponseData):
+    # process the data
+    # for now this is a test only
+    print(data)
+    # we shall now ask the persona_link server to say the sme thing i.e. an echo bot
+    input = AvatarInput(
+        text=data.text,
+        personalize=False
+    )
+    await APIClient().post_request(f"http://localhost:9000/conversation/{data.conversation_id}", input)
