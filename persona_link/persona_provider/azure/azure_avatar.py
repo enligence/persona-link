@@ -9,7 +9,7 @@ from persona_link.api_client import APIClient
 import os
 from persona_link.cache.models import ContentType, DataToStore, Metadata
 from uuid import uuid4
-from .models import AzureAvatarSettings
+from persona_link.persona_provider.azure.models import AzureAvatarSettings
 # https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech-avatar/what-is-text-to-speech-avatar
 @persona_link_provider
 class AzureAvatar(PersonaBase):

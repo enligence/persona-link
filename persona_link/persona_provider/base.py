@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from .models import (
+from persona_link.persona_provider.models import (
     SpeakingAvatarInstance,
     AudioProviderSettings,
     VideoProviderSettings,

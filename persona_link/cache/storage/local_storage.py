@@ -7,7 +7,7 @@ import os
 from typing import AsyncGenerator
 import aiofiles
 import aiofiles.os
-from .base_storage import BaseCacheStorage
+from persona_link.cache.storage.base_storage import BaseCacheStorage
 from persona_link.cache.models import ContentType
 
 class LocalStorage(BaseCacheStorage):

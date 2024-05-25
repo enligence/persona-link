@@ -1,4 +1,4 @@
-from .models import Avatar, AvatarInput, WebhookResponseData
+from persona_link.avatar.models import Avatar, AvatarInput, WebhookResponseData
 from persona_link.cache import Cache
 from persona_link.persona_provider import PersonaBase
 from persona_link.persona_provider.models import SpeakingAvatarInstance

@@ -1,5 +1,5 @@
-from .models import Personalization
-from .base import PersonalizationBase
+from persona_link.personalization.models import Personalization
+from persona_link.personalization.base import PersonalizationBase
 from random import choice
 class RandomPersonalization(PersonalizationBase):
     def __init__(self):

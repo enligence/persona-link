@@ -7,7 +7,7 @@ from persona_link.persona_provider.models import (
     AudioFormat,
 )
 from persona_link.tts.base import TTSBase
-from .models import AzureTTSVoiceSettings
+from persona_link.tts.azure.models import AzureTTSVoiceSettings
 
 from azure.cognitiveservices.speech import (
     SpeechSynthesisOutputFormat,

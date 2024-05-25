@@ -1,2 +1,2 @@
-from .avatar import Avatar, AvatarPydantic
-from .api_client import APIClient
+from persona_link.avatar import Avatar, AvatarPydantic
+from persona_link.api_client import APIClient

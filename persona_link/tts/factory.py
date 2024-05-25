@@ -1,4 +1,4 @@
-from . import AzureTTSVoiceSettings, TTSBase
+from persona_link.tts import AzureTTSVoiceSettings, TTSBase
 from persona_link.persona_provider.models import AudioProviderSettings
 
 def tts_factory(settings: AudioProviderSettings) -> TTSBase:

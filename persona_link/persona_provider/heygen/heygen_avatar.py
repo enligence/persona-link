@@ -3,7 +3,7 @@ from persona_link.persona_provider.models import AvatarType, SpeakingAvatarInsta
 from persona_link.persona_provider.base import PersonaBase
 import asyncio
 from persona_link.api_client import APIClient
-from .models import HeygenAvatarSettings
+from persona_link.persona_provider.heygen import HeygenAvatarSettings
 from persona_link.cache.models import ContentType, DataToStore, Metadata
 @persona_link_provider
 class HeygenAvatar(PersonaBase):

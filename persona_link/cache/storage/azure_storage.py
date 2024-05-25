@@ -4,7 +4,7 @@ Azure storage for cache
 
 import os
 from typing import AsyncGenerator
-from .base_storage import BaseCacheStorage
+from persona_link.cache.storage.base_storage import BaseCacheStorage
 from azure.storage.blob.aio import BlobServiceClient, BlobClient
 from azure.storage.blob import generate_blob_sas, BlobSasPermissions, ContentSettings
 from azure.core.exceptions import ResourceNotFoundError

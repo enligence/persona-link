@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persona_link.cache package &mdash; Persona Link  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Persona Link
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">persona_link.cache package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-persona_link.cache.cache">persona_link.cache.cache module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache"><code class="docutils literal notranslate"><span class="pre">Cache</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache.delete"><code class="docutils literal notranslate"><span class="pre">Cache.delete()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache.deleteAll"><code class="docutils literal notranslate"><span class="pre">Cache.deleteAll()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache.get"><code class="docutils literal notranslate"><span class="pre">Cache.get()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache.getUsageCount"><code class="docutils literal notranslate"><span class="pre">Cache.getUsageCount()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache.get_urls"><code class="docutils literal notranslate"><span class="pre">Cache.get_urls()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache.incrementUsage"><code class="docutils literal notranslate"><span class="pre">Cache.incrementUsage()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.cache.Cache.put"><code class="docutils literal notranslate"><span class="pre">Cache.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.hashing">persona_link.cache.hashing module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.hashing.md5hash"><code class="docutils literal notranslate"><span class="pre">md5hash()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.hashing.sha256hash"><code class="docutils literal notranslate"><span class="pre">sha256hash()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.models">persona_link.cache.models module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.models.ContentType"><code class="docutils literal notranslate"><span class="pre">ContentType</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.models.ContentType.JSON"><code class="docutils literal notranslate"><span class="pre">ContentType.JSON</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.ContentType.MP3"><code class="docutils literal notranslate"><span class="pre">ContentType.MP3</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.ContentType.MP4"><code class="docutils literal notranslate"><span class="pre">ContentType.MP4</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.ContentType.WAV"><code class="docutils literal notranslate"><span class="pre">ContentType.WAV</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.ContentType.WEBM"><code class="docutils literal notranslate"><span class="pre">ContentType.WEBM</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore"><code class="docutils literal notranslate"><span class="pre">DataToStore</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.binary_data"><code class="docutils literal notranslate"><span class="pre">DataToStore.binary_data</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.content_type"><code class="docutils literal notranslate"><span class="pre">DataToStore.content_type</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.data_type"><code class="docutils literal notranslate"><span class="pre">DataToStore.data_type</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.metadata"><code class="docutils literal notranslate"><span class="pre">DataToStore.metadata</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">DataToStore.model_computed_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.model_config"><code class="docutils literal notranslate"><span class="pre">DataToStore.model_config</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.model_fields"><code class="docutils literal notranslate"><span class="pre">DataToStore.model_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.validate_data_type"><code class="docutils literal notranslate"><span class="pre">DataToStore.validate_data_type()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.visemes"><code class="docutils literal notranslate"><span class="pre">DataToStore.visemes</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.DataToStore.word_timestamps"><code class="docutils literal notranslate"><span class="pre">DataToStore.word_timestamps</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#persona_link.cache.models.PathType"><code class="docutils literal notranslate"><span class="pre">PathType</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.models.PathType.MEDIA"><code class="docutils literal notranslate"><span class="pre">PathType.MEDIA</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.PathType.VISEMES"><code class="docutils literal notranslate"><span class="pre">PathType.VISEMES</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.PathType.WORD_TIMESTAMPS"><code class="docutils literal notranslate"><span class="pre">PathType.WORD_TIMESTAMPS</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record"><code class="docutils literal notranslate"><span class="pre">Record</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.avatarId"><code class="docutils literal notranslate"><span class="pre">Record.avatarId</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.created"><code class="docutils literal notranslate"><span class="pre">Record.created</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.from_db"><code class="docutils literal notranslate"><span class="pre">Record.from_db()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.key"><code class="docutils literal notranslate"><span class="pre">Record.key</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.metadata"><code class="docutils literal notranslate"><span class="pre">Record.metadata</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">Record.model_computed_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.model_config"><code class="docutils literal notranslate"><span class="pre">Record.model_config</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.model_fields"><code class="docutils literal notranslate"><span class="pre">Record.model_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.storage_paths"><code class="docutils literal notranslate"><span class="pre">Record.storage_paths</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.text"><code class="docutils literal notranslate"><span class="pre">Record.text</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.Record.updated"><code class="docutils literal notranslate"><span class="pre">Record.updated</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#persona_link.cache.models.StoragePaths"><code class="docutils literal notranslate"><span class="pre">StoragePaths</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.models.StoragePaths.media_path"><code class="docutils literal notranslate"><span class="pre">StoragePaths.media_path</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.StoragePaths.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">StoragePaths.model_computed_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.StoragePaths.model_config"><code class="docutils literal notranslate"><span class="pre">StoragePaths.model_config</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.StoragePaths.model_fields"><code class="docutils literal notranslate"><span class="pre">StoragePaths.model_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.StoragePaths.viseme_path"><code class="docutils literal notranslate"><span class="pre">StoragePaths.viseme_path</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.StoragePaths.word_timestamp_path"><code class="docutils literal notranslate"><span class="pre">StoragePaths.word_timestamp_path</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#persona_link.cache.models.UsageLog"><code class="docutils literal notranslate"><span class="pre">UsageLog</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.models.UsageLog.from_db"><code class="docutils literal notranslate"><span class="pre">UsageLog.from_db()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.UsageLog.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">UsageLog.model_computed_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.UsageLog.model_config"><code class="docutils literal notranslate"><span class="pre">UsageLog.model_config</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.UsageLog.model_fields"><code class="docutils literal notranslate"><span class="pre">UsageLog.model_fields</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.UsageLog.record_key"><code class="docutils literal notranslate"><span class="pre">UsageLog.record_key</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.models.UsageLog.timestamp"><code class="docutils literal notranslate"><span class="pre">UsageLog.timestamp</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Persona Link</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">persona_link.cache package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/persona_link.cache.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="persona-link-cache-package">
+<h1>persona_link.cache package<a class="headerlink" href="#persona-link-cache-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="persona_link.cache.db.html">persona_link.cache.db package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.db.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.db.html#module-persona_link.cache.db.base_db">persona_link.cache.db.base_db module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB.delete"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB.deleteAll"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.deleteAll()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB.get"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB.getUsageCount"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.getUsageCount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB.incrementUsage"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.incrementUsage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB.put"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.db.html#module-persona_link.cache.db.models">persona_link.cache.db.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.models.Record"><code class="docutils literal notranslate"><span class="pre">Record</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.models.Record.Meta"><code class="docutils literal notranslate"><span class="pre">Record.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.models.UsageLog"><code class="docutils literal notranslate"><span class="pre">UsageLog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.models.UsageLog.Meta"><code class="docutils literal notranslate"><span class="pre">UsageLog.Meta</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.db.html#module-persona_link.cache.db.relational">persona_link.cache.db.relational module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB"><code class="docutils literal notranslate"><span class="pre">RelationalDB</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB.delete"><code class="docutils literal notranslate"><span class="pre">RelationalDB.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB.deleteAll"><code class="docutils literal notranslate"><span class="pre">RelationalDB.deleteAll()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB.get"><code class="docutils literal notranslate"><span class="pre">RelationalDB.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB.getUsageCount"><code class="docutils literal notranslate"><span class="pre">RelationalDB.getUsageCount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB.incrementUsage"><code class="docutils literal notranslate"><span class="pre">RelationalDB.incrementUsage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB.init_db"><code class="docutils literal notranslate"><span class="pre">RelationalDB.init_db()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.relational.RelationalDB.put"><code class="docutils literal notranslate"><span class="pre">RelationalDB.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.db.html#module-persona_link.cache.db">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="persona_link.cache.storage.html">persona_link.cache.storage package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.storage.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.storage.html#module-persona_link.cache.storage.azure_storage">persona_link.cache.storage.azure_storage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.azure_storage.AzureStorage"><code class="docutils literal notranslate"><span class="pre">AzureStorage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.azure_storage.AzureStorage.delete"><code class="docutils literal notranslate"><span class="pre">AzureStorage.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.azure_storage.AzureStorage.deleteAll"><code class="docutils literal notranslate"><span class="pre">AzureStorage.deleteAll()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.azure_storage.AzureStorage.get"><code class="docutils literal notranslate"><span class="pre">AzureStorage.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.azure_storage.AzureStorage.put"><code class="docutils literal notranslate"><span class="pre">AzureStorage.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.storage.html#module-persona_link.cache.storage.base_storage">persona_link.cache.storage.base_storage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.base_storage.BaseCacheStorage"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.base_storage.BaseCacheStorage.delete"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.base_storage.BaseCacheStorage.deleteAll"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.deleteAll()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.base_storage.BaseCacheStorage.get"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.base_storage.BaseCacheStorage.put"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.storage.html#module-persona_link.cache.storage.local_storage">persona_link.cache.storage.local_storage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.local_storage.LocalStorage"><code class="docutils literal notranslate"><span class="pre">LocalStorage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.local_storage.LocalStorage.delete"><code class="docutils literal notranslate"><span class="pre">LocalStorage.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.local_storage.LocalStorage.deleteAll"><code class="docutils literal notranslate"><span class="pre">LocalStorage.deleteAll()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.local_storage.LocalStorage.get"><code class="docutils literal notranslate"><span class="pre">LocalStorage.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.local_storage.LocalStorage.put"><code class="docutils literal notranslate"><span class="pre">LocalStorage.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="persona_link.cache.storage.html#module-persona_link.cache.storage">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-persona_link.cache.cache">
+<span id="persona-link-cache-cache-module"></span><h2>persona_link.cache.cache module<a class="headerlink" href="#module-persona_link.cache.cache" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.cache.</span></span><span class="sig-name descname"><span class="pre">Cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.cache.storage.html#persona_link.cache.storage.base_storage.BaseCacheStorage" title="persona_link.cache.storage.base_storage.BaseCacheStorage"><span class="pre">BaseCacheStorage</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.cache.db.html#persona_link.cache.db.base_db.BaseCacheDB" title="persona_link.cache.db.base_db.BaseCacheDB"><span class="pre">BaseCacheDB</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashFn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.cache.Cache" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for caching of Avatar video / audio as per the
+avatar type. Caching requires a blob storage for files,
+database for metadata, and a hashing method to generate
+unique keys for the data.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.cache.Cache.delete" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache.deleteAll">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.cache.Cache.deleteAll" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache.get">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.cache.Cache.get" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache.getUsageCount">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getUsageCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#persona_link.cache.cache.Cache.getUsageCount" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache.get_urls">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_urls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.Urls" title="persona_link.persona_provider.models.Urls"><span class="pre">Urls</span></a></span></span><a class="headerlink" href="#persona_link.cache.cache.Cache.get_urls" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache.incrementUsage">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">incrementUsage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.cache.Cache.incrementUsage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.cache.Cache.put">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persona_link.cache.models.DataToStore" title="persona_link.cache.models.DataToStore"><span class="pre">DataToStore</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a></span></span><a class="headerlink" href="#persona_link.cache.cache.Cache.put" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache.hashing">
+<span id="persona-link-cache-hashing-module"></span><h2>persona_link.cache.hashing module<a class="headerlink" href="#module-persona_link.cache.hashing" title="Link to this heading">¶</a></h2>
+<p>Hash methods that can be used to hash data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="persona_link.cache.hashing.md5hash">
+<span class="sig-prename descclassname"><span class="pre">persona_link.cache.hashing.</span></span><span class="sig-name descname"><span class="pre">md5hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#persona_link.cache.hashing.md5hash" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persona_link.cache.hashing.sha256hash">
+<span class="sig-prename descclassname"><span class="pre">persona_link.cache.hashing.</span></span><span class="sig-name descname"><span class="pre">sha256hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#persona_link.cache.hashing.sha256hash" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-persona_link.cache.models">
+<span id="persona-link-cache-models-module"></span><h2>persona_link.cache.models module<a class="headerlink" href="#module-persona_link.cache.models" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.models.ContentType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.models.</span></span><span class="sig-name descname"><span class="pre">ContentType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.models.ContentType" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.ContentType.JSON">
+<span class="sig-name descname"><span class="pre">JSON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'application/json'</span></em><a class="headerlink" href="#persona_link.cache.models.ContentType.JSON" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.ContentType.MP3">
+<span class="sig-name descname"><span class="pre">MP3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'audio/mpeg'</span></em><a class="headerlink" href="#persona_link.cache.models.ContentType.MP3" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.ContentType.MP4">
+<span class="sig-name descname"><span class="pre">MP4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'video/mp4'</span></em><a class="headerlink" href="#persona_link.cache.models.ContentType.MP4" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.ContentType.WAV">
+<span class="sig-name descname"><span class="pre">WAV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'audio/wav'</span></em><a class="headerlink" href="#persona_link.cache.models.ContentType.WAV" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.ContentType.WEBM">
+<span class="sig-name descname"><span class="pre">WEBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'video/webm'</span></em><a class="headerlink" href="#persona_link.cache.models.ContentType.WEBM" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.models.</span></span><span class="sig-name descname"><span class="pre">DataToStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.AvatarType" title="persona_link.persona_provider.models.AvatarType"><span class="pre">AvatarType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persona_link.cache.models.ContentType" title="persona_link.cache.models.ContentType"><span class="pre">ContentType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">visemes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.Viseme" title="persona_link.persona_provider.models.Viseme"><span class="pre">Viseme</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.WordTimestamp" title="persona_link.persona_provider.models.WordTimestamp"><span class="pre">WordTimestamp</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.Metadata" title="persona_link.persona_provider.models.Metadata"><span class="pre">Metadata</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.models.DataToStore" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.binary_data">
+<span class="sig-name descname"><span class="pre">binary_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.binary_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.content_type">
+<span class="sig-name descname"><span class="pre">content_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#persona_link.cache.models.ContentType" title="persona_link.cache.models.ContentType"><span class="pre">ContentType</span></a></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.content_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.data_type">
+<span class="sig-name descname"><span class="pre">data_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.AvatarType" title="persona_link.persona_provider.models.AvatarType"><span class="pre">AvatarType</span></a></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.data_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.Metadata" title="persona_link.persona_provider.models.Metadata"><span class="pre">Metadata</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.metadata" title="Link to this definition">¶</a></dt>
+<dd><p>validate data type, if it is audio then visemes must also be there</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.model_computed_fields" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'arbitrary_types_allowed':</span> <span class="pre">True}</span></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'binary_data':</span> <span class="pre">FieldInfo(annotation=Union[bytes,</span> <span class="pre">AsyncGenerator[bytes,</span> <span class="pre">NoneType]],</span> <span class="pre">required=True),</span> <span class="pre">'content_type':</span> <span class="pre">FieldInfo(annotation=ContentType,</span> <span class="pre">required=True),</span> <span class="pre">'data_type':</span> <span class="pre">FieldInfo(annotation=AvatarType,</span> <span class="pre">required=True),</span> <span class="pre">'metadata':</span> <span class="pre">FieldInfo(annotation=Union[Metadata,</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None),</span> <span class="pre">'visemes':</span> <span class="pre">FieldInfo(annotation=Union[List[Viseme],</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None),</span> <span class="pre">'word_timestamps':</span> <span class="pre">FieldInfo(annotation=Union[List[WordTimestamp],</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None)}</span></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.model_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.validate_data_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.models.DataToStore.validate_data_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.visemes">
+<span class="sig-name descname"><span class="pre">visemes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.Viseme" title="persona_link.persona_provider.models.Viseme"><span class="pre">Viseme</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.visemes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.DataToStore.word_timestamps">
+<span class="sig-name descname"><span class="pre">word_timestamps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.WordTimestamp" title="persona_link.persona_provider.models.WordTimestamp"><span class="pre">WordTimestamp</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#persona_link.cache.models.DataToStore.word_timestamps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.models.PathType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.models.</span></span><span class="sig-name descname"><span class="pre">PathType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.models.PathType" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.PathType.MEDIA">
+<span class="sig-name descname"><span class="pre">MEDIA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'media'</span></em><a class="headerlink" href="#persona_link.cache.models.PathType.MEDIA" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.PathType.VISEMES">
+<span class="sig-name descname"><span class="pre">VISEMES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'visemes'</span></em><a class="headerlink" href="#persona_link.cache.models.PathType.VISEMES" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.PathType.WORD_TIMESTAMPS">
+<span class="sig-name descname"><span class="pre">WORD_TIMESTAMPS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'word_timestamps'</span></em><a class="headerlink" href="#persona_link.cache.models.PathType.WORD_TIMESTAMPS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.models.</span></span><span class="sig-name descname"><span class="pre">Record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persona_link.cache.models.StoragePaths" title="persona_link.cache.models.StoragePaths"><span class="pre">StoragePaths</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.Metadata" title="persona_link.persona_provider.models.Metadata"><span class="pre">Metadata</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.models.Record" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>A single cache record in the database</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.avatarId">
+<span class="sig-name descname"><span class="pre">avatarId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#persona_link.cache.models.Record.avatarId" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.created">
+<span class="sig-name descname"><span class="pre">created</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#persona_link.cache.models.Record.created" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.from_db">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a></span></span><a class="headerlink" href="#persona_link.cache.models.Record.from_db" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.key">
+<span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#persona_link.cache.models.Record.key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="persona_link.persona_provider.html#persona_link.persona_provider.models.Metadata" title="persona_link.persona_provider.models.Metadata"><span class="pre">Metadata</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#persona_link.cache.models.Record.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#persona_link.cache.models.Record.model_computed_fields" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'from_attributes':</span> <span class="pre">True}</span></em><a class="headerlink" href="#persona_link.cache.models.Record.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'avatarId':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'created':</span> <span class="pre">FieldInfo(annotation=datetime,</span> <span class="pre">required=True),</span> <span class="pre">'key':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'metadata':</span> <span class="pre">FieldInfo(annotation=Union[Metadata,</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None),</span> <span class="pre">'storage_paths':</span> <span class="pre">FieldInfo(annotation=StoragePaths,</span> <span class="pre">required=True),</span> <span class="pre">'text':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'updated':</span> <span class="pre">FieldInfo(annotation=Union[datetime,</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None)}</span></em><a class="headerlink" href="#persona_link.cache.models.Record.model_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.storage_paths">
+<span class="sig-name descname"><span class="pre">storage_paths</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#persona_link.cache.models.StoragePaths" title="persona_link.cache.models.StoragePaths"><span class="pre">StoragePaths</span></a></em><a class="headerlink" href="#persona_link.cache.models.Record.storage_paths" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.text">
+<span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#persona_link.cache.models.Record.text" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.Record.updated">
+<span class="sig-name descname"><span class="pre">updated</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#persona_link.cache.models.Record.updated" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.models.StoragePaths">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.models.</span></span><span class="sig-name descname"><span class="pre">StoragePaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viseme_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_timestamp_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.models.StoragePaths" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.StoragePaths.media_path">
+<span class="sig-name descname"><span class="pre">media_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#persona_link.cache.models.StoragePaths.media_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.StoragePaths.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#persona_link.cache.models.StoragePaths.model_computed_fields" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.StoragePaths.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#persona_link.cache.models.StoragePaths.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.StoragePaths.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'media_path':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'viseme_path':</span> <span class="pre">FieldInfo(annotation=Union[str,</span> <span class="pre">NoneType],</span> <span class="pre">required=True),</span> <span class="pre">'word_timestamp_path':</span> <span class="pre">FieldInfo(annotation=Union[str,</span> <span class="pre">NoneType],</span> <span class="pre">required=True)}</span></em><a class="headerlink" href="#persona_link.cache.models.StoragePaths.model_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.StoragePaths.viseme_path">
+<span class="sig-name descname"><span class="pre">viseme_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#persona_link.cache.models.StoragePaths.viseme_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.StoragePaths.word_timestamp_path">
+<span class="sig-name descname"><span class="pre">word_timestamp_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#persona_link.cache.models.StoragePaths.word_timestamp_path" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.models.UsageLog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.models.</span></span><span class="sig-name descname"><span class="pre">UsageLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.models.UsageLog" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.models.UsageLog.from_db">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persona_link.cache.models.UsageLog" title="persona_link.cache.models.UsageLog"><span class="pre">UsageLog</span></a></span></span><a class="headerlink" href="#persona_link.cache.models.UsageLog.from_db" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.UsageLog.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#persona_link.cache.models.UsageLog.model_computed_fields" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.UsageLog.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'from_attributes':</span> <span class="pre">True}</span></em><a class="headerlink" href="#persona_link.cache.models.UsageLog.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.UsageLog.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'record_key':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'timestamp':</span> <span class="pre">FieldInfo(annotation=datetime,</span> <span class="pre">required=True)}</span></em><a class="headerlink" href="#persona_link.cache.models.UsageLog.model_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.UsageLog.record_key">
+<span class="sig-name descname"><span class="pre">record_key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#persona_link.cache.models.UsageLog.record_key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.models.UsageLog.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#persona_link.cache.models.UsageLog.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-persona_link.cache" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Abhinav Dayal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

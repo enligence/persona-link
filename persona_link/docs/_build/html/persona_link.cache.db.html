@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persona_link.cache.db package &mdash; Persona Link  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Persona Link
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">persona_link.cache.db package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-persona_link.cache.db.base_db">persona_link.cache.db.base_db module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB.delete"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.delete()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB.deleteAll"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.deleteAll()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB.get"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.get()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB.getUsageCount"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.getUsageCount()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB.incrementUsage"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.incrementUsage()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB.put"><code class="docutils literal notranslate"><span class="pre">BaseCacheDB.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.db.models">persona_link.cache.db.models module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.models.Record"><code class="docutils literal notranslate"><span class="pre">Record</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.models.Record.Meta"><code class="docutils literal notranslate"><span class="pre">Record.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.models.Record.Meta.app"><code class="docutils literal notranslate"><span class="pre">Record.Meta.app</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.models.Record.Meta.table"><code class="docutils literal notranslate"><span class="pre">Record.Meta.table</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#persona_link.cache.db.models.UsageLog"><code class="docutils literal notranslate"><span class="pre">UsageLog</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.models.UsageLog.Meta"><code class="docutils literal notranslate"><span class="pre">UsageLog.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.models.UsageLog.Meta.app"><code class="docutils literal notranslate"><span class="pre">UsageLog.Meta.app</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.models.UsageLog.Meta.table"><code class="docutils literal notranslate"><span class="pre">UsageLog.Meta.table</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.db.relational">persona_link.cache.db.relational module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB"><code class="docutils literal notranslate"><span class="pre">RelationalDB</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB.delete"><code class="docutils literal notranslate"><span class="pre">RelationalDB.delete()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB.deleteAll"><code class="docutils literal notranslate"><span class="pre">RelationalDB.deleteAll()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB.get"><code class="docutils literal notranslate"><span class="pre">RelationalDB.get()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB.getUsageCount"><code class="docutils literal notranslate"><span class="pre">RelationalDB.getUsageCount()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB.incrementUsage"><code class="docutils literal notranslate"><span class="pre">RelationalDB.incrementUsage()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB.init_db"><code class="docutils literal notranslate"><span class="pre">RelationalDB.init_db()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.db.relational.RelationalDB.put"><code class="docutils literal notranslate"><span class="pre">RelationalDB.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.db">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Persona Link</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">persona_link.cache.db package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/persona_link.cache.db.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="persona-link-cache-db-package">
+<h1>persona_link.cache.db package<a class="headerlink" href="#persona-link-cache-db-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-persona_link.cache.db.base_db">
+<span id="persona-link-cache-db-base-db-module"></span><h2>persona_link.cache.db.base_db module<a class="headerlink" href="#module-persona_link.cache.db.base_db" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.db.base_db.BaseCacheDB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.db.base_db.</span></span><span class="sig-name descname"><span class="pre">BaseCacheDB</span></span><a class="headerlink" href="#persona_link.cache.db.base_db.BaseCacheDB" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Base class for database to store metadata of the cached files</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.base_db.BaseCacheDB.delete">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.base_db.BaseCacheDB.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.base_db.BaseCacheDB.deleteAll">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.base_db.BaseCacheDB.deleteAll" title="Link to this definition">¶</a></dt>
+<dd><p>Delete all the records for the given avatar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.base_db.BaseCacheDB.get">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="persona_link.cache.html#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.base_db.BaseCacheDB.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.base_db.BaseCacheDB.getUsageCount">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getUsageCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#persona_link.cache.db.base_db.BaseCacheDB.getUsageCount" title="Link to this definition">¶</a></dt>
+<dd><p>Get the usage count of the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.base_db.BaseCacheDB.incrementUsage">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">incrementUsage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.base_db.BaseCacheDB.incrementUsage" title="Link to this definition">¶</a></dt>
+<dd><p>Increment the usage count of the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.base_db.BaseCacheDB.put">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.cache.html#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.base_db.BaseCacheDB.put" title="Link to this definition">¶</a></dt>
+<dd><p>Put the record in the database</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache.db.models">
+<span id="persona-link-cache-db-models-module"></span><h2>persona_link.cache.db.models module<a class="headerlink" href="#module-persona_link.cache.db.models" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.Record">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.db.models.</span></span><span class="sig-name descname"><span class="pre">Record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.db.models.Record" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>A single cache record in the database</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.Record.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#persona_link.cache.db.models.Record.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.Record.Meta.app">
+<span class="sig-name descname"><span class="pre">app</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'persona_link'</span></em><a class="headerlink" href="#persona_link.cache.db.models.Record.Meta.app" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.Record.Meta.table">
+<span class="sig-name descname"><span class="pre">table</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'records'</span></em><a class="headerlink" href="#persona_link.cache.db.models.Record.Meta.table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.UsageLog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.db.models.</span></span><span class="sig-name descname"><span class="pre">UsageLog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.db.models.UsageLog" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.UsageLog.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#persona_link.cache.db.models.UsageLog.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.UsageLog.Meta.app">
+<span class="sig-name descname"><span class="pre">app</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'persona_link'</span></em><a class="headerlink" href="#persona_link.cache.db.models.UsageLog.Meta.app" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="persona_link.cache.db.models.UsageLog.Meta.table">
+<span class="sig-name descname"><span class="pre">table</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'usage_logs'</span></em><a class="headerlink" href="#persona_link.cache.db.models.UsageLog.Meta.table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache.db.relational">
+<span id="persona-link-cache-db-relational-module"></span><h2>persona_link.cache.db.relational module<a class="headerlink" href="#module-persona_link.cache.db.relational" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.db.relational.</span></span><span class="sig-name descname"><span class="pre">RelationalDB</span></span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#persona_link.cache.db.base_db.BaseCacheDB" title="persona_link.cache.db.base_db.BaseCacheDB"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCacheDB</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB.deleteAll">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB.deleteAll" title="Link to this definition">¶</a></dt>
+<dd><p>Delete all the records for the given avatar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB.get">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="persona_link.cache.html#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB.getUsageCount">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getUsageCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB.getUsageCount" title="Link to this definition">¶</a></dt>
+<dd><p>Get the usage count of the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB.incrementUsage">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">incrementUsage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB.incrementUsage" title="Link to this definition">¶</a></dt>
+<dd><p>Increment the usage count of the record for the given key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB.init_db">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init_db</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB.init_db" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.db.relational.RelationalDB.put">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.cache.html#persona_link.cache.models.Record" title="persona_link.cache.models.Record"><span class="pre">Record</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.db.relational.RelationalDB.put" title="Link to this definition">¶</a></dt>
+<dd><p>Put the record in the database</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache.db">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-persona_link.cache.db" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Abhinav Dayal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

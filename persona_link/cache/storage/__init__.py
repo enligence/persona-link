@@ -1,3 +1,3 @@
-from .azure_storage import AzureStorage
-from .local_storage import LocalStorage
-from .base_storage import BaseCacheStorage
+from persona_link.cache.storage.azure_storage import AzureStorage
+from persona_link.cache.storage.local_storage import LocalStorage
+from persona_link.cache.storage.base_storage import BaseCacheStorage

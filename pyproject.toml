@@ -10,6 +10,8 @@ package-mode = true
 python = ">=3.10,<=3.13"
 uvicorn = "^0.29.0"
 aerich = "^0.7.2"
+sphinx = "^7.3.7"
+sphinx-rtd-theme = "^2.0.0"
 
 [tool.poetry.group.core.dependencies]
 python-dotenv = "^1.0.1"

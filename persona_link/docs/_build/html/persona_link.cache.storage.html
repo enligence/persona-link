@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persona_link.cache.storage package &mdash; Persona Link  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Persona Link
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">persona_link.cache.storage package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-persona_link.cache.storage.azure_storage">persona_link.cache.storage.azure_storage module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.storage.azure_storage.AzureStorage"><code class="docutils literal notranslate"><span class="pre">AzureStorage</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.storage.azure_storage.AzureStorage.delete"><code class="docutils literal notranslate"><span class="pre">AzureStorage.delete()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.azure_storage.AzureStorage.deleteAll"><code class="docutils literal notranslate"><span class="pre">AzureStorage.deleteAll()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.azure_storage.AzureStorage.get"><code class="docutils literal notranslate"><span class="pre">AzureStorage.get()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.azure_storage.AzureStorage.put"><code class="docutils literal notranslate"><span class="pre">AzureStorage.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.storage.base_storage">persona_link.cache.storage.base_storage module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.storage.base_storage.BaseCacheStorage"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.delete"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.delete()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.deleteAll"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.deleteAll()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.get"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.get()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.put"><code class="docutils literal notranslate"><span class="pre">BaseCacheStorage.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.storage.local_storage">persona_link.cache.storage.local_storage module</a><ul>
+<li><a class="reference internal" href="#persona_link.cache.storage.local_storage.LocalStorage"><code class="docutils literal notranslate"><span class="pre">LocalStorage</span></code></a><ul>
+<li><a class="reference internal" href="#persona_link.cache.storage.local_storage.LocalStorage.delete"><code class="docutils literal notranslate"><span class="pre">LocalStorage.delete()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.local_storage.LocalStorage.deleteAll"><code class="docutils literal notranslate"><span class="pre">LocalStorage.deleteAll()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.local_storage.LocalStorage.get"><code class="docutils literal notranslate"><span class="pre">LocalStorage.get()</span></code></a></li>
+<li><a class="reference internal" href="#persona_link.cache.storage.local_storage.LocalStorage.put"><code class="docutils literal notranslate"><span class="pre">LocalStorage.put()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-persona_link.cache.storage">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Persona Link</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">persona_link.cache.storage package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/persona_link.cache.storage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="persona-link-cache-storage-package">
+<h1>persona_link.cache.storage package<a class="headerlink" href="#persona-link-cache-storage-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-persona_link.cache.storage.azure_storage">
+<span id="persona-link-cache-storage-azure-storage-module"></span><h2>persona_link.cache.storage.azure_storage module<a class="headerlink" href="#module-persona_link.cache.storage.azure_storage" title="Link to this heading">¶</a></h2>
+<p>Azure storage for cache</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.storage.azure_storage.AzureStorage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.storage.azure_storage.</span></span><span class="sig-name descname"><span class="pre">AzureStorage</span></span><a class="headerlink" href="#persona_link.cache.storage.azure_storage.AzureStorage" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#persona_link.cache.storage.base_storage.BaseCacheStorage" title="persona_link.cache.storage.base_storage.BaseCacheStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCacheStorage</span></code></a></p>
+<p>Azure storage for cache.
+Requires ENV vars to be set for connection string and container name</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.azure_storage.AzureStorage.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.storage.azure_storage.AzureStorage.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete the data from the given path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.azure_storage.AzureStorage.deleteAll">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.storage.azure_storage.AzureStorage.deleteAll" title="Link to this definition">¶</a></dt>
+<dd><p>Delete all the data for the given avatar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.azure_storage.AzureStorage.get">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#persona_link.cache.storage.azure_storage.AzureStorage.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get the url for the given path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.azure_storage.AzureStorage.put">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.cache.html#persona_link.cache.models.ContentType" title="persona_link.cache.models.ContentType"><span class="pre">ContentType</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#persona_link.cache.storage.azure_storage.AzureStorage.put" title="Link to this definition">¶</a></dt>
+<dd><p>Put the file in the avatarId folder and return the path</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache.storage.base_storage">
+<span id="persona-link-cache-storage-base-storage-module"></span><h2>persona_link.cache.storage.base_storage module<a class="headerlink" href="#module-persona_link.cache.storage.base_storage" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.storage.base_storage.BaseCacheStorage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.storage.base_storage.</span></span><span class="sig-name descname"><span class="pre">BaseCacheStorage</span></span><a class="headerlink" href="#persona_link.cache.storage.base_storage.BaseCacheStorage" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Base class for storage of video/audio files. Storage can be file system, 
+cloud storage, etc. The storage will store files in avatarId/file format.
+This way it will be possible to delete all files for a given persona_link.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.base_storage.BaseCacheStorage.delete">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete the data from the given path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.base_storage.BaseCacheStorage.deleteAll">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.deleteAll" title="Link to this definition">¶</a></dt>
+<dd><p>Delete all the data for the given avatar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.base_storage.BaseCacheStorage.get">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get the url for the given path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.base_storage.BaseCacheStorage.put">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.cache.html#persona_link.cache.models.ContentType" title="persona_link.cache.models.ContentType"><span class="pre">ContentType</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#persona_link.cache.storage.base_storage.BaseCacheStorage.put" title="Link to this definition">¶</a></dt>
+<dd><p>Put the file in the avatarId folder and return the path</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache.storage.local_storage">
+<span id="persona-link-cache-storage-local-storage-module"></span><h2>persona_link.cache.storage.local_storage module<a class="headerlink" href="#module-persona_link.cache.storage.local_storage" title="Link to this heading">¶</a></h2>
+<p>Local storage for cache</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="persona_link.cache.storage.local_storage.LocalStorage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persona_link.cache.storage.local_storage.</span></span><span class="sig-name descname"><span class="pre">LocalStorage</span></span><a class="headerlink" href="#persona_link.cache.storage.local_storage.LocalStorage" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#persona_link.cache.storage.base_storage.BaseCacheStorage" title="persona_link.cache.storage.base_storage.BaseCacheStorage"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCacheStorage</span></code></a></p>
+<p>Local storage for cache
+Requires ENV vars to be set for the path to the storage</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.local_storage.LocalStorage.delete">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.storage.local_storage.LocalStorage.delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete the data from the given path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.local_storage.LocalStorage.deleteAll">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persona_link.cache.storage.local_storage.LocalStorage.deleteAll" title="Link to this definition">¶</a></dt>
+<dd><p>Delete all the data for the given avatar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.local_storage.LocalStorage.get">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#persona_link.cache.storage.local_storage.LocalStorage.get" title="Link to this definition">¶</a></dt>
+<dd><p>Get the url for the given path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persona_link.cache.storage.local_storage.LocalStorage.put">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avatarId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persona_link.cache.html#persona_link.cache.models.ContentType" title="persona_link.cache.models.ContentType"><span class="pre">ContentType</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#persona_link.cache.storage.local_storage.LocalStorage.put" title="Link to this definition">¶</a></dt>
+<dd><p>Put the file in the avatarId folder and return the path</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-persona_link.cache.storage">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-persona_link.cache.storage" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Abhinav Dayal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

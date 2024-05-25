@@ -1,1 +1,1 @@
-from .sprite_avatar import SpriteAvatar
+from persona_link.persona_provider.sprite.sprite_avatar import SpriteAvatar

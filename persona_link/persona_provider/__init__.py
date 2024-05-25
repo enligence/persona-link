@@ -27,7 +27,7 @@ def persona_link_provider(klass):
 
     return inner
 
-from .azure import AzureAvatar
-from .heygen import HeygenAvatar
-from .sprite import SpriteAvatar
-from .base import PersonaBase
+from persona_link.persona_provider.azure import AzureAvatar
+from persona_link.persona_provider.heygen import HeygenAvatar
+from persona_link.persona_provider.sprite import SpriteAvatar
+from persona_link.persona_provider.base import PersonaBase

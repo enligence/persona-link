@@ -115,17 +115,17 @@ async def create_conversation(avatar_slug: str) -> Conversation:
 @app.post("/conversation/{conversation_id}/")
 async def converse(
     conversation_id: str, input: AvatarInput
-) -> SpeakingAvatarInstance:
+) :
     websocket = connections.get(conversation_id, None)
     if websocket is None:
         raise ValueError(f"Conversation '{conversation_id}' has no active connection")
     
-    conversation = await Conversation.get_or_none(id=conversation_id)
+    conversation = await Conversation.get_or_none(conversation_id=conversation_id)
      
     if conversation is None:
         raise ValueError(f"Conversation '{conversation_id}' not found")
     
-    speech: SpeakingAvatarInstance = await speak(conversation.avatar_slug, cache, input, conversation_id)
+    speech: SpeakingAvatarInstance = await speak(conversation.avatar_slug, cache, input)
     
     message = await Message.create(
         conversation=conversation,
@@ -134,7 +134,7 @@ async def converse(
         media_url=speech.urls.media_url,
         visemes_url=speech.urls.visemes_url,
         word_timestamps_url=speech.urls.word_timestamps_url,
-        metadata=speech.metadata,
+        metadata=speech.metadata.model_dump(),
         media_type=speech.avatar_type,
     )
     
