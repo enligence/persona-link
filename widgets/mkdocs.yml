@@ -1,0 +1,4 @@
+site_name: Persona Link Widgets
+nav:
+  - Home: index.md
+theme: readthedocs

@@ -1,5 +1,5 @@
 # Persona Link
-This new open source project intends to revolutionize the digital human industry by making it easier for users to integrate their AI-based agents with any avatar or digital human provider. 
+The project's aim is to make a novel step to facilitate digital human industry by making it easier for users to integrate their AI-based agents with any avatar or digital human provider. 
 
 The main features of the project include:
 1. **Interoperability**: Our solution provides a standard interface that allows users to seamlessly integrate any AI-based agent with any avatar or digital human provider.

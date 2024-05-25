@@ -10,19 +10,63 @@ from tortoise.contrib.pydantic import pydantic_model_creator
 from enum import Enum
 
 class ConnectedAvatar(BaseModel):
+    """
+    Model for an Avatar connected to the application backend using a webhook
+    
+    Attributes:
+        avatar_settings : AvatarPydantic
+            Settings of the Avatar.
+        webhook_settings : WebhookPydantic
+            Settings of the Webhook.
+    """
     avatar_settings: Optional[AvatarPydantic] = None
     webhook_settings: Optional[WebhookPydantic] = None
     
 class AvatarListModel(BaseModel):
+    """
+    Class for a single Avatar in the list of Avatars when returned in bulk
+    """
     name: str
     slug: str
     provider: str
     
 class PersonaType(Enum):
+    """
+    Enum for the type of persona
+    
+    Attributes:
+        AGENT : str
+            Agent persona
+        HUMAN : str
+            Human persona
+    """
     AGENT = "agent"
     HUMAN = "human"
 
 class Message(Model):
+    """
+    Model for a message
+    
+    Attributes:
+        id : int
+            Primary Key
+        persona_type : PersonaType
+            Type of persona
+        text : str
+            text of message
+        media_url : str
+            media url or audio or video
+        visemes_url : str
+            visemes url from agent
+        word_timestamps_url : str
+            word timestamps url from agent
+        metadata : dict
+            metadata for the message
+        media_type : AvatarType
+            type of media
+        created_at : datetime
+            Creation timestamp
+    """
     id = fields.IntField(pk=True, description="Primary Key")
     persona_type = fields.CharEnumField(PersonaType, description="Type of persona")
 
@@ -42,6 +86,21 @@ class MessagePydantic(pydantic_model_creator(Message, name="MessagePydantic")):
     model_config = ConfigDict(from_attributes=True)
 
 class Feedback(Model):
+    """
+    Model for feedback on a message
+    
+    Attributes:
+        id : int
+            Primary Key
+        message : Message
+            Message for which feedback is given
+        feedback_thumb : bool
+            thumbs up(true) or thumbs down(false) for the interaction
+        feedback_text : str
+            detailed feedback on the interaction
+        updated_at : datetime
+            Last update timestamp
+    """
     message = fields.ForeignKeyField('models.Message', related_name='feedback', on_delete=fields.CASCADE, description="Message for which feedback is given", unique=True)
     
     feedback_thumb = fields.BooleanField(description="thumbs up(true) or thumbs down(false) for the interaction", null=True)
@@ -53,12 +112,36 @@ class Feedback(Model):
         table = "feedbacks"
         
 class FeedbackPydantic(BaseModel):
+    """
+    Pydantic model for feedback on a message for API
+    
+    Attributes:
+        feedback_thumb : bool
+            thumbs up(true) or thumbs down(false) for the interaction
+        feedback_text : str
+            detailed feedback on the interaction
+    """
     model_config = ConfigDict(from_attributes=True)
     
     feedback_thumb: bool
     feedback_text: str
     
 class Conversation(Model):
+    """
+    Model for a conversation
+    
+    Attributes:
+        id : int
+            Primary Key
+        conversation_id : str
+            Conversation id
+        avatar_slug : str
+            Avatar slug
+        created_at : datetime
+            Creation timestamp
+        updated_at : datetime
+            Last update timestamp
+    """
     id = fields.IntField(pk=True, description="Primary Key")
     conversation_id = fields.CharField(255, description="Conversation id", unique=True)
     avatar_slug = fields.CharField(255, description="Avatar slug")
@@ -72,6 +155,19 @@ class ConversationPydantic(pydantic_model_creator(Conversation, name="Conversati
     model_config = ConfigDict(from_attributes=True)
         
 class ConversationMessage(Model):
+    """
+    Model for a message in a conversation
+    
+    Attributes:
+        id : int
+            Primary Key
+        conversation : Conversation
+            Conversation to which the message belongs
+        message : Message
+            Message in the conversation
+        order : int
+            Order in which messages appear in the conversation
+    """
     id = fields.IntField(pk=True, description="Primary Key")
     conversation = fields.ForeignKeyField('models.Conversation', related_name='messages', on_delete='CASCADE')
     message = fields.ForeignKeyField('models.Message', related_name='conversations', on_delete='CASCADE')
