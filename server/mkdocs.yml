@@ -1,1 +1,6 @@
 site_name: "Server"
+
+nav:
+  - Getting Started: getting_started.md
+  - API Models: models.md
+  - API Endpoints: routes.md

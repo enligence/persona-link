@@ -1,1 +1,10 @@
 site_name: "Library"
+
+nav:
+  - Getting Started: getting_started.md
+  - Avatar: avatar.md
+  - Persona Provider: persona_provider.md
+  - Storage: storage.md
+  - Database: database.md
+  - Cache: cache.md
+  - Utils: utilities.md

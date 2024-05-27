@@ -33,15 +33,7 @@ Follow the instructions to get a copy of this project up and running on your loc
 8. run teh example application `uvicorn server.example:app --port 8000 --reload`
 9. run frontend example `npm start`
 
-You can also install
-
-### Prerequisites 
-
-A list of technologies that you need to have installed and how to install them
-
-### Installation 
-
-A step by step series of commands and procedures that tells you how to set up your local environment.
+For more details see `server/README.md`
 
 ## How to Contribute
 
@@ -64,14 +56,3 @@ If you have any questions, comments, or concerns, feel free to contact us. We ar
 By contributing to Persona Link, you're helping shape the future of digital human technology. Together, we can create new connections, new experiences, and ultimately, a new world.
 
 Thank you for your interest in Persona Link. We can't wait to build the future with you!
-
-```
-poetry install --with server,azure,postgres,local-storage,dev,test
-
-First time:
-aerich init -t server.settings.TORTOISE_ORM
-aerich init-db 
-
-Then onwords for any model changes
-aerich migrate
-```

@@ -53,6 +53,10 @@ mkdocstrings-python = "^1.10.3"
 mkdocs-monorepo-plugin = "^1.1.0"
 mkdocs-material = "^9.5.24"
 
+
+[tool.poetry.group.dist.dependencies]
+twine = "^5.1.0"
+
 [tool.aerich]
 tortoise_orm = "server.settings.TORTOISE_ORM"
 location = "./migrations"
