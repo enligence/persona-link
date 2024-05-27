@@ -13,10 +13,15 @@
 - [ ] Widget for duplex communication - text based
 - [ ] Widget for duplex communication - audio based
 - [ ] Widget for duplex communication - video based
+- [ ] Widget to consume visemes and playback rom sprite image.
+
+## AI Features
+- [ ] We also need to develop a complete workflow to take any head-shot of a real or virtual character and create 21 viseme sprites as mentioned on [Azure Visemes Page]
+(https://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-speech-synthesis-viseme?tabs=visemeid&pivots=programming-language-python).
+- [ ] Update architecture to offer pre-built agents using CrewAI / Langchain - e.g. QA Agent with RAG, Personalization Agent, Custom actions agent like appointment booking etc.
 
 ## New features
 - [ ] Add personalization layer logic
-- [ ] Update architecture to offer pre-built agents using CrewAI / Langchain - e.g. QA Agent with RAG, Personalization Agent, Custom actions agent like appointment booking etc.
 - [ ] Add audio and text only end points for complete compatibility
 
 ## Documentation
