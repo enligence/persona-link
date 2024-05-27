@@ -43,6 +43,15 @@ class AzureStorage(BaseCacheStorage):
             raise ValueError("AZURE_STORAGE_CONTAINER_NAME must be set in ENV")
 
     async def put(self, avatarId: str, data: bytes | AsyncGenerator[bytes, None], filename: str, content_type: ContentType) -> str:
+        """
+        Put the data in the storage
+        
+        Parameters:
+            avatarId (str): The avatar ID
+            data (bytes): The data to store
+            filename (str): The filename to store the data as
+            content_type (ContentType): The content type of the data
+        """
         path = f"{avatarId}/{filename}"
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
 
@@ -52,6 +61,12 @@ class AzureStorage(BaseCacheStorage):
         return path
     
     async def get(self, path: str) -> str:
+        """
+        Get the data from the storage
+        
+        Parameters:
+            path (str): The path to the data in the storage
+        """
         # get temporary url to the resource that is publicly accessible for streaming
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
 
@@ -62,6 +77,12 @@ class AzureStorage(BaseCacheStorage):
             return self._getUrl(blob_client)
 
     async def delete(self, path: str) -> None:
+        """
+        Delete the data from the storage
+        
+        Parameters:
+            path (str): The path to the data in the storage
+        """
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
         async with blob_service_client:
             container_client = blob_service_client.get_container_client(self.container_name)
@@ -73,6 +94,12 @@ class AzureStorage(BaseCacheStorage):
             await blob_client.delete_blob()
 
     async def deleteAll(self, avatarId: str) -> None:
+        """
+        Delete all the data for the given avatar
+        
+        Parameters:
+            avatarId (str): The avatar ID
+        """
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
         async with blob_service_client:
             container_client = blob_service_client.get_container_client(self.container_name)

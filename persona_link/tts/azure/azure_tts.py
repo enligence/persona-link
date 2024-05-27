@@ -80,6 +80,13 @@ class AzureTTS(TTSBase):
     ) -> AudioInstance:
         """
         Get the audio bytes for the given text
+        
+        Parameters:
+            text (str): The text to synthesize
+            settings (AzureTTSVoiceSettings): The settings for the Azure TTS
+            
+        Returns:
+            AudioInstance: The audio instance
         """
         try:
 

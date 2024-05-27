@@ -5,6 +5,16 @@ from enum import Enum
 from persona_link.persona_provider.models import AvatarType, Metadata, Viseme, WordTimestamp
 
 class ContentType(Enum):
+    """
+    Enum for the content type of the data to be stored
+    
+    Attributes:
+        MP4 (str): MP4 video content type
+        MP3 (str): MP3 audio content type
+        WAV (str): WAV audio content type
+        WEBM (str): WEBM video content type
+        JSON (str): JSON metadata content type
+    """
     MP4 = 'video/mp4'
     MP3 = 'audio/mpeg'
     WAV = 'audio/wav'
@@ -19,16 +29,43 @@ EXTENSION_MAPPING = {
     ContentType.JSON: '.json'
 }
 class PathType(Enum):
+    """
+    Enum for the type of path
+    
+    Attributes:
+        MEDIA (str): Media path
+        VISEMES (str): Visemes path
+        WORD_TIMESTAMPS (str): Word timestamps path
+    """
     MEDIA = 'media'
     VISEMES = 'visemes'
     WORD_TIMESTAMPS = 'word_timestamps'
 class StoragePaths(BaseModel):
+    """
+    Model for the storage paths of the data
+    
+    Attributes:
+        media_path (str): Media path
+        viseme_path (Optional[str]): Visemes path
+        word_timestamp_path (Optional[str]): Word timestamps path
+    """
     media_path: str
     viseme_path: Optional[str]
     word_timestamp_path: Optional[str]
 
     
 class DataToStore(BaseModel):
+    """
+    Model for the data to be stored in the cache
+    
+    Attributes:
+        data_type (AvatarType): Type of the data
+        binary_data (bytes | AsyncGenerator[bytes, None]): Binary data to be stored
+        content_type (ContentType): Content type of the data
+        visemes (Optional[List[Viseme]]): Visemes for the data
+        word_timestamps (Optional[List[WordTimestamp]]): Word timestamps for the data
+        metadata (Optional[Metadata]): Metadata for the data
+    """
     model_config = ConfigDict(arbitrary_types_allowed=True)
     
     data_type: AvatarType
@@ -50,6 +87,15 @@ class DataToStore(BaseModel):
 class Record(BaseModel):
     """
     A single cache record in the database
+    
+    Attributes:
+        key (str): unique key (also filename) for the file stored in storage.
+        avatarId (str): unique key for the avatar, also the folder in storage
+        text (str): text to be converted to audio/video
+        storage_paths (StoragePaths): paths where the media and related files are stored
+        created (datetime): timestamp when the record was created
+        updated (Optional[datetime]): timestamp of the last update of the record
+        metadata (Optional[Metadata]): metadata about the record
     """
     model_config = ConfigDict(from_attributes = True)
     
@@ -66,6 +112,13 @@ class Record(BaseModel):
         return cls(**record)
 
 class UsageLog(BaseModel):
+    """
+    A log of usage of a cache record
+    
+    Attributes:
+        record_key (str): the key of the record for which the usage is logged
+        timestamp (datetime): timestamp of the usage
+    """
     model_config = ConfigDict(from_attributes = True)
     
     record_key: str

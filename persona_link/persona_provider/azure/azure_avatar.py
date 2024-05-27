@@ -14,13 +14,23 @@ from persona_link.persona_provider.azure.models import AzureAvatarSettings
 @persona_link_provider
 class AzureAvatar(PersonaBase):
     """
-    Audio avatar class
+    Azure avatar provider for generating video avatars
     """
     name = "Azure"
     description = "Azure Avatar"
     
     @classmethod
     def validate(cls, settings: dict) -> AzureAvatarSettings | None:
+        """
+        Validate the settings for the provider. This method should return the settings object if the settings are valid
+        
+        Parameters:
+            settings : dict
+                The settings for the provider
+                
+        Returns:
+            AzureAvatarSettings | None
+        """
         return AzureAvatarSettings.validate(settings)
     
     def __init__(self):
@@ -33,10 +43,10 @@ class AzureAvatar(PersonaBase):
             "Ocp-Apim-Subscription-Key": self.subscription_key,
         }
 
-    def generate_url(self, job_id: str) -> str:
+    def _generate_url(self, job_id: str) -> str:
         return f"{self.speech_endpoint}/avatar/batchsyntheses/{job_id}?api-version={self.api_version}"
 
-    async def get_video_url(self, url: str) -> str:
+    async def _get_video_url(self, url: str) -> str:
         try:
             while True:
                 result = await APIClient().get_request(url, self.headers)
@@ -49,7 +59,7 @@ class AzureAvatar(PersonaBase):
             print(f"Request failed: {str(e)}")
             return None
 
-    def formPayload(self, text: str, settings: AzureAvatarSettings) -> dict:
+    def _formPayload(self, text: str, settings: AzureAvatarSettings) -> dict:
 
         payload = {
             "synthesisConfig": {"voice": settings.voice},
@@ -72,20 +82,27 @@ class AzureAvatar(PersonaBase):
 
     async def generate(
         self, text: str, settings: AzureAvatarSettings
-    ) -> SpeakingAvatarInstance:
+    ) -> SpeakingAvatarInstance | None:
         """
-        Speak the given text
+        Generate the avatar for the given text and settings
+        
+        Parameters:
+            text (str): The text to be spoken by the avatar
+            settings (AzureAvatarSettings): The settings for the provider
+                
+        Returns:
+            Details of rendered avatar if successful, None otherwise
         """
 
-        payload = self.formPayload(text, settings)
+        payload = self._formPayload(text, settings)
         job_id = uuid4().hex
-        url = self.generate_url(job_id)
+        url = self._generate_url(job_id)
         result = await APIClient().put_request(url, self.headers, payload)
         if not "id" in result:
             print(f"Error in response: {result}")
             return None
         bitrate_kbps = result["avatarConfig"]["bitrateKbps"]
-        video_url = await self.get_video_url(url)
+        video_url = await self._get_video_url(url)
 
         content = APIClient().download(video_url)
 

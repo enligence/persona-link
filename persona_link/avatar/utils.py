@@ -4,6 +4,17 @@ from persona_link.persona_provider import PersonaBase
 from persona_link.persona_provider.models import SpeakingAvatarInstance
 
 async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingAvatarInstance:
+    """
+    Speak the input text using the avatar with the given slug
+    
+    Parameters:
+        avatar_slug (str): The slug of the avatar to use
+        cache (Cache): The cache object to use
+        input (AvatarInput): The input text to speak
+        
+    Returns:
+        SpeakingAvatarInstance: The instance of the speaking avatar
+    """
     avatar: Avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
@@ -15,6 +26,14 @@ async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingA
     return await instance.speak(cache, avatar.slug, input.text, settings)
 
 async def call_webhook(avatar_slug: str, data: WebhookResponseData):
+    """
+    Call the webhook of the avatar with the given slug. 
+    The calling app must handle the request and take appropriate action
+    
+    Parameters:
+        avatar_slug (str): The slug of the avatar to use
+        data (WebhookResponseData): The data to send to the webhook
+    """
     avatar: Avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")

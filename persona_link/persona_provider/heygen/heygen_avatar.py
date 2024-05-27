@@ -8,20 +8,29 @@ from persona_link.cache.models import ContentType, DataToStore, Metadata
 @persona_link_provider
 class HeygenAvatar(PersonaBase):
     """
-    Audio avatar class
+    Heygen video avatar provider.
     """
     name = "Heygen"
     description = "Heygen Avatar"
     
     @classmethod
     def validate(cls, settings: dict) -> HeygenAvatarSettings | None:
+        """
+        Validate the settings for the provider. This method should return the settings object if the settings are valid
+        
+        Parameters:
+            settings (dict): The settings for the provider
+                
+        Returns:
+            Video avatar settings for heygen provider if the settings are valid, None otherwise
+        """
         return HeygenAvatarSettings.validate(settings)
     
     def __init__(self):
         self.generate_url = "https://api.heygen.com/v2/video/generate"
         self.retrieve_url = "https://api.heygen.com/v1/video_status.get"
 
-    async def get_video_url(self, url, headers) -> str:
+    async def _get_video_url(self, url, headers) -> str:
         try:
             while True:
                 result = await APIClient().get_request(url, headers)
@@ -39,7 +48,7 @@ class HeygenAvatar(PersonaBase):
             print(f"Request failed: {str(e)}")
             return None
 
-    def formPayload(self, text: str, settings: HeygenAvatarSettings) -> dict:
+    def _formPayload(self, text: str, settings: HeygenAvatarSettings) -> dict:
         bg = {
             "type": settings.background_type
         }
@@ -80,7 +89,14 @@ class HeygenAvatar(PersonaBase):
 
     async def generate(self, text: str, settings: HeygenAvatarSettings) -> SpeakingAvatarInstance:
         """
-        Speak the given text
+        Generate the video for the avatar
+        
+        Parameters:
+            text (str): The text to be spoken by the avatar
+            settings (HeygenAvatarSettings): The settings for the provider
+                
+        Returns:
+            Rendered video details if successful, None otherwise
         """
 
         headers = {
@@ -88,7 +104,7 @@ class HeygenAvatar(PersonaBase):
             "X-Api-Key": settings.api_token
         }
 
-        payload = self.formPayload(text, settings)
+        payload = self._formPayload(text, settings)
         
         result = await APIClient().post_request(self.generate_url, headers, payload)
         
@@ -99,7 +115,7 @@ class HeygenAvatar(PersonaBase):
         video_id = result["data"]["video_id"]
 
         retrieve_url = f"{self.retrieve_url}?video_id={video_id}"
-        video_url = await self.get_video_url(retrieve_url, headers)
+        video_url = await self._get_video_url(retrieve_url, headers)
         print(video_url)
         
         content = APIClient().download(video_url)

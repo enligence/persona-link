@@ -3,6 +3,19 @@ from typing import Optional
 from pydantic import ValidationError
     
 class HeygenAvatarSettings(VideoProviderSettings):
+    """
+    Settings for Heygen Avatar Provider. Refer to [heygen](https://docs.heygen.com/docs/create-video) for more information.
+    
+    Attributes:
+        heygen_id (str): Heygen ID of the Avatar.
+        avatar_style (str): Style of the Avatar.
+        voice_id (str): ID of the voice.
+        background_color (str): Color of the background.
+        background_type (str): Type of the background.
+        background_asset_id (str): ID of the background asset.
+        test (bool): Whether to test the Avatar.
+        api_token (str): API token of the Avatar.
+    """
     heygen_id: str
     avatar_style: str
     voice_id: str
@@ -14,6 +27,15 @@ class HeygenAvatarSettings(VideoProviderSettings):
     
     @classmethod
     def validate(cls, settings: dict) -> Optional['HeygenAvatarSettings']:
+        """
+        Validates the settings passed in
+        
+        Parameters:
+            settings (dict): The settings to validate
+                
+        Returns:
+            The settings for the Heygen Avatar Provider if the settings are valid, None otherwise
+        """
         try:
             return cls(**settings)  # Attempts to parse and validate the passed in settings
         except ValidationError as e:

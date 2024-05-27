@@ -14,6 +14,9 @@ class BaseCacheStorage(ABC):
     async def get(self, path: str) -> Optional[str]:
         """
         Get the url for the given path
+        
+        Parameters:
+            path (str): The path of the file in the storage
         """
         pass
 
@@ -21,6 +24,12 @@ class BaseCacheStorage(ABC):
     async def put(self, avatarId: str, data: bytes | AsyncGenerator[bytes, None], filename: str, content_type: ContentType) -> str:
         """
         Put the file in the avatarId folder and return the path
+        
+        Parameters:
+            avatarId (str): The avatar ID
+            data (bytes | AsyncGenerator[bytes, None]): The data to store
+            filename (str): The filename of the file
+            content_type (ContentType): The content type of the file
         """
         pass
 
@@ -28,6 +37,9 @@ class BaseCacheStorage(ABC):
     async def delete(self, path: str) -> None:
         """
         Delete the data from the given path
+        
+        Parameters:
+            path (str): The path of the file in the storage
         """
         pass
 
@@ -35,5 +47,8 @@ class BaseCacheStorage(ABC):
     async def deleteAll(self, avatarId: str) -> None:
         """
         Delete all the data for the given avatar
+        
+        Parameters:
+            avatarId (str): The avatar ID
         """
         pass

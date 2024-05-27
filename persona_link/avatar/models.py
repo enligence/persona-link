@@ -14,14 +14,10 @@ class WebhookResponseData(BaseModel):
     A class that represents the data to be sent to the webhook when a user speaks or messages from the frontend.
     
     Attributes:
-        text : str
-            Text to be sent to the webhook.
-        media_url : str
-            URL of the media to be sent to the webhook.
-        media_type : AvatarType
-            Type of the media to be sent to the webhook.
-        conversation_id : str
-            a unique id to identify the conversation on which the user sent the message.
+        text (Optional[str]): Text spoken by the Avatar.
+        media_url (Optional[str]): URL of the media file.
+        media_type (Optional[AvatarType]): Type of the media file.
+        conversation_id (str): ID that the source will use to determine conversation details.
     """
     text: Optional[str] = None
     media_url: Optional[str] = None
@@ -33,10 +29,8 @@ class AvatarInput(BaseModel):
     A class that represents the input to the Avatar from the application backend.
     
     Attributes:
-        text : str
-            Text to be spoken by the Avatar.
-        personalize : bool
-            Whether Avatar should personalize the text in any way.
+        text (str): Text to be spoken by the Avatar.
+        personalize (bool): Whether to personalize the Avatar.
     """
     text: str # text to speak
     personalize: bool = False # whether to personalize the avatar
@@ -46,28 +40,17 @@ class WebhookPydantic(BaseModel):
     A pydantic model for the Webhook class for creating a webhook.
     
     Attributes:
-        url : str
-            URL of the webhook.
-        headers : dict
-            Headers to be sent to the webhook.
-        method : str
-            Method of the webhook.
-        get_text : bool
-            Whether to get text from the webhook.
-        get_audio : bool
-            Whether to get audio from the webhook.
-        get_video : bool
-            Whether to get video from the webhook.
-        video_width : int
-            Width of the video.
-        video_height : int
-            Height of the video.
-        video_frame_rate : int
-            Frame rate of the video.
-        audio_bit_rate : int
-            Bit rate of the audio.
-        audio_sampling_rate : int
-            Sampling rate of the audio.
+        url (str): URL of the webhook.
+        headers (dict): Headers for the webhook.
+        method (str): Method of the webhook.
+        get_text (bool): Whether to get text from the webhook.
+        get_audio (bool): Whether to get audio from the webhook.
+        get_video (bool): Whether to get video from the webhook.
+        video_width (int): Width of the video.
+        video_height (int): Height of the video.
+        video_frame_rate (int): Frame rate of the video.
+        audio_bit_rate (int): Bit rate of the audio.
+        audio_sampling_rate (int): Sampling rate of the audio.
     """
     url: str
     headers: Optional[dict] = None
@@ -86,34 +69,20 @@ class Webhook(Model):
     A class to represent webhook in the database
     
     Attributes:
-        id : int
-            Primary key for the Webhook, managed by the database.
-        url : str
-            URL of the webhook.
-        headers : dict
-            Headers to be sent to the webhook.
-        method : str
-            Method of the webhook.
-        get_text : bool
-            Whether to get text from the webhook.
-        get_audio : bool
-            Whether to get audio from the webhook.
-        get_video : bool
-            Whether to get video from the webhook.
-        video_width : int
-            Width of the video.
-        video_height : int
-            Height of the video.
-        video_frame_rate : int
-            Frame rate of the video.
-        audio_bit_rate : int
-            Bit rate of the audio.
-        audio_sampling_rate : int
-            Sampling rate of the audio.
-        created_at : Datetime
-            The time when the Webhook instance was created in the database.
-        updated_at : Datetime
-            The time of the last update of the Webhook instance in the database.
+        id (int): Primary key for the Webhook, managed by the database.
+        url (str): URL of the webhook.
+        headers (dict): Headers for the webhook.
+        method (str): Method of the webhook.
+        get_text (bool): Whether to get text from the webhook.
+        get_audio (bool): Whether to get audio from the webhook.
+        get_video (bool): Whether to get video from the webhook.
+        video_width (int): Width of the video.
+        video_height (int): Height of the video.
+        video_frame_rate (int): Frame rate of the video.
+        audio_bit_rate (int): Bit rate of the audio.
+        audio_sampling_rate (int): Sampling rate of the audio.
+        created_at (Datetime): The time when the Webhook instance was created in the database.
+        updated_at (Datetime): The time of the last update of the Webhook instance in the database. 
     """
     id = fields.IntField(pk=True)
     url = fields.CharField(255)
@@ -143,14 +112,9 @@ class AvatarPydantic(BaseModel):
     A pydantic model for the Avatar class for creating an avatar.
     
     Attributes:
-        name : str
-            Name for the Avatar.
-        provider : str
-            Refers to implementation of :class:`persona_link.persona_provider.base.PersonaBase`. 
-            Provides the Avatar for the module. Enum format.
-            Provider for the Avatar .
-        settings : dict
-            Settings for the Avatar, specific the provider. The provider shall validate these settings.
+        name (str): Name for the Avatar.
+        provider (str): Name of the registered provider ([persona_link.persona_provider.base.PersonaBase][]).
+        settings (dict): Settings for the Avatar, specific the provider. The provider shall validate these settings.
     """
     name: Optional[str] = None
     provider: Optional[str] = None
@@ -161,24 +125,16 @@ class Avatar(Model):
     A class that represents Avatar data in the database.
 
     Attributes:
-        id : int
-            Primary key for the Avatar, managed by the database.
-        name : str
-            Name for the Avatar.
-        slug : str
-            Auto-generated unique identifier for the Avatar based upon the name.
-        provider : str
-            Refers to implementation of :class:`persona_link.persona_provider.base.PersonaBase`. 
-            Provides the Avatar for the module. Enum format.
-            Provider for the Avatar .
-        settings : dict
-            Settings for the Avatar, specific the provider. The provider shall validate these settings.
-        webhook : ForeignKey
-            Refers to implementation of: class:`persona_link.avatar.models.Webhook`.
+        id (int): Primary key for the Avatar, managed by the database.
+        name (str): Name for the Avatar.
+        slug (str): Auto-generated unique identifier for the Avatar based upon the name.
+        provider (str): Refers to a registered provider, [persona_link.persona_provider.base.PersonaBase][].
+        settings (dict): Settings for the Avatar, specific the provider. The provider shall validate these settings.
+        webhook (ForeignKey): Refers to implementation of: class:`persona_link.avatar.models.Webhook`.
             ForeignKey Webhook that the avatar is assigned to.
-        created_at : Datetime
+        created_at (Datetime):
             The time when the Avatar instance was created in the database.
-        updated_at : Datetime
+        updated_at (Datetime):
             The time of the last update of the Avatar instance in the database. 
     """
     

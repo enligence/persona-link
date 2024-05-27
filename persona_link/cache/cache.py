@@ -26,6 +26,14 @@ class Cache:
     def __init__(
         self, storage: BaseCacheStorage, db: BaseCacheDB, hashFn: Callable[[Any], str]
     ):
+        """
+        Constructor for Cache class.
+        
+        Parameters:
+            storage (BaseCacheStorage): The storage for the cache
+            db (BaseCacheDB): The database for the cache
+            hashFn (Callable[[Any], str]): The hashing function to generate keys
+        """
         if storage is None:
             raise ValueError("storage cannot be None")
         self.storage = storage
@@ -37,6 +45,16 @@ class Cache:
         self.hashFn = hashFn
 
     async def get(self, avatarId: str, text: str) -> Optional[Record]:
+        """
+        Get the record from the cache
+        
+        Parameters:
+            avatarId (str): The avatar ID
+            text (str): The text to get the record for
+            
+        Returns:
+            The record for the given avatar ID and text
+        """
         key = self.hashFn(avatarId + text)
         record = await self.db.get(key)
         if record is None:
@@ -44,6 +62,15 @@ class Cache:
         return record
     
     async def get_urls(self, record: Record) -> Urls:
+        """
+        Get the URLs for the media, visemes, and word timestamps
+        
+        Parameters:
+            record (Record): The record to get the URLs for
+            
+        Returns:
+            The URLs for the media, visemes, and word timestamps
+        """
         return Urls(
             media_url = await self.storage.get(record.storage_paths.media_path),
             viseme_url = await self.storage.get(record.storage_paths.viseme_path) if record.storage_paths.viseme_path else None,
@@ -51,6 +78,15 @@ class Cache:
         )
         
     async def getUsageCount(self, key: str) -> int:
+        """
+        Get the usage count of the record for the given key
+        
+        Parameters:
+            key (str): The key for the record
+            
+        Returns:
+            The usage count for the given key
+        """
         return await self.db.getUsageCount(key)
 
     async def put(
@@ -59,6 +95,17 @@ class Cache:
         text: str,
         data: DataToStore,
     ) -> Record:
+        """
+        Put the record in the cache
+        
+        Parameters:
+            avatarId (str): The avatar ID
+            text (str): The text to put the record for
+            data (DataToStore): The data to store in the cache
+            
+        Returns:
+            The record that was put in the cache
+        """
         key = self.hashFn(avatarId + text)
         media_path = await self.storage.put(
             avatarId,
@@ -105,6 +152,12 @@ class Cache:
         return record
 
     async def delete(self, key: str) -> None:
+        """
+        Delete the record for the given key
+        
+        Parameters:
+            key (str): The key for the record
+        """
         record: Record = await self.db.get(key)
         if record is None:
             return
@@ -116,8 +169,20 @@ class Cache:
         await self.db.delete(key)
 
     async def deleteAll(self, avatarId: str) -> None:
+        """
+        Delete all the records for the given avatar
+        
+        Parameters:
+            avatarId (str): The avatar ID
+        """
         await self.storage.deleteAll(avatarId)
         await self.db.deleteAll(avatarId)
 
     async def incrementUsage(self, key: str) -> None:
+        """
+        Increment the usage count of the record for the given key
+        
+        Parameters:
+            key (str): The key for the record
+        """
         await self.db.incrementUsage(key)
