@@ -1,4 +1,5 @@
 site_name: "Persona Link"
+docs_dir: './docs_src'
 site_dir: './docs'
 
 theme:
