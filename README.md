@@ -1,5 +1,5 @@
 # Persona Link
-The project's aim is to make a novel step to facilitate digital human industry by making it easier for users to integrate their AI-based agents with any avatar or digital human provider. 
+>The project's aim is to make a novel step to facilitate digital human industry by making it easier for users to integrate their AI-based agents with any avatar or digital human provider. 
 
 The main features of the project include:
 1. **Interoperability**: Provides a standard interface that allows users to seamlessly integrate any AI-based agent with any avatar or digital human provider.
@@ -17,6 +17,10 @@ With your help, we can transform the world of digital humans and create a unique
 * **Community**: Encourage cooperation and assistance from developers, designers, and anyone with an interest in advancing AI and digital human technology.
 * **User-Centered**: Propel the industry forward by creating a platform based on the needs of the users, making digital human interaction a seamless experience.
 * **Transparency**: Foster an open-source community where development is done in plain sight, offering clarity and trust to the users.
+
+## Architecture
+
+![Arch Diagram](architecture.png)
 
 ## Getting Started
 
