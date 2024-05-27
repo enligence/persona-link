@@ -37,15 +37,15 @@ For more details see `server/README.md`
 
 ## How to Contribute
 
-We greatly appreciate any contribution to Persona Link. It's our contributors who help make this project better and more beneficial for everyone. Check out our `CONTRIBUTING` file to find out how you can be a part of this incredible project.
+We greatly appreciate any contribution to Persona Link. It's our contributors who help make this project better and more beneficial for everyone. Check out our [ROADMAP](Roadmap.md) to be part of this project. You can always suggest any new ideas to be included in the Roadmap.
 
 ## Code of Conduct
 
-Outlines how contributors should interact with each other. Please read and follow our `CODE_OF_CONDUCT` to maintain a positive and inclusive environment.
+Please read and follow our [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) to maintain a positive and inclusive environment.
 
 ## Licensing 
 
-This project leverages an open source license. For more details, please check out the `LICENSE` file.
+This project leverages an open source license. For more details, please check out the [LICENSE](LICENSE) file.
 
 ## Contact Information
 
@@ -53,6 +53,6 @@ If you have any questions, comments, or concerns, feel free to contact us. We ar
 
 ---
 
-By contributing to Persona Link, you're helping shape the future of digital human technology. Together, we can create new connections, new experiences, and ultimately, a new world.
+By contributing to Persona Link, you're helping shape the future of digital human technology. Together, we can create new connections and experiences.
 
 Thank you for your interest in Persona Link. We can't wait to build the future with you!
