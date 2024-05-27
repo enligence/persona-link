@@ -1,4 +1,5 @@
 site_name: "Library"
+site_dir: '../docs/persona_link'
 
 nav:
   - Getting Started: getting_started.md

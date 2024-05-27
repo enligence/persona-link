@@ -1,4 +1,5 @@
 site_name: "Persona Link"
+site_dir: './docs'
 
 theme:
   name: "material"
@@ -13,7 +14,7 @@ plugins:
           show_source: false
           show_root_heading: false
     enable_inventory: false
-    
+
 - monorepo
 
 nav:

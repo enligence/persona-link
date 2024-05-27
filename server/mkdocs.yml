@@ -1,4 +1,5 @@
 site_name: "Server"
+site_dir: '../docs/server'
 
 nav:
   - Getting Started: getting_started.md
