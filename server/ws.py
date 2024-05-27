@@ -8,6 +8,16 @@ connections: dict[str, WebSocket] = {}
 
 @router.websocket("/{conversation_id}")
 async def websocket_endpoint(websocket: WebSocket, conversation_id: str):
+    """
+    This endpoint is used to establish a websocket connection for a conversation.
+    
+    route: `/ws/{conversation_id}`
+    method: WebSocket
+    
+    Parameters:
+        websocket (WebSocket): The websocket connection
+        conversation_id (str): The ID of the conversation
+    """
     await websocket.accept()
     
     if conversation_id in connections:

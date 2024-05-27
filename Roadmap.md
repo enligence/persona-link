@@ -32,3 +32,4 @@
 - [x] Add relational DB support using Tortoise ORM
 - [x] Add azure blob storage
 - [x] Add local storage
+- [x] Add documentation

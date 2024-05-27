@@ -58,6 +58,15 @@ async def read_root():
 #################################################
 @app.get("/avatars/")
 async def list_avatars() -> List[AvatarListModel]:
+    """
+    List all the avatars
+    
+    route : `/avatars/`
+    method: GET
+    
+    Returns:
+    List[ AvatarListModel ]: List of all avatars [server.models.AvatarListModel][]
+    """
     avatars = await Avatar.all()
     return [
         AvatarListModel(name=avatar.name, slug=avatar.slug, provider=avatar.provider)
@@ -66,12 +75,37 @@ async def list_avatars() -> List[AvatarListModel]:
 
 
 @app.put("/avatar/")
-async def create_avatar(data: ConnectedAvatar):
+async def create_avatar(data: ConnectedAvatar) -> Avatar:
+    """
+    Create a new avatar
+    
+    route: `/avatar/`
+    method: PUT
+    
+    Parameters:
+        data (ConnectedAvatar): The data for the new avatar
+        
+    Returns:
+        Avatar: The created avatar
+    """
     return await Avatar.create_avatar(data.avatar_settings, data.webhook_settings)
 
 
 @app.post("/avatar/{avatar_slug}/")
-async def update_avatar(avatar_slug: str, data: ConnectedAvatar):
+async def update_avatar(avatar_slug: str, data: ConnectedAvatar) -> Avatar:
+    """
+    Update the avatar with the given slug
+    
+    route: `/avatar/{avatar_slug}/`
+    method: POST
+    
+    Parameters:
+        avatar_slug (str): The slug of the avatar to update
+        data (ConnectedAvatar): The updated data for the avatar
+        
+    Returns:
+        Avatar: The updated avatar
+    """
     avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
@@ -81,7 +115,19 @@ async def update_avatar(avatar_slug: str, data: ConnectedAvatar):
 
 
 @app.delete("/avatar/{avatar_slug}/")
-async def delete_avatar(avatar_slug: str):
+async def delete_avatar(avatar_slug: str) -> dict:
+    """
+    Delete the avatar with the given slug
+    
+    route: `/avatar/{avatar_slug}/`
+    method: DELETE
+    
+    Parameters:
+        avatar_slug (str): The slug of the avatar to delete
+        
+    Returns:
+        dict: The status of the deletion
+    """
     avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
@@ -94,10 +140,35 @@ async def delete_avatar(avatar_slug: str):
 
 @app.post("/avatar/{avatar_slug}/generate/")
 async def avatarify(avatar_slug: str, input: AvatarInput) -> SpeakingAvatarInstance:
+    """
+    Generate the avatar for the given input
+    
+    route: `/avatar/{avatar_slug}/generate/`
+    method: POST
+    
+    Parameters:
+        avatar_slug (str): The slug of the avatar to use
+        input (AvatarInput): The input text to speak
+        
+    Returns:
+        SpeakingAvatarInstance: The instance of the speaking avatar
+    """
     return await speak(avatar_slug, cache, input)
 
 @app.get("/conversation/{conversation_id}/messages/", response_model=List[MessagePydantic])
 async def list_messages(conversation_id: str) -> List[MessagePydantic]:
+    """
+    List all the messages in the conversation
+    
+    route: `/conversation/{conversation_id}/messages/`
+    method: GET
+    
+    Parameters:
+        conversation_id (str): The ID of the conversation
+        
+    Returns:
+        List[ MessagePydantic ]: List of all messages in the conversation
+    """
     conversation = await Conversation.get_or_none(id=conversation_id)
     if conversation is None:
         return []
@@ -106,6 +177,18 @@ async def list_messages(conversation_id: str) -> List[MessagePydantic]:
 
 @app.put("/conversation/{avatar_slug}/", response_model=ConversationPydantic)
 async def create_conversation(avatar_slug: str) -> Conversation:
+    """
+    Create a new conversation
+    
+    route: `/conversation/{avatar_slug}/`
+    method: PUT
+    
+    Parameters:
+        avatar_slug (str): The slug of the avatar to use
+        
+    Returns:
+        Conversation: The created conversation
+    """
     from uuid import uuid4
     conversation_id = uuid4().hex
     conversation = await Conversation.create(conversation_id=conversation_id, avatar_slug=avatar_slug)
@@ -116,6 +199,17 @@ async def create_conversation(avatar_slug: str) -> Conversation:
 async def converse(
     conversation_id: str, input: AvatarInput
 ) :
+    """
+    Converse in the conversation. 
+    This will speak the input text and send it to the conversation websocket connection
+    
+    route: `/conversation/{conversation_id}/`
+    method: POST
+    
+    Parameters:
+        conversation_id (str): The ID of the conversation
+        input (AvatarInput): The input text to speak
+    """
     websocket = connections.get(conversation_id, None)
     if websocket is None:
         raise ValueError(f"Conversation '{conversation_id}' has no active connection")
@@ -152,7 +246,20 @@ async def converse(
     await websocket.send_json(message.dict())
     
 @app.post("/feedback/{message_id}")
-async def feedback(message_id: int, feedback: FeedbackPydantic):
+async def feedback(message_id: int, feedback: FeedbackPydantic) -> Feedback:
+    """
+    Provide feedback for the message
+    
+    route: `/feedback/{message_id}`
+    method: POST
+    
+    Parameters:
+        message_id (int): The ID of the message
+        feedback (FeedbackPydantic): The feedback data
+        
+    Returns:
+        Feedback: The feedback object
+    """
     message = await Message.get_or_none(id=message_id)
     if message is None:
         raise ValueError(f"Message '{message_id}' not found")
