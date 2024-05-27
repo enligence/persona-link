@@ -190,7 +190,7 @@ curl -X 'PUT' \
         "character":"lisa",
         "style":"graceful",
         "pose":"sitting",
-        "video_format":"webm",
+        "video_format":"mp4",
         "background_color":"#ffffff",
         "video_codec":"hevc"
     }

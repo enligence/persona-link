@@ -9,8 +9,15 @@
 - [ ] D-iD avatars
 - [ ] Heygen talking photo avatar
 
+## Frontend components
+- [ ] Widget for duplex communication - text based
+- [ ] Widget for duplex communication - audio based
+- [ ] Widget for duplex communication - video based
+
 ## New features
-- [ ] Update architecture to offer pre-built agents using CrewAI - e.g. QA Agent with RAG, Personalization Agent, Custom actions agent like appointment booking etc.
+- [ ] Add personalization layer logic
+- [ ] Update architecture to offer pre-built agents using CrewAI / Langchain - e.g. QA Agent with RAG, Personalization Agent, Custom actions agent like appointment booking etc.
+- [ ] Add audio and text only end points for complete compatibility
 
 ## Documentation
 - [ ] Prepare more examples for various avatar providers
@@ -18,7 +25,7 @@
 
 ## Completed
 
-- [x] Add base structure
+- [x] Add core architecture
 - [x] Add Azure avatar
 - [x] Add Azure TTS
 - [x] Add Heygen Avatar

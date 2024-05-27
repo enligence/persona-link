@@ -2,12 +2,12 @@
 The project's aim is to make a novel step to facilitate digital human industry by making it easier for users to integrate their AI-based agents with any avatar or digital human provider. 
 
 The main features of the project include:
-1. **Interoperability**: Our solution provides a standard interface that allows users to seamlessly integrate any AI-based agent with any avatar or digital human provider.
-2. **Caching**: We also offer a caching layer that significantly improves performance by storing recurring similar requests and their responses. This means that the system won't have to exert extra computational efforts to process the similar requests from scratch.
-3. **Personalization**: In addition, our product has a personalization layer that allows users to customize their avatars or digital humans based on specific preferences or requirements.
-4. **Front-end Widgets**: Lastly, we plan to offer front-end widgets that users can incorporate into their websites or applications. These widgets will offer a host of features that will further enhance the user experience.
+1. **Interoperability**: Provides a standard interface that allows users to seamlessly integrate any AI-based agent with any avatar or digital human provider.
+2. **Caching**: Caching layer that significantly improves performance by storing recurring similar requests and their responses. This means that the system won't have to exert extra computational efforts to process the similar requests from scratch.
+3. **Personalization**: Personalization layer that allows users to customize their avatars or digital humans based on specific preferences or requirements.
+4. **Front-end Widgets**: Front-end widgets that users can incorporate into their websites or applications. These widgets will offer a host of features that will further enhance the user experience.
 
-As an open-source product, our project is built by the community for the community. We're looking for developers, designers, and anyone interested in digital humans and AI to contribute to this exciting project. 
+As an open-source product, this project is built by the community for the community. We're looking for developers, designers, and anyone interested in digital humans and AI to contribute to this exciting project. 
 
 With your help, we can transform the world of digital humans and create a unique, engaging, and immersive user experience. Please join us as we usher in a new era in digital human technology. Let's make the digital world more interactive and enjoyable.
 
@@ -21,6 +21,19 @@ With your help, we can transform the world of digital humans and create a unique
 ## Getting Started
 
 Follow the instructions to get a copy of this project up and running on your local machine for development and testing purposes.
+
+1. [Install poetry](https://python-poetry.org/docs/#installing-with-the-official-installer)
+2. Ensure you have python 3.10 and above.
+4. clone this repository and cd to it.
+3. create virtual env `python3 -m venv .venv`
+4. activate the env `source .venv/bin/activate`
+5. run `poetry install` to install the dependencies
+6. create your `.env` file based upon the `.env.example`
+7. run the server `uvicorn server.app:app --port 9000 --reload`
+8. run teh example application `uvicorn server.example:app --port 8000 --reload`
+9. run frontend example `npm start`
+
+You can also install
 
 ### Prerequisites 
 
