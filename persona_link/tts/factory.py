@@ -1,5 +1,6 @@
-from persona_link.tts import AzureTTSVoiceSettings, TTSBase
 from persona_link.persona_provider.models import AudioProviderSettings
+from persona_link.tts import AzureTTSVoiceSettings, TTSBase
+
 
 def tts_factory(settings: AudioProviderSettings) -> TTSBase:
     """

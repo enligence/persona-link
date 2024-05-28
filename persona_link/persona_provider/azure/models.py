@@ -1,7 +1,11 @@
-from pydantic import BaseModel, ValidationError
-from persona_link.persona_provider.models import VideoFormat, VideoCodecs
 from enum import Enum
 from typing import Optional
+
+from pydantic import BaseModel, ValidationError
+
+from persona_link.persona_provider.models import VideoCodecs, VideoFormat
+
+
 class AzureAvatarStyle(Enum):
     """
     Enum for the style of the Azure Avatar
@@ -73,5 +77,5 @@ class AzureAvatarSettings(BaseModel):
         """
         try:
             return cls(**settings)  # Attempts to parse and validate the passed in settings
-        except ValidationError as e:
+        except ValidationError:
             return None

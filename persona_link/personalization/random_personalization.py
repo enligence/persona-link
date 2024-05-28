@@ -1,6 +1,9 @@
-from persona_link.personalization.models import Personalization
-from persona_link.personalization.base import PersonalizationBase
 from random import choice
+
+from persona_link.personalization.base import PersonalizationBase
+from persona_link.personalization.models import Personalization
+
+
 class RandomPersonalization(PersonalizationBase):
     def __init__(self):
         # generate many templates for prefix and suffix given name and role (optional)

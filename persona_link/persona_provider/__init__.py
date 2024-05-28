@@ -1,3 +1,7 @@
+from persona_link.persona_provider.azure import AzureAvatar
+from persona_link.persona_provider.base import PersonaBase
+from persona_link.persona_provider.heygen import HeygenAvatar
+from persona_link.persona_provider.sprite import SpriteAvatar
 
 persona_link_providers = {}
 
@@ -5,7 +9,7 @@ def persona_link_provider(klass):
     name = getattr(klass, "name", None)
     desc = getattr(klass, "description", None)
     
-    if type(name) is not str or type(desc) is not str:
+    if not isinstance(name, str) or not isinstance(desc, str):
         raise TypeError(f"In {klass}, name or description are not strings")
     
     if not name:
@@ -27,7 +31,4 @@ def persona_link_provider(klass):
 
     return inner
 
-from persona_link.persona_provider.azure import AzureAvatar
-from persona_link.persona_provider.heygen import HeygenAvatar
-from persona_link.persona_provider.sprite import SpriteAvatar
-from persona_link.persona_provider.base import PersonaBase
+__all__ = [ "AzureAvatar", "PersonaBase", "HeygenAvatar", "SpriteAvatar", "persona_link_provider", "persona_link_providers" ]

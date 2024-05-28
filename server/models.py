@@ -1,13 +1,14 @@
-from persona_link.avatar import AvatarPydantic, WebhookPydantic
-from persona_link.persona_provider.models import AvatarType
-from pydantic import BaseModel, ConfigDict
+from enum import Enum
 from typing import Optional
-from tortoise.models import Model
+
+from pydantic import BaseModel, ConfigDict
 from tortoise import fields
 from tortoise.contrib.pydantic import pydantic_model_creator
+from tortoise.models import Model
 
+from persona_link.avatar import AvatarPydantic, WebhookPydantic
+from persona_link.persona_provider.models import AvatarType
 
-from enum import Enum
 
 class ConnectedAvatar(BaseModel):
     """

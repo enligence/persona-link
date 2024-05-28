@@ -3,7 +3,7 @@ Hash methods that can be used to hash data.
 """
 
 import hashlib
-from typing import Any
+
 
 def sha256hash(data: any) -> str:
     """

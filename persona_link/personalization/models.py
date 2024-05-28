@@ -1,6 +1,8 @@
-from pydantic import BaseModel
 from enum import Enum
 from typing import List
+
+from pydantic import BaseModel
+
 
 class Locale(Enum):
     # Major International Languages

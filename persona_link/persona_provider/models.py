@@ -1,8 +1,9 @@
-from enum import Enum
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import AsyncGenerator, List, Optional
+
 from pydantic import BaseModel, ConfigDict, ValidationError
-from typing import Optional
+
 
 class AvatarType(Enum):
     """

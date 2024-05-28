@@ -1,5 +1,7 @@
-from aiohttp import ClientSession
 from typing import AsyncGenerator
+
+from aiohttp import ClientSession
+
 
 class APIClient:
     """

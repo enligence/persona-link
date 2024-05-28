@@ -17,12 +17,16 @@ The workflow is as follows:
 """
 
 from fastapi import FastAPI
-from persona_link.avatar.models import WebhookResponseData, AvatarInput
+from fastapi.middleware.cors import CORSMiddleware
+
 from persona_link import APIClient
+from persona_link.avatar.models import AvatarInput, WebhookResponseData
+
 app = FastAPI()
 
 # add cors policy to allow localhost:3000 and localhost:9000
-from fastapi.middleware.cors import CORSMiddleware
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://localhost:9000"],

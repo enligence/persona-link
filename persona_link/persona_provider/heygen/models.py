@@ -1,7 +1,10 @@
-from persona_link.persona_provider.models import VideoProviderSettings
 from typing import Optional
+
 from pydantic import ValidationError
-    
+
+from persona_link.persona_provider.models import VideoProviderSettings
+
+
 class HeygenAvatarSettings(VideoProviderSettings):
     """
     Settings for Heygen Avatar Provider. Refer to [heygen](https://docs.heygen.com/docs/create-video) for more information.
@@ -38,7 +41,7 @@ class HeygenAvatarSettings(VideoProviderSettings):
         """
         try:
             return cls(**settings)  # Attempts to parse and validate the passed in settings
-        except ValidationError as e:
+        except ValidationError:
             return None
         
     

@@ -1,11 +1,13 @@
-from tortoise.models import Model
+from enum import Enum
+from typing import Optional
+
+from pydantic import BaseModel
 from tortoise import fields
+from tortoise.models import Model
+
+from persona_link.api_client import APIClient
 from persona_link.persona_provider import persona_link_providers
 from persona_link.persona_provider.models import AvatarType
-from persona_link.api_client import APIClient
-from enum import Enum
-from pydantic import BaseModel
-from typing import Optional
 
 ProviderEnum = Enum('ProviderEnum', {k:k for k in persona_link_providers.keys()})
 

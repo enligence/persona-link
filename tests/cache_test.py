@@ -1,34 +1,24 @@
-import pytest
 import os
+
+import pytest
 from dotenv import load_dotenv
+
+from persona_link.cache.cache import Cache
+from persona_link.cache.db import RelationalDB
+from persona_link.cache.hashing import md5hash
+from persona_link.cache.models import ContentType, DataToStore, Record
+from persona_link.cache.storage import AzureStorage, LocalStorage
+from persona_link.persona_provider.models import (AudioInstance, AvatarType,
+                                                  Urls, Viseme)
+from persona_link.tts import AzureTTS, AzureTTSVoiceSettings
+
 # import sys
 
 # sys.path.insert(
 #     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "python_pkg"))
 # )
 
-from persona_link.cache.storage import LocalStorage, AzureStorage
-from persona_link.cache.db import RelationalDB
-from persona_link.cache.cache import Cache
-from persona_link.cache.models import (
-    ContentType,
-    DataToStore,
-    Record
-)
-from persona_link.cache.hashing import md5hash
-from persona_link.persona_provider.models import (
-    Viseme, 
-    AudioInstance,
-    Urls,
-    AvatarType,
-    VideoFormat,
-    VideoCodecs
-)
-from persona_link.tts import AzureTTSVoiceSettings, AzureTTS
 
-from persona_link.persona_provider.sprite import SpriteAvatar
-from persona_link.persona_provider.heygen import HeygenAvatar, HeygenAvatarSettings
-from persona_link.persona_provider.azure import AzureAvatar, AzureAvatarSettings, AzureAvatarStyle, AzureAvatarPose
 
 load_dotenv()
 
@@ -60,7 +50,7 @@ async def test_cache():
     assert urls.visemes_url is not None
     assert urls.word_timestamps_url is None
     await cache.delete(record.key)
-    assert await cache.get("avatarId", "text") == None
+    assert await cache.get("avatarId", "text") is None
     
     # test azure storage
     #await azure_storage.deleteAll("avatarId")
@@ -161,22 +151,22 @@ async def test_cache():
     
     # Test Azure Avatar
     # """
-    voice: str = "en-IN-NeerjaNeural"
-    character: str = "lisa"
-    style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
-    pose: AzureAvatarPose = AzureAvatarPose.SITTING
-    video_format: VideoFormat = VideoFormat.WEBM
-    background_color: str = "#00000000"
-    video_codec = "vp9"""
-    azure_avatar_settings = AzureAvatarSettings(
-        voice="en-IN-NeerjaNeural",
-        character="lisa",
-        style=AzureAvatarStyle.GRACEFUL,
-        pose=AzureAvatarPose.SITTING,
-        video_format=VideoFormat.WEBM,
-        background_color="#ffffff",
-        video_codec=VideoCodecs.HEVC
-    )
+    # voice: str = "en-IN-NeerjaNeural"
+    # character: str = "lisa"
+    # style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
+    # pose: AzureAvatarPose = AzureAvatarPose.SITTING
+    # video_format: VideoFormat = VideoFormat.WEBM
+    # background_color: str = "#00000000"
+    # video_codec = "vp9"""
+    # azure_avatar_settings = AzureAvatarSettings(
+    #     voice="en-IN-NeerjaNeural",
+    #     character="lisa",
+    #     style=AzureAvatarStyle.GRACEFUL,
+    #     pose=AzureAvatarPose.SITTING,
+    #     video_format=VideoFormat.WEBM,
+    #     background_color="#ffffff",
+    #     video_codec=VideoCodecs.HEVC
+    # )
     
     # azure_avatar = AzureAvatar()
     # text = "Hi, I am Lisa. I am a graceful persona_link. I am sitting. I am speaking in English. I hope you like my voice. Can I know more about you please?"

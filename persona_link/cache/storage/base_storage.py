@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import AsyncGenerator, Optional
+
 from persona_link.cache.models import ContentType
 
-    
+
 class BaseCacheStorage(ABC):
     """
     Base class for storage of video/audio files. Storage can be file system, 

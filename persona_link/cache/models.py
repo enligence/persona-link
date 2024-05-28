@@ -1,8 +1,12 @@
-from pydantic import BaseModel, model_validator, ConfigDict
 from datetime import datetime
-from typing import AsyncGenerator, List, Dict, Optional
 from enum import Enum
-from persona_link.persona_provider.models import AvatarType, Metadata, Viseme, WordTimestamp
+from typing import AsyncGenerator, Dict, List, Optional
+
+from pydantic import BaseModel, ConfigDict, model_validator
+
+from persona_link.persona_provider.models import (AvatarType, Metadata, Viseme,
+                                                  WordTimestamp)
+
 
 class ContentType(Enum):
     """

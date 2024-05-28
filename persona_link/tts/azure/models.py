@@ -1,5 +1,8 @@
-from persona_link.persona_provider.models import AudioProviderSettings
 from pydantic import ValidationError
+
+from persona_link.persona_provider.models import AudioProviderSettings
+
+
 class AzureTTSVoiceSettings(AudioProviderSettings):
     
     """
@@ -31,6 +34,6 @@ class AzureTTSVoiceSettings(AudioProviderSettings):
         """
         try:
             return cls(**settings)  # Attempts to parse and validate the passed in settings
-        except ValidationError as e:
+        except ValidationError:
             return False
     

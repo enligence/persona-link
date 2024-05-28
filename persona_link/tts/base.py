@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
-from persona_link.persona_provider.models import AudioInstance, AudioProviderSettings
-    
+
+from persona_link.persona_provider.models import (AudioInstance,
+                                                  AudioProviderSettings)
+
+
 class TTSBase(ABC):
     @abstractmethod
     async def synthesize_speech(self, text: str, settings: AudioProviderSettings) -> AudioInstance:

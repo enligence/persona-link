@@ -6,6 +6,9 @@ authors = ["Abhinav Dayal <abhinav@enligence.com>"]
 readme = "README.md"
 package-mode = true
 
+[tool.ruff]
+exclude=["tests/"]
+
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
 uvicorn = "^0.29.0"
@@ -42,6 +45,7 @@ pyright = "^1.1.359"
 pre-commit = "^3.7.0"
 isort = "^5.13.2"
 autoflake = "^2.3.1"
+ruff = "^0.4.5"
 
 [tool.poetry.group.test.dependencies]
 pytest-asyncio = "^0.23.6"

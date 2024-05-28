@@ -1,17 +1,11 @@
-from persona_link.cache.storage import BaseCacheStorage
-from persona_link.cache.db import BaseCacheDB
-from typing import Any, Callable, Optional
-from datetime import datetime
 import json
+from datetime import datetime
+from typing import Any, Callable, Optional
 
-from persona_link.cache.models import (
-    Record,
-    DataToStore,
-    EXTENSION_MAPPING,
-    ContentType,
-    StoragePaths,
-)
-
+from persona_link.cache.db import BaseCacheDB
+from persona_link.cache.models import (EXTENSION_MAPPING, ContentType,
+                                       DataToStore, Record, StoragePaths)
+from persona_link.cache.storage import BaseCacheStorage
 from persona_link.persona_provider.models import Urls
 
 

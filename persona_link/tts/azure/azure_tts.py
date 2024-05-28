@@ -1,24 +1,15 @@
 from io import BytesIO
 
-from persona_link.persona_provider.models import (
-    AudioInstance,
-    Viseme,
-    WordTimestamp,
-    AudioFormat,
-)
-from persona_link.tts.base import TTSBase
-from persona_link.tts.azure.models import AzureTTSVoiceSettings
-
 from azure.cognitiveservices.speech import (
-    SpeechSynthesisOutputFormat,
-    SpeechSynthesizer,
-    ResultReason,
-    SpeechSynthesisBoundaryType,
-    SpeechConfig,
-    SpeechSynthesisVisemeEventArgs,
-    SpeechSynthesisWordBoundaryEventArgs,
-    SpeechSynthesisResult,
-)
+    ResultReason, SpeechConfig, SpeechSynthesisBoundaryType,
+    SpeechSynthesisOutputFormat, SpeechSynthesisResult,
+    SpeechSynthesisVisemeEventArgs, SpeechSynthesisWordBoundaryEventArgs,
+    SpeechSynthesizer)
+
+from persona_link.persona_provider.models import (AudioFormat, AudioInstance,
+                                                  Viseme, WordTimestamp)
+from persona_link.tts.azure.models import AzureTTSVoiceSettings
+from persona_link.tts.base import TTSBase
 
 
 class AzureTTS(TTSBase):
@@ -147,7 +138,7 @@ class AzureTTS(TTSBase):
                 word_timestamps=word_timestamps if settings.word_timestamps else None,
             )
 
-        except Exception as e:
+        except Exception:
             # traceback
             import traceback
 

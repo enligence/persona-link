@@ -1,5 +1,7 @@
-from tortoise.models import Model
 from tortoise import fields
+from tortoise.models import Model
+
+
 class Record(Model):
     """
     A single cache record in the database

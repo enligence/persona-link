@@ -1,14 +1,17 @@
 """
 Local storage for cache
 """
-import shutil
 import asyncio
 import os
+import shutil
 from typing import AsyncGenerator
+
 import aiofiles
 import aiofiles.os
-from persona_link.cache.storage.base_storage import BaseCacheStorage
+
 from persona_link.cache.models import ContentType
+from persona_link.cache.storage.base_storage import BaseCacheStorage
+
 
 class LocalStorage(BaseCacheStorage):
     """

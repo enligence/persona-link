@@ -1,10 +1,14 @@
-from tortoise import Tortoise
-from tortoise.exceptions import DoesNotExist
-from persona_link.cache.models import Record
-from persona_link.cache.db.base_db import BaseCacheDB
-from persona_link.cache.db.models import Record as DBRecord, UsageLog
 import os
 from typing import Optional
+
+from tortoise import Tortoise
+from tortoise.exceptions import DoesNotExist
+
+from persona_link.cache.db.base_db import BaseCacheDB
+from persona_link.cache.db.models import Record as DBRecord
+from persona_link.cache.db.models import UsageLog
+from persona_link.cache.models import Record
+
 
 class RelationalDB(BaseCacheDB):
     

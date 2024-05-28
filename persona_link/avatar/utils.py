@@ -3,6 +3,7 @@ from persona_link.cache import Cache
 from persona_link.persona_provider import PersonaBase
 from persona_link.persona_provider.models import SpeakingAvatarInstance
 
+
 async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingAvatarInstance:
     """
     Speak the input text using the avatar with the given slug

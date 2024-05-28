@@ -1,16 +1,12 @@
 from abc import ABC, abstractmethod
-from persona_link.persona_provider.models import (
-    SpeakingAvatarInstance,
-    AudioProviderSettings,
-    VideoProviderSettings,
-    Urls,
-    AvatarType
-)
+
 from persona_link.cache.cache import Cache
-from persona_link.cache.models import (
-    DataToStore,
-    Record,
-)
+from persona_link.cache.models import DataToStore, Record
+from persona_link.persona_provider.models import (AudioProviderSettings,
+                                                  AvatarType,
+                                                  SpeakingAvatarInstance, Urls,
+                                                  VideoProviderSettings)
+
 
 class PersonaBase(ABC):
     """

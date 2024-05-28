@@ -1,7 +1,10 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-from .models import Conversation
-from persona_link.avatar.models import WebhookResponseData
+
 from persona_link.avatar import call_webhook
+from persona_link.avatar.models import WebhookResponseData
+
+from .models import Conversation
+
 router = APIRouter()
 
 connections: dict[str, WebSocket] = {}

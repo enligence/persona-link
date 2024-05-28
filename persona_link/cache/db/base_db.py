@@ -3,6 +3,7 @@ from typing import Optional
 
 from persona_link.cache.models import Record
 
+
 class BaseCacheDB(ABC):
     """
     Base class for database to store metadata of the cached files

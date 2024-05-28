@@ -4,31 +4,26 @@ Actual implementation my involve more complex logic,
 validation, security measures, and handling multiple tenants.
 """
 
-from .settings import TORTOISE_ORM
-from tortoise.contrib.fastapi import register_tortoise
-from fastapi import FastAPI
-from .models import (
-    ConnectedAvatar,
-    AvatarListModel,
-    Conversation,
-    Message,
-    Feedback,
-    FeedbackPydantic,
-    ConversationMessage,
-    PersonaType,
-    MessagePydantic,
-    ConversationPydantic
-)
-from persona_link.avatar import speak, Avatar, AvatarInput
-from persona_link.cache import Cache, AzureStorage, RelationalDB, md5hash
-from persona_link.persona_provider.models import SpeakingAvatarInstance
 from typing import List
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from tortoise.contrib.fastapi import register_tortoise
+
+from persona_link.avatar import Avatar, AvatarInput, speak
+from persona_link.cache import AzureStorage, Cache, RelationalDB, md5hash
+from persona_link.persona_provider.models import SpeakingAvatarInstance
+
+from .models import (AvatarListModel, ConnectedAvatar, Conversation,
+                     ConversationMessage, ConversationPydantic, Feedback,
+                     FeedbackPydantic, Message, MessagePydantic, PersonaType)
+from .settings import TORTOISE_ORM
 from .ws import connections, router
 
 app = FastAPI()
 
 # add cors policy to allow localhost:3000 and localhost:8000
-from fastapi.middleware.cors import CORSMiddleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://localhost:8000"],

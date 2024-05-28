@@ -1,10 +1,14 @@
-from persona_link.persona_provider import persona_link_provider
-from persona_link.persona_provider.models import AvatarType, SpeakingAvatarInstance
-from persona_link.persona_provider.base import PersonaBase
 import asyncio
+
 from persona_link.api_client import APIClient
-from persona_link.persona_provider.heygen import HeygenAvatarSettings
 from persona_link.cache.models import ContentType, DataToStore, Metadata
+from persona_link.persona_provider import persona_link_provider
+from persona_link.persona_provider.base import PersonaBase
+from persona_link.persona_provider.heygen import HeygenAvatarSettings
+from persona_link.persona_provider.models import (AvatarType,
+                                                  SpeakingAvatarInstance)
+
+
 @persona_link_provider
 class HeygenAvatar(PersonaBase):
     """

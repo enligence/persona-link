@@ -1,15 +1,16 @@
-from persona_link.persona_provider import persona_link_provider
-from persona_link.persona_provider.models import (
-    AvatarType,
-    SpeakingAvatarInstance
-)
-from persona_link.persona_provider.base import PersonaBase
 import asyncio
-from persona_link.api_client import APIClient
 import os
-from persona_link.cache.models import ContentType, DataToStore, Metadata
 from uuid import uuid4
+
+from persona_link.api_client import APIClient
+from persona_link.cache.models import ContentType, DataToStore, Metadata
+from persona_link.persona_provider import persona_link_provider
 from persona_link.persona_provider.azure.models import AzureAvatarSettings
+from persona_link.persona_provider.base import PersonaBase
+from persona_link.persona_provider.models import (AvatarType,
+                                                  SpeakingAvatarInstance)
+
+
 # https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech-avatar/what-is-text-to-speech-avatar
 @persona_link_provider
 class AzureAvatar(PersonaBase):
@@ -98,7 +99,7 @@ class AzureAvatar(PersonaBase):
         job_id = uuid4().hex
         url = self._generate_url(job_id)
         result = await APIClient().put_request(url, self.headers, payload)
-        if not "id" in result:
+        if "id" not in result:
             print(f"Error in response: {result}")
             return None
         bitrate_kbps = result["avatarConfig"]["bitrateKbps"]
