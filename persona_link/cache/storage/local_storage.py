@@ -10,6 +10,7 @@ import aiofiles
 import aiofiles.os
 
 from persona_link.cache.models import ContentType
+
 from .base_storage import BaseCacheStorage
 
 

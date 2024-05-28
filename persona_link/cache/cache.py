@@ -2,10 +2,12 @@ import json
 from datetime import datetime
 from typing import Any, Callable, Optional
 
-from .db import BaseCacheDB
-from .models import EXTENSION_MAPPING, ContentType, DataToStore, Record, StoragePaths
-from .storage import BaseCacheStorage
 from persona_link.persona_provider.models import Urls
+
+from .db import BaseCacheDB
+from .models import (EXTENSION_MAPPING, ContentType, DataToStore, Record,
+                     StoragePaths)
+from .storage import BaseCacheStorage
 
 
 class Cache:

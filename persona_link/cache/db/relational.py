@@ -4,10 +4,11 @@ from typing import Optional
 from tortoise import Tortoise
 from tortoise.exceptions import DoesNotExist
 
+from persona_link.cache.models import Record
+
 from .base_db import BaseCacheDB
 from .models import Record as DBRecord
 from .models import UsageLog
-from persona_link.cache.models import Record
 
 
 class RelationalDB(BaseCacheDB):

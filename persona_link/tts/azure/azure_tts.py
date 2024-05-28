@@ -1,5 +1,5 @@
-from io import BytesIO
 import os
+from io import BytesIO
 
 from azure.cognitiveservices.speech import (
     ResultReason, SpeechConfig, SpeechSynthesisBoundaryType,
@@ -9,8 +9,9 @@ from azure.cognitiveservices.speech import (
 
 from persona_link.persona_provider.models import (AudioFormat, AudioInstance,
                                                   Viseme, WordTimestamp)
-from .models import AzureTTSVoiceSettings
 from persona_link.tts.base import TTSBase
+
+from .models import AzureTTSVoiceSettings
 
 
 class AzureTTS(TTSBase):

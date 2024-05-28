@@ -1,7 +1,10 @@
 import asyncio
+
 import pytest
 from tortoise import Tortoise
+
 from server.settings import TORTOISE_ORM
+
 
 @pytest.fixture(scope="session", autouse=True)
 def db(request) -> None:

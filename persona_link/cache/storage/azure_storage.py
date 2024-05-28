@@ -7,10 +7,12 @@ from datetime import UTC, datetime, timedelta
 from typing import AsyncGenerator
 
 from azure.core.exceptions import ResourceNotFoundError
-from azure.storage.blob import BlobSasPermissions, ContentSettings, generate_blob_sas
+from azure.storage.blob import (BlobSasPermissions, ContentSettings,
+                                generate_blob_sas)
 from azure.storage.blob.aio import BlobClient, BlobServiceClient
 
 from persona_link.cache.models import ContentType
+
 from .base_storage import BaseCacheStorage
 
 

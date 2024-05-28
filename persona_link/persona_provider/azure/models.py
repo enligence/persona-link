@@ -4,6 +4,8 @@ from typing import Optional
 from pydantic import ValidationError
 
 from persona_link.persona_provider.models import VideoProviderSettings
+
+
 class AzureAvatarStyle(Enum):
     """
     Enum for the style of the Azure Avatar

@@ -270,7 +270,7 @@ class AudioProviderSettings(CommonAudioSettings, ABC):
             Provider = registered_audio_provider_settings.get(settings.get("provider_name"))
             return Provider.validate(settings)
         except (ValidationError, AttributeError) as e:
-            raise ValueError(f"Provider not found or bad configuration", str(e))
+            raise ValueError("Provider not found or bad configuration", str(e))
 
     @classmethod
     @abstractmethod

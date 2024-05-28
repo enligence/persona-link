@@ -5,6 +5,7 @@ from persona_link.persona_provider.models import (AudioInstance,
                                                   AudioProviderSettings)
 from persona_link.tts import tts_factory
 
+
 @persona_link_provider
 class AudioAvatar(PersonaBase):
     """

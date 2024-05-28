@@ -2,13 +2,9 @@ from abc import ABC, abstractmethod
 
 from persona_link.cache.cache import Cache
 from persona_link.cache.models import DataToStore, Record
-from .models import (
-    AudioProviderSettings,
-    AvatarType,
-    SpeakingAvatarInstance,
-    Urls,
-    VideoProviderSettings,
-)
+
+from .models import (AudioProviderSettings, AvatarType, SpeakingAvatarInstance,
+                     Urls, VideoProviderSettings)
 
 
 class PersonaBase(ABC):

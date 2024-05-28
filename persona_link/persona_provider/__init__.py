@@ -1,3 +1,4 @@
+# flake8: noqa: E402 (module level import not at top of file)
 
 persona_link_providers = {}
 
@@ -27,10 +28,10 @@ def persona_link_provider(klass):
 
     return inner
 
-from .base import PersonaBase
+from .audio import AudioAvatar
 from .azure import AzureAvatar
+from .base import PersonaBase
 from .heygen import HeygenAvatar
 from .sprite import SpriteAvatar
-from .audio import AudioAvatar
 
 __all__ = [ "AzureAvatar", "PersonaBase", "HeygenAvatar", "SpriteAvatar", "AudioAvatar", "persona_link_provider", "persona_link_providers" ]

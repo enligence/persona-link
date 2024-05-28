@@ -1,8 +1,9 @@
 from typing import Optional
 
-from pydantic import ValidationError, BaseModel
+from pydantic import BaseModel, ValidationError
 
 from persona_link.persona_provider.models import AudioProviderSettings
+
 
 class SpriteAvatarSettings(BaseModel):
     """

@@ -1,16 +1,14 @@
 import pytest
 from dotenv import load_dotenv
 
+from persona_link.avatar import speak
 from persona_link.avatar.models import Avatar, AvatarInput, AvatarPydantic
 from persona_link.cache.cache import Cache
 from persona_link.cache.db import RelationalDB
 from persona_link.cache.hashing import md5hash
 from persona_link.cache.storage import LocalStorage
-from persona_link.persona_provider.models import (
-    SpeakingAvatarInstance,
-)
+from persona_link.persona_provider.models import SpeakingAvatarInstance
 from persona_link.tts import AzureTTS, AzureTTSVoiceSettings
-from persona_link.avatar import speak
 
 load_dotenv()
 

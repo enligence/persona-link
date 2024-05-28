@@ -3,8 +3,8 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from persona_link.avatar import call_webhook
 from persona_link.avatar.models import Avatar, AvatarInput, WebhookResponseData
 
-from .models import Conversation
 from .app import construct_and_send, get_message_count
+from .models import Conversation
 
 router = APIRouter()
 

@@ -1,7 +1,11 @@
-from .models import Avatar, AvatarInput, WebhookResponseData
 from persona_link.cache import Cache
 from persona_link.persona_provider import PersonaBase
-from persona_link.persona_provider.models import AudioProviderSettings, AvatarType, SpeakingAvatarInstance
+from persona_link.persona_provider.models import (AudioProviderSettings,
+                                                  AvatarType,
+                                                  SpeakingAvatarInstance)
+
+from .models import Avatar, AvatarInput, WebhookResponseData
+
 
 async def get_avatar_info(avatar_slug: str) -> Avatar:
     """

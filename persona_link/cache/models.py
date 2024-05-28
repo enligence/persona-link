@@ -2,7 +2,7 @@ from datetime import datetime
 from enum import Enum
 from typing import AsyncGenerator, Dict, List, Optional
 
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict
 
 from persona_link.persona_provider.models import (AvatarType, Metadata, Viseme,
                                                   WordTimestamp)

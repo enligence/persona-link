@@ -6,12 +6,7 @@ from persona_link.cache.db import RelationalDB
 from persona_link.cache.hashing import md5hash
 from persona_link.cache.models import ContentType, DataToStore, Record
 from persona_link.cache.storage import AzureStorage, LocalStorage
-
-from persona_link.persona_provider.models import (
-    AvatarType,
-    Urls,
-    Viseme,
-)
+from persona_link.persona_provider.models import AvatarType, Urls, Viseme
 
 load_dotenv()
 

@@ -10,25 +10,15 @@ from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from tortoise.contrib.fastapi import register_tortoise
 
-from persona_link.avatar import Avatar, AvatarInput, speak, get_avatar_info
+from persona_link.avatar import Avatar, AvatarInput, get_avatar_info, speak
 from persona_link.avatar.models import AvatarPydantic
 from persona_link.cache import AzureStorage, Cache, RelationalDB, md5hash
 from persona_link.persona_provider.models import SpeakingAvatarInstance
 
-from .models import (
-    AvatarListModel,
-    ConnectedAvatar,
-    Conversation,
-    ConversationMessage,
-    ConversationPydantic,
-    Feedback,
-    FeedbackPydantic,
-    Message,
-    MessagePydantic,
-    PersonaType,
-    ConversationAvatar,
-)
-
+from .models import (AvatarListModel, ConnectedAvatar, Conversation,
+                     ConversationAvatar, ConversationMessage,
+                     ConversationPydantic, Feedback, FeedbackPydantic, Message,
+                     MessagePydantic, PersonaType)
 from .settings import TORTOISE_ORM
 from .ws import connections, router
 
