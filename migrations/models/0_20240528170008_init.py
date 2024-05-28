@@ -9,7 +9,7 @@ async def upgrade(db: BaseDBAsyncClient) -> str:
     "avatar_slug" VARCHAR(255) NOT NULL  /* Avatar slug */,
     "created_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Creation timestamp */,
     "updated_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Last update timestamp */
-);
+) /* Model for a conversation */;
 CREATE TABLE IF NOT EXISTS "messages" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL /* Primary Key */,
     "persona_type" VARCHAR(5) NOT NULL  /* Type of persona */,
@@ -20,20 +20,20 @@ CREATE TABLE IF NOT EXISTS "messages" (
     "metadata" JSON   /* metadata for the message */,
     "media_type" VARCHAR(5)   /* type of media */,
     "created_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Creation timestamp */
-);
+) /* Model for a message */;
 CREATE TABLE IF NOT EXISTS "conversation_messages" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL /* Primary Key */,
     "order" INT NOT NULL  /* Order in which messages appear in the conversation */,
     "conversation_id" INT NOT NULL REFERENCES "conversations" ("id") ON DELETE CASCADE,
     "message_id" INT NOT NULL REFERENCES "messages" ("id") ON DELETE CASCADE
-);
+) /* Model for a message in a conversation */;
 CREATE TABLE IF NOT EXISTS "feedbacks" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     "feedback_thumb" INT   /* thumbs up(true) or thumbs down(false) for the interaction */,
     "feedback_text" TEXT   /* detailed feedback on the interaction */,
     "updated_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Last update timestamp */,
     "message_id" INT NOT NULL REFERENCES "messages" ("id") ON DELETE CASCADE /* Message for which feedback is given */
-);
+) /* Model for feedback on a message ( [server.models.Message][] ) */;
 CREATE TABLE IF NOT EXISTS "aerich" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     "version" VARCHAR(255) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS "webhooks" (
     "audio_sampling_rate" INT NOT NULL  DEFAULT 22050,
     "created_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP
-);
+) /* A class to represent webhook in the database */;
 CREATE TABLE IF NOT EXISTS "avatars" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL /* Primary Key */,
     "name" VARCHAR(255) NOT NULL  /* Name for the avatar */,
@@ -64,8 +64,9 @@ CREATE TABLE IF NOT EXISTS "avatars" (
     "settings" JSON NOT NULL  /* Settings for the avatar */,
     "created_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Creation timestamp */,
     "updated_at" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP /* Last update timestamp */,
+    "initial_message" VARCHAR(1000)   /* Initial message for the avatar */,
     "webhook_id" INT REFERENCES "webhooks" ("id") ON DELETE CASCADE /* Webhook to send the avatar to */
-);
+) /* A class that represents Avatar data in the database. */;
 CREATE TABLE IF NOT EXISTS "records" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     "key" VARCHAR(255) NOT NULL UNIQUE,
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS "usage_logs" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     "timestamp" TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
     "record_id" INT NOT NULL REFERENCES "records" ("id") ON DELETE CASCADE
-);"""
+) /* A log of usage of a cache record */;"""
 
 
 async def downgrade(db: BaseDBAsyncClient) -> str:
