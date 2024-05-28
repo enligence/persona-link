@@ -54,8 +54,8 @@ class StoragePaths(BaseModel):
         word_timestamp_path (Optional[str]): Word timestamps path
     """
     media_path: str
-    viseme_path: Optional[str]
-    word_timestamp_path: Optional[str]
+    visemes_path: Optional[str]
+    word_timestamps_path: Optional[str]
 
     
 class DataToStore(BaseModel):
@@ -78,15 +78,6 @@ class DataToStore(BaseModel):
     visemes:  Optional[List[Viseme]] = None
     word_timestamps: Optional[List[WordTimestamp]] = None
     metadata: Optional[Metadata] = None
-    
-    """
-    validate data type, if it is audio then visemes must also be there
-    """
-    @model_validator(mode="after")
-    def validate_data_type(cls, data):
-        if data.data_type == AvatarType.AUDIO and data.visemes is None:
-            raise ValueError("Visemes must be present for audio data")
-        return data
 
 class Record(BaseModel):
     """

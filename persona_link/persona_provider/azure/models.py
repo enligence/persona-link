@@ -1,11 +1,9 @@
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, ValidationError
+from pydantic import ValidationError
 
-from persona_link.persona_provider.models import VideoCodecs, VideoFormat
-
-
+from persona_link.persona_provider.models import VideoProviderSettings
 class AzureAvatarStyle(Enum):
     """
     Enum for the style of the Azure Avatar
@@ -37,7 +35,7 @@ class AzureAvatarPose(Enum):
     STANDING = "standing"
 
 
-class AzureAvatarSettings(BaseModel):
+class AzureAvatarSettings(VideoProviderSettings):
     """
     Settings for Azure Avatar Provider. Refer to [azure](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech-avatar/what-is-text-to-speech-avatar) for more information.
     
@@ -50,20 +48,14 @@ class AzureAvatarSettings(BaseModel):
             Style of the Avatar.
         pose : AzureAvatarPose
             Pose of the Avatar.
-        video_format : VideoFormat
-            Format of the video.
         background_color : str
             Color of the background.
-        video_codec : VideoCodecs
-            Codec of the video.
     """
     voice: str = "en-IN-NeerjaNeural"
     character: str = "lisa"
     style: AzureAvatarStyle = AzureAvatarStyle.GRACEFUL
     pose: AzureAvatarPose = AzureAvatarPose.SITTING
-    video_format: VideoFormat = VideoFormat.WEBM
     background_color: str = "#00000000"
-    video_codec:VideoCodecs = VideoCodecs.VP9
     
     @classmethod
     def validate(cls, settings: dict) -> Optional['AzureAvatarSettings']:

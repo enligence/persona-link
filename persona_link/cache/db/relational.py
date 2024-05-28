@@ -4,9 +4,9 @@ from typing import Optional
 from tortoise import Tortoise
 from tortoise.exceptions import DoesNotExist
 
-from persona_link.cache.db.base_db import BaseCacheDB
-from persona_link.cache.db.models import Record as DBRecord
-from persona_link.cache.db.models import UsageLog
+from .base_db import BaseCacheDB
+from .models import Record as DBRecord
+from .models import UsageLog
 from persona_link.cache.models import Record
 
 

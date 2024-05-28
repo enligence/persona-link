@@ -1,7 +1,7 @@
 from random import choice
 
-from persona_link.personalization.base import PersonalizationBase
-from persona_link.personalization.models import Personalization
+from .base import PersonalizationBase
+from .models import Personalization
 
 
 class RandomPersonalization(PersonalizationBase):

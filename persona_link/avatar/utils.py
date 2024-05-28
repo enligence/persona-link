@@ -1,8 +1,33 @@
-from persona_link.avatar.models import Avatar, AvatarInput, WebhookResponseData
+from .models import Avatar, AvatarInput, WebhookResponseData
 from persona_link.cache import Cache
 from persona_link.persona_provider import PersonaBase
-from persona_link.persona_provider.models import SpeakingAvatarInstance
+from persona_link.persona_provider.models import AudioProviderSettings, AvatarType, SpeakingAvatarInstance
 
+async def get_avatar_info(avatar_slug: str) -> Avatar:
+    """
+    Get the avatar with the given slug
+    
+    Parameters:
+        avatar_slug (str): The slug of the avatar to get
+        
+    Returns:
+        A tuple with the following values:
+            Avatar: The avatar with the given slug
+            AvatarType: The type of the avatar
+    """
+    avatar: Avatar = await Avatar.get_or_none(slug=avatar_slug)
+    if avatar is None:
+        raise ValueError(f"Avatar '{avatar_slug}' not found")
+    instance: PersonaBase = avatar.instance()
+    settings = instance.validate(avatar.settings)
+    if not settings:
+        raise ValueError(f"Settings for provider '{avatar.provider}' are invalid")
+    
+    if isinstance(settings, AudioProviderSettings):
+        return avatar, AvatarType.AUDIO.value
+    else:
+        return avatar, AvatarType.VIDEO.value
+    
 
 async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingAvatarInstance:
     """

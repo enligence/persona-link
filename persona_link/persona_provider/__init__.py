@@ -1,7 +1,3 @@
-from persona_link.persona_provider.azure import AzureAvatar
-from persona_link.persona_provider.base import PersonaBase
-from persona_link.persona_provider.heygen import HeygenAvatar
-from persona_link.persona_provider.sprite import SpriteAvatar
 
 persona_link_providers = {}
 
@@ -31,4 +27,10 @@ def persona_link_provider(klass):
 
     return inner
 
-__all__ = [ "AzureAvatar", "PersonaBase", "HeygenAvatar", "SpriteAvatar", "persona_link_provider", "persona_link_providers" ]
+from .base import PersonaBase
+from .azure import AzureAvatar
+from .heygen import HeygenAvatar
+from .sprite import SpriteAvatar
+from .audio import AudioAvatar
+
+__all__ = [ "AzureAvatar", "PersonaBase", "HeygenAvatar", "SpriteAvatar", "AudioAvatar", "persona_link_provider", "persona_link_providers" ]

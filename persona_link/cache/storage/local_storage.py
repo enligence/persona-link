@@ -10,7 +10,7 @@ import aiofiles
 import aiofiles.os
 
 from persona_link.cache.models import ContentType
-from persona_link.cache.storage.base_storage import BaseCacheStorage
+from .base_storage import BaseCacheStorage
 
 
 class LocalStorage(BaseCacheStorage):
@@ -50,6 +50,7 @@ class LocalStorage(BaseCacheStorage):
                     await f.write(chunk)
             else:
                 await f.write(data)
+
         return path
 
     async def get(self, path: str) -> str:
@@ -59,6 +60,8 @@ class LocalStorage(BaseCacheStorage):
         Parameters:
             path (str): The path to the file in the storage
         """
+        if not path:
+            return None
         full_path = os.path.join(self.path, path)
         if os.path.exists(full_path):
             return full_path
@@ -72,7 +75,7 @@ class LocalStorage(BaseCacheStorage):
             path (str): The path to the file in the storage
         """
         full_path = os.path.join(self.path, path)
-        if await aiofiles.os.path.exists(full_path):
+        if os.path.exists(full_path):
             await aiofiles.os.remove(full_path)
 
     async def deleteAll(self, avatarId: str) -> None:

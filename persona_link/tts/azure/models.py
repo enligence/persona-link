@@ -16,8 +16,6 @@ class AzureTTSVoiceSettings(AudioProviderSettings):
         language (str) : Language of the voice
     """
     provider_name: str = "azure"
-    subscription_key: str
-    region: str
     name: str
     language: str = "en-US"
 

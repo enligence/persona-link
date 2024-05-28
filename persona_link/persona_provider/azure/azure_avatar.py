@@ -51,7 +51,7 @@ class AzureAvatar(PersonaBase):
         try:
             while True:
                 result = await APIClient().get_request(url, self.headers)
-                #print(result)
+
                 if "status" in result and result["status"] == "Succeeded":
                     return result["outputs"]["result"]
                 else:

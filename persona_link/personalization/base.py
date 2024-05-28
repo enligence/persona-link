@@ -6,7 +6,7 @@ text that can be play before or after the main message.
 
 from abc import ABC, abstractmethod
 
-from persona_link.personalization.models import Personalization
+from .models import Personalization
 
 
 class PersonalizationBase(ABC):

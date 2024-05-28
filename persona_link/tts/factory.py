@@ -1,5 +1,5 @@
 from persona_link.persona_provider.models import AudioProviderSettings
-from persona_link.tts import AzureTTSVoiceSettings, TTSBase
+from .base import TTSBase
 
 
 def tts_factory(settings: AudioProviderSettings) -> TTSBase:
@@ -12,20 +12,8 @@ def tts_factory(settings: AudioProviderSettings) -> TTSBase:
     Returns:
         TTSBase: The TTS provider instance
     """
-    if isinstance(settings, AzureTTSVoiceSettings):
+    if settings.provider_name == "azure":
         from persona_link.tts.azure.azure_tts import AzureTTS
         return AzureTTS()
     else:
         raise ValueError("Invalid TTS provider")
-    
-def tts_validate(settings: dict) -> AudioProviderSettings:
-    """
-    Validates the TTS settings
-    
-    Arguments:
-        settings (dict): The settings for the TTS provider
-        
-    Returns:
-        AudioProviderSettings: The validated settings
-    """
-    return AzureTTSVoiceSettings.validate(settings)

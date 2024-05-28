@@ -146,6 +146,21 @@ class Conversation(Model):
         
 class ConversationPydantic(pydantic_model_creator(Conversation, name="ConversationPydanticIn", exclude_readonly=True)):
     model_config = ConfigDict(from_attributes=True)
+    
+class ConversationAvatar(BaseModel):
+    """
+    Model for the avatar in a conversation
+    
+    Attributes:
+        avatar_type (AvatarType): Type of avatar
+        avatar_slug (str): Avatar slug
+        avatar_name (str): Avatar name
+        avatar_provider_name (str): Avatar provider name
+    """
+    avatar_type: AvatarType
+    avatar_slug: str
+    avatar_name: str
+    avatar_provider_name: str
         
 class ConversationMessage(Model):
     """

@@ -17,7 +17,6 @@ class HeygenAvatarSettings(VideoProviderSettings):
         background_type (str): Type of the background.
         background_asset_id (str): ID of the background asset.
         test (bool): Whether to test the Avatar.
-        api_token (str): API token of the Avatar.
     """
     heygen_id: str
     avatar_style: str
@@ -26,7 +25,6 @@ class HeygenAvatarSettings(VideoProviderSettings):
     background_type: str = "color"
     background_asset_id: Optional[str] = None
     test: bool = True
-    api_token: str
     
     @classmethod
     def validate(cls, settings: dict) -> Optional['HeygenAvatarSettings']:

@@ -29,6 +29,8 @@ async def websocket_endpoint(websocket: WebSocket, conversation_id: str):
         
     # Store the websocket connection
     connections[conversation_id] = websocket
+    
+    #TODO: if there is initial_message, send over websocket now.
 
     try:
         while True:

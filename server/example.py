@@ -50,7 +50,7 @@ async def create_conversation():
 async def process(data: WebhookResponseData):
     # process the data
     # for now this is a test only
-    print(data)
+    #print(data)
     # we shall now ask the persona_link server to say the sme thing i.e. an echo bot
     input = AvatarInput(
         text=data.text,

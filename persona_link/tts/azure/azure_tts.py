@@ -1,4 +1,5 @@
 from io import BytesIO
+import os
 
 from azure.cognitiveservices.speech import (
     ResultReason, SpeechConfig, SpeechSynthesisBoundaryType,
@@ -8,7 +9,7 @@ from azure.cognitiveservices.speech import (
 
 from persona_link.persona_provider.models import (AudioFormat, AudioInstance,
                                                   Viseme, WordTimestamp)
-from persona_link.tts.azure.models import AzureTTSVoiceSettings
+from .models import AzureTTSVoiceSettings
 from persona_link.tts.base import TTSBase
 
 
@@ -21,7 +22,12 @@ class AzureTTS(TTSBase):
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(AzureTTS, cls).__new__(cls)
+            cls._instance._initialize()
         return cls._instance
+    
+    def _initialize(self):
+        self.subscription_key = os.getenv("AZURE_SPEECH_KEY")
+        self.region = os.getenv("AZURE_SPEECH_REGION")
 
     def getAudioFormat(
         self, settings: AzureTTSVoiceSettings
@@ -82,7 +88,7 @@ class AzureTTS(TTSBase):
         try:
 
             speech_config = SpeechConfig(
-                subscription=settings.subscription_key, region=settings.region
+                subscription=self.subscription_key, region=self.region
             )
             speech_config.set_speech_synthesis_output_format(
                 SpeechSynthesisOutputFormat.Audio16Khz32KBitRateMonoMp3
@@ -98,7 +104,7 @@ class AzureTTS(TTSBase):
 
                 def viseme_cb(evt: SpeechSynthesisVisemeEventArgs):
                     visemes.append(
-                        Viseme(offset=evt.audio_offset / 10000, viseme=evt.viseme_id)
+                        Viseme(offset=round(evt.audio_offset / 10000), viseme=evt.viseme_id)
                     )
 
                 speech_synthesizer.viseme_received.connect(viseme_cb)
@@ -108,15 +114,14 @@ class AzureTTS(TTSBase):
 
                 def word_boundary_cb(evt: SpeechSynthesisWordBoundaryEventArgs):
                     if evt.boundary_type == SpeechSynthesisBoundaryType.Word:
-                        word_timestamps.append(
-                            WordTimestamp(
+                        wts = WordTimestamp(
                                 word=evt.text,
-                                offset=evt.audio_offset / 10000,
-                                duration=evt.duration.total_seconds() * 1000,
+                                offset=round(evt.audio_offset / 10000),
+                                duration=round(evt.duration.total_seconds() * 1000),
                                 text_offset=evt.text_offset,
                                 word_length=evt.word_length,
                             )
-                        )
+                        word_timestamps.append(wts)
 
                 speech_synthesizer.synthesis_word_boundary.connect(word_boundary_cb)
 
@@ -125,7 +130,7 @@ class AzureTTS(TTSBase):
             ).get()
             if result.reason != ResultReason.SynthesizingAudioCompleted:
                 raise Exception(f"Speech synthesis failed: {result.reason}")
-
+            
             return AudioInstance(
                 streaming=settings.streaming,
                 duration_seconds=result.audio_duration.total_seconds(),
