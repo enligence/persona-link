@@ -17,9 +17,11 @@ class ConnectedAvatar(BaseModel):
     Attributes:
         avatar_settings (Optional[AvatarPydantic]): Settings of the Avatar. Defaults to None.
         webhook_settings (Optional[WebhookPydantic]): Settings of the Webhook. Defaults to None.
+        initial_message (Optional[str]): Initial message for Avatar to speak. Defaults to None.
     """
     avatar_settings: Optional[AvatarPydantic] = None
     webhook_settings: Optional[WebhookPydantic] = None
+    initial_message: Optional[str] = None
     
 class AvatarListModel(BaseModel):
     """

@@ -586,6 +586,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#server.app.get_conversation_avatar" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_conversation_avatar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#server.app.list_avatars" class="md-nav__link">
     <span class="md-ellipsis">
       list_avatars
@@ -818,6 +827,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#server.app.get_conversation_avatar" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_conversation_avatar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#server.app.list_avatars" class="md-nav__link">
     <span class="md-ellipsis">
       list_avatars
@@ -1006,7 +1024,7 @@ method: POST</p>
 
     <div class="doc doc-contents ">
 
-      <p>Converse in the conversation. 
+      <p>Converse in the conversation.
 This will speak the input text and send it to the conversation websocket connection</p>
 <p>route: <code>/conversation/{conversation_id}/</code>
 method: POST</p>
@@ -1118,7 +1136,7 @@ method: PUT</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>Avatar</code></td>            <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.Avatar" href="../../Library/avatar/#persona_link.avatar.models.Avatar">Avatar</a></code>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.models.AvatarPydantic" href="../../Library/avatar/#persona_link.avatar.models.AvatarPydantic">AvatarPydantic</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1357,11 +1375,86 @@ method: POST</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>Feedback</code></td>            <td>
-                  <code><a class="autorefs autorefs-internal" title="server.models.Feedback" href="../models/#server.models.Feedback">Feedback</a></code>
+                  <code><a class="autorefs autorefs-internal" title="server.models.FeedbackPydantic" href="../models/#server.models.FeedbackPydantic">FeedbackPydantic</a></code>
             </td>
             <td>
               <div class="doc-md-description">
                 <p>The feedback object</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="server.app.get_conversation_avatar" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_conversation_avatar</span><span class="p">(</span><span class="n">conversation_id</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Get the avatar for the conversation</p>
+<p>route: <code>/conversation/{conversation_id}/</code>
+method: GET</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>conversation_id</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The ID of the conversation</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>ConversationAvatar</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="server.models.ConversationAvatar" href="../models/#server.models.ConversationAvatar">ConversationAvatar</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The avatar for the conversation</p>
               </div>
             </td>
           </tr>
@@ -1546,7 +1639,7 @@ method: POST</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>Avatar</code></td>            <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.Avatar" href="../../Library/avatar/#persona_link.avatar.models.Avatar">Avatar</a></code>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.models.AvatarPydantic" href="../../Library/avatar/#persona_link.avatar.models.AvatarPydantic">AvatarPydantic</a></code>
             </td>
             <td>
               <div class="doc-md-description">

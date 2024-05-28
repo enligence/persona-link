@@ -820,15 +820,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#persona_link.tts.factory.tts_validate" class="md-nav__link">
-    <span class="md-ellipsis">
-      tts_validate
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#persona_link.tts.azure.models" class="md-nav__link">
     <span class="md-ellipsis">
       models
@@ -1694,15 +1685,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#persona_link.tts.factory.tts_validate" class="md-nav__link">
-    <span class="md-ellipsis">
-      tts_validate
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#persona_link.tts.azure.models" class="md-nav__link">
     <span class="md-ellipsis">
       models
@@ -1819,7 +1801,7 @@
               Bases: <code><span title="abc.ABC">ABC</span></code></p>
 
 
-      <p>Base class for persona provider. A persona provider is the one responsible to take some text and settings 
+      <p>Base class for persona provider. A persona provider is the one responsible to take some text and settings
 and generate the corresponding audio or video.</p>
 
 
@@ -2507,7 +2489,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The settings for the provider  </p>
+                <p>The settings for the provider</p>
               </div>
             </td>
             <td>
@@ -2663,7 +2645,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Whether to include visemes</p>
+                <p>Whether to include visemes, default is False</p>
               </div>
             </td>
           </tr>
@@ -2674,7 +2656,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Whether to include word timestamps</p>
+                <p>Whether to include word timestamps, default is False</p>
               </div>
             </td>
           </tr>
@@ -2685,7 +2667,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Whether to stream the audio</p>
+                <p>Whether to stream the audio, default is False</p>
               </div>
             </td>
           </tr>
@@ -2696,7 +2678,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Sampling rate of the audio in Hz</p>
+                <p>Sampling rate of the audio in Hz, default is 16000</p>
               </div>
             </td>
           </tr>
@@ -2707,7 +2689,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Bit rate of the audio in kbps</p>
+                <p>Bit rate of the audio in kbps, default is 32</p>
               </div>
             </td>
           </tr>
@@ -2718,7 +2700,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Format of the audio</p>
+                <p>Format of the audio, default is MP3</p>
               </div>
             </td>
           </tr>
@@ -2782,7 +2764,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Whether to include word timestamps</p>
+                <p>Whether to include word timestamps, default is False</p>
               </div>
             </td>
           </tr>
@@ -2793,7 +2775,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Whether to stream the video</p>
+                <p>Whether to stream the video, default is False</p>
               </div>
             </td>
           </tr>
@@ -2804,7 +2786,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Frame rate of the video</p>
+                <p>Frame rate of the video, default is 30</p>
               </div>
             </td>
           </tr>
@@ -2815,7 +2797,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Width of the video</p>
+                <p>Width of the video, default is 640</p>
               </div>
             </td>
           </tr>
@@ -2826,7 +2808,7 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Height of the video</p>
+                <p>Height of the video, default is 480</p>
               </div>
             </td>
           </tr>
@@ -2837,7 +2819,18 @@ and generate the corresponding audio or video.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Format of the video</p>
+                <p>Format of the video, default is MP4</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="persona_link.persona_provider.models.CommonVideoSettings.video_codec">video_codec</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.models.VideoCodecs" href="#persona_link.persona_provider.models.VideoCodecs">VideoCodecs</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Codec of the video, default is HEVC</p>
               </div>
             </td>
           </tr>
@@ -3764,7 +3757,7 @@ Standing pose</p>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.models.VideoProviderSettings" href="#persona_link.persona_provider.models.VideoProviderSettings">VideoProviderSettings</a></code></p>
 
 
       <p>Settings for Azure Avatar Provider. Refer to <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech-avatar/what-is-text-to-speech-avatar">azure</a> for more information.</p>
@@ -3825,17 +3818,6 @@ Pose of the Avatar.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="persona_link.persona_provider.azure.models.AzureAvatarSettings.video_format">video_format</span></code></td>
-            <td>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>VideoFormat
-Format of the video.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
             <td><code><span title="persona_link.persona_provider.azure.models.AzureAvatarSettings.background_color">background_color</span></code></td>
             <td>
             </td>
@@ -3843,17 +3825,6 @@ Format of the video.</p>
               <div class="doc-md-description">
                 <p>str
 Color of the background.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="persona_link.persona_provider.azure.models.AzureAvatarSettings.video_codec">video_codec</span></code></td>
-            <td>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>VideoCodecs
-Codec of the video.</p>
               </div>
             </td>
           </tr>
@@ -4378,17 +4349,6 @@ The settings for the provider</p>
               </div>
             </td>
           </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="persona_link.persona_provider.heygen.models.HeygenAvatarSettings.api_token">api_token</span></code></td>
-            <td>
-                  <code>str</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>API token of the Avatar.</p>
-              </div>
-            </td>
-          </tr>
       </tbody>
     </table>
 
@@ -4590,7 +4550,7 @@ The settings for the provider</p>
           <tr class="doc-section-item">
             <td><code>settings</code></td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.heygen.HeygenAvatarSettings" href="#persona_link.persona_provider.heygen.models.HeygenAvatarSettings">HeygenAvatarSettings</a></code>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.heygen.models.HeygenAvatarSettings" href="#persona_link.persona_provider.heygen.models.HeygenAvatarSettings">HeygenAvatarSettings</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4689,7 +4649,7 @@ The settings for the provider</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.heygen.HeygenAvatarSettings" href="#persona_link.persona_provider.heygen.models.HeygenAvatarSettings">HeygenAvatarSettings</a> | None</code>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.heygen.models.HeygenAvatarSettings" href="#persona_link.persona_provider.heygen.models.HeygenAvatarSettings">HeygenAvatarSettings</a> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4757,7 +4717,7 @@ The settings for the provider</p>
 
       <p>Sprite Avatar takes a series of images as a sprite image where each sub image in the reel represent a visual
 lip position as illustrated <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-speech-synthesis-viseme?tabs=visemeid&amp;pivots=programming-language-python#map-phonemes-to-visemes">here</a></p>
-<p>The provider will generate the audio and the visemes for the avatar such that the frontend can play the audio and 
+<p>The provider will generate the audio and the visemes for the avatar such that the frontend can play the audio and
 animate the avatar based on the visemes.</p>
 
 
@@ -4819,11 +4779,11 @@ animate the avatar based on the visemes.</p>
           <tr class="doc-section-item">
             <td><code>settings</code></td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.models.AudioProviderSettings" href="#persona_link.persona_provider.models.AudioProviderSettings">AudioProviderSettings</a></code>
+                  <code><span title="persona_link.persona_provider.sprite.models.SpriteAvatarSettings">SpriteAvatarSettings</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The settings for the provider</p>
+                <p>The settings for the sprite provider</p>
               </div>
             </td>
             <td>
@@ -4918,7 +4878,7 @@ animate the avatar based on the visemes.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.models.AudioProviderSettings" href="#persona_link.persona_provider.models.AudioProviderSettings">AudioProviderSettings</a></code>
+                  <code><span title="persona_link.persona_provider.sprite.models.SpriteAvatarSettings">SpriteAvatarSettings</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -5114,80 +5074,11 @@ and challenging terminologies may still be incorrectly spoken.</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>TTSBase</code></td>            <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.tts.TTSBase" href="#persona_link.tts.base.TTSBase">TTSBase</a></code>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.tts.base.TTSBase" href="#persona_link.tts.base.TTSBase">TTSBase</a></code>
             </td>
             <td>
               <div class="doc-md-description">
                 <p>The TTS provider instance</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="persona_link.tts.factory.tts_validate" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">tts_validate</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span></code>
-
-</h2>
-
-
-    <div class="doc doc-contents ">
-
-      <p>Validates the TTS settings</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td><code>settings</code></td>
-            <td>
-                  <code>dict</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>The settings for the TTS provider</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-<th>Name</th>          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-<td><code>AudioProviderSettings</code></td>            <td>
-                  <code><a class="autorefs autorefs-internal" title="persona_link.persona_provider.models.AudioProviderSettings" href="#persona_link.persona_provider.models.AudioProviderSettings">AudioProviderSettings</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>The validated settings</p>
               </div>
             </td>
           </tr>

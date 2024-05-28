@@ -6,7 +6,7 @@ validation, security measures, and handling multiple tenants.
 
 from typing import List
 
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from tortoise.contrib.fastapi import register_tortoise
 
@@ -97,7 +97,9 @@ async def create_avatar(data: ConnectedAvatar) -> AvatarPydantic:
     Returns:
         Avatar: The created avatar
     """
-    avatar = await Avatar.create_avatar(data.avatar_settings, data.webhook_settings)
+    avatar = await Avatar.create_avatar(
+        data.avatar_settings, data.webhook_settings, data.initial_message
+    )
     return AvatarPydantic(
         name=avatar.name,
         provider=avatar.provider,
@@ -123,8 +125,10 @@ async def update_avatar(avatar_slug: str, data: ConnectedAvatar) -> AvatarPydant
     avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
-    
-    avatar = await avatar.update_avatar(data.avatar_settings, data.webhook_settings)
+
+    avatar = await avatar.update_avatar(
+        data.avatar_settings, data.webhook_settings, data.initial_message
+    )
     return AvatarPydantic(
         name=avatar.name,
         provider=avatar.provider,
@@ -272,6 +276,9 @@ async def converse(conversation_id: str, input: AvatarInput):
     if conversation is None:
         raise ValueError(f"Conversation '{conversation_id}' not found")
 
+    await construct_and_send(input, websocket, conversation)
+
+async def construct_and_send(input: AvatarInput, websocket: WebSocket, conversation: Conversation):
     speech: SpeakingAvatarInstance = await speak(conversation.avatar_slug, cache, input)
 
     message = await Message.create(
@@ -286,9 +293,7 @@ async def converse(conversation_id: str, input: AvatarInput):
     )
 
     # get the number of existing messages in the conversation
-    existing_messages_count = await ConversationMessage.filter(
-        conversation=conversation
-    ).count()
+    existing_messages_count = await get_message_count(conversation)
 
     # create a new conversation message
     await ConversationMessage.create(
@@ -299,6 +304,13 @@ async def converse(conversation_id: str, input: AvatarInput):
 
     # send the speech to websocket
     await websocket.send_json(message.dict())
+
+async def get_message_count(conversation):
+    existing_messages_count = await ConversationMessage.filter(
+        conversation=conversation
+    ).count()
+    
+    return existing_messages_count
 
 
 @app.post("/feedback/{message_id}")

@@ -328,6 +328,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Avatar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#persona_link.avatar.models.Avatar.create_avatar" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_avatar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persona_link.avatar.models.Avatar.update_avatar" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_avatar
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -388,6 +412,15 @@
   <a href="#persona_link.avatar.utils.call_webhook" class="md-nav__link">
     <span class="md-ellipsis">
       call_webhook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persona_link.avatar.utils.get_avatar_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_avatar_info
     </span>
   </a>
   
@@ -752,6 +785,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Avatar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#persona_link.avatar.models.Avatar.create_avatar" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_avatar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persona_link.avatar.models.Avatar.update_avatar" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_avatar
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -812,6 +869,15 @@
   <a href="#persona_link.avatar.utils.call_webhook" class="md-nav__link">
     <span class="md-ellipsis">
       call_webhook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persona_link.avatar.utils.get_avatar_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_avatar_info
     </span>
   </a>
   
@@ -979,6 +1045,17 @@ ForeignKey Webhook that the avatar is assigned to.</p>
               </div>
             </td>
           </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="persona_link.avatar.models.Avatar.initial_message">initial_message</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial message the avatar should speak upon first conversation.</p>
+              </div>
+            </td>
+          </tr>
       </tbody>
     </table>
 
@@ -994,6 +1071,163 @@ ForeignKey Webhook that the avatar is assigned to.</p>
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="persona_link.avatar.models.Avatar.create_avatar" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">create_avatar</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">webhook</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Create an avatar with the given data</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>data</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.models.AvatarPydantic" href="#persona_link.avatar.models.AvatarPydantic">AvatarPydantic</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The data for the avatar</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>webhook</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.models.WebhookPydantic" href="#persona_link.avatar.models.WebhookPydantic">WebhookPydantic</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The data for the webhook</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>initial_message</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The initial message for the avatar to speak</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="persona_link.avatar.models.Avatar.update_avatar" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">update_avatar</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">webhook</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_message</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Update the avatar with the given data</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>data</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.models.AvatarPydantic" href="#persona_link.avatar.models.AvatarPydantic">AvatarPydantic</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The data for the avatar</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>webhook</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.models.WebhookPydantic" href="#persona_link.avatar.models.WebhookPydantic">WebhookPydantic</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The data for the webhook</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>initial_message</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The initial message for the avatar to speak</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
 
 
 
@@ -1726,6 +1960,81 @@ The calling app must handle the request and take appropriate action</p>
             </td>
             <td>
                 <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="persona_link.avatar.utils.get_avatar_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_avatar_info</span><span class="p">(</span><span class="n">avatar_slug</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Get the avatar with the given slug</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>avatar_slug</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The slug of the avatar to get</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="persona_link.avatar.models.Avatar" href="#persona_link.avatar.models.Avatar">Avatar</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A tuple with the following values:
+Avatar: The avatar with the given slug
+AvatarType: The type of the avatar</p>
+              </div>
             </td>
           </tr>
       </tbody>
