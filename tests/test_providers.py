@@ -8,7 +8,6 @@ from persona_link.cache.db import RelationalDB
 from persona_link.cache.hashing import md5hash
 from persona_link.cache.storage import LocalStorage
 from persona_link.persona_provider.models import SpeakingAvatarInstance
-from persona_link.tts import AzureTTS, AzureTTSVoiceSettings
 
 load_dotenv()
 
