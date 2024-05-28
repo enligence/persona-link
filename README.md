@@ -34,7 +34,7 @@ Follow the instructions to get a copy of this project up and running on your loc
 5. run `poetry install` to install the dependencies
 6. create your `.env` file based upon the `.env.example`
 7. run the server `uvicorn server.app:app --port 9000 --reload`
-8. run teh example application `uvicorn server.example:app --port 8000 --reload`
+8. run the example application `uvicorn server.example:app --port 8000 --reload`
 9. run frontend example `npm start`
 
 For more details see `server/README.md`
