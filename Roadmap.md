@@ -22,7 +22,7 @@
 
 ## New features
 - [ ] Add personalization layer logic
-- [ ] Add audio and text only end points for complete compatibility
+- [ ] Add text only end points for complete compatibility (low priority)
 
 ## Documentation
 - [ ] Prepare more examples for various avatar providers
