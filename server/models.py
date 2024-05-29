@@ -40,9 +40,11 @@ class PersonaType(Enum):
     """
     Enum for the type of persona
     
-    Attributes:
-        AGENT (str): Agent persona
-        HUMAN (str): Human persona
+    Values:
+    ```
+        AGENT : Agent persona
+        HUMAN : Human persona
+    ```
     """
     AGENT = "agent"
     HUMAN = "human"

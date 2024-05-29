@@ -9,9 +9,11 @@ class AvatarType(Enum):
     """
     Enum for the type of avatar
 
-    Attributes:
-        AUDIO (str): Audio avatar
-        VIDEO (str): Video avatar
+    Values:
+    ```
+        AUDIO : Audio avatar
+        VIDEO : Video avatar
+    ```
     """
 
     AUDIO = "audio"
@@ -73,10 +75,12 @@ class VideoFormat(str, Enum):
     """
     Enum for the video format
 
-    Attributes:
-        MP4 (str): MP4 format
-        WEBM (str): WEBM format
-        OGG (str): OGG format
+    Values:
+    ```
+        MP4  : MP4 format
+        WEBM : WEBM format
+        OGG  : OGG format
+    ```
     """
 
     MP4 = "mp4"
@@ -88,10 +92,12 @@ class VideoCodecs(Enum):
     """
     Enum for the video codecs
 
-    Attributes:
-        VP9 (str): VP9 codec
-        H264 (str): H264 codec
-        HEVC (str): HEVC codec
+    Values:
+    ```
+        VP9  : VP9 codec
+        H264 : H264 codec
+        HEVC : HEVC codec
+    ```
     """
 
     VP9 = "vp9"
@@ -203,10 +209,12 @@ class AudioFormat(str, Enum):
     """
     Enum for the audio format
 
-    Attributes:
-        MP3 (str): MP3 format
-        WAV (str): WAV format
-        OPUS (str): OPUS format
+    Values:
+    ```
+        MP3  : MP3 format
+        WAV  : WAV format
+        OPUS : OPUS format
+    ```
     """
 
     MP3 = "mp3"

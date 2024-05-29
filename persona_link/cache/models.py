@@ -12,12 +12,14 @@ class ContentType(Enum):
     """
     Enum for the content type of the data to be stored
     
-    Attributes:
-        MP4 (str): MP4 video content type
-        MP3 (str): MP3 audio content type
-        WAV (str): WAV audio content type
-        WEBM (str): WEBM video content type
-        JSON (str): JSON metadata content type
+    Values:
+    ```
+        MP4  : MP4 video content type
+        MP3  : MP3 audio content type
+        WAV  : WAV audio content type
+        WEBM : WEBM video content type
+        JSON : JSON metadata content type
+    ```
     """
     MP4 = 'video/mp4'
     MP3 = 'audio/mpeg'
@@ -36,10 +38,12 @@ class PathType(Enum):
     """
     Enum for the type of path
     
-    Attributes:
-        MEDIA (str): Media path
-        VISEMES (str): Visemes path
-        WORD_TIMESTAMPS (str): Word timestamps path
+    Values:
+    ```
+        MEDIA           : Media path
+        VISEMES         : Visemes path
+        WORD_TIMESTAMPS : Word timestamps path
+    ```
     """
     MEDIA = 'media'
     VISEMES = 'visemes'

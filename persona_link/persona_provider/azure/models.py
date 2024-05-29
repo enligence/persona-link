@@ -10,13 +10,12 @@ class AzureAvatarStyle(Enum):
     """
     Enum for the style of the Azure Avatar
     
-    Attributes:
-        GRACEFUL : str
-            Graceful style
-        CASUAL : str
-            Casual style
-        TECHNICAL : str
-            Technical style
+    Values:
+    ```
+        GRACEFUL  : Graceful style
+        CASUAL    : Casual style
+        TECHNICAL : Technical style
+    ```
     """
     GRACEFUL = "graceful"
     CASUAL = "casual"
@@ -27,11 +26,11 @@ class AzureAvatarPose(Enum):
     """
     Enum for the pose of the Azure Avatar
     
-    Attributes:
-        SITTING : str
-            Sitting pose
-        STANDING : str
-            Standing pose
+    Values:
+    ```
+        SITTING  : Sitting pose
+        STANDING : Standing pose
+    ```
     """
     SITTING = "sitting"
     STANDING = "standing"
