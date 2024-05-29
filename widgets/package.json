@@ -1,10 +1,14 @@
 {
-    "name": "avatar-widgets",
-    "version": "0.1.0",
+    "name": "persona-link-avatar",
+    "version": "0.1.7",
     "main": "./build/index.js",
     "dependencies": {
         "@babel/core": "^7.24.6",
         "@babel/preset-env": "^7.24.6",
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
+        "@material-ui/icons": "^4.11.3",
+        "@mui/material": "^5.15.18",
         "@testing-library/jest-dom": "^5.17.0",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",

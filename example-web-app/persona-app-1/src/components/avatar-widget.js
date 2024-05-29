@@ -1,15 +1,10 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import SendIcon from '@material-ui/icons/Send';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 function Avatarwidget(props) {
-  const [ws, setWs] = useState(null);  
-  const [messageData, setMessageData] = useState(null); 
-  const [conversationId, setConversationId] = useState(props.conversationid);  // New state variable 
-  const [websocketadd ,setWebsocketadd] = useState(props.websocketadd);
-  const [inputValue, setInputValue] = useState(''); // Create state variable
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
   const handlePlayVideo = () => {
@@ -19,16 +14,33 @@ function Avatarwidget(props) {
     }
   };
 
+  const [ws, setWs] = useState(null);  
+  const [messageData, setMessageData] = useState(null); 
+  const [conversationId, setConversationId] = useState(props.conversationid);  // New state variable
+  // setConversationId(props.conversationid)
+// console.log(props.conversationid)
+// console.log(props)
+  const [inputValue, setInputValue] = useState(''); // Create state variable
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value); // Update state variable with input value
   };
-
+console.log('inputValue:', inputValue);
+ 
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/create_conversation/')
+  //     .then(response => response.json())
+  //     .then(data => setConversationId(data.conversation_id));
+    
+  // }, []);
+  console.log('conversationId:', conversationId);
+  // console.log('avatr-alsug:', conversationId);
   // Connection
   useEffect(() => {
     if (conversationId) { 
-    const websocket = new WebSocket(`ws://${ websocketadd }/ws/${conversationId}/`);
+    const websocket = new WebSocket(`ws://localhost:9000/ws/${conversationId}/`);
     setWs(websocket);
-  }}, [conversationId]);
+  }}, []);
 
   // Message handling
   useEffect(() => {
@@ -45,8 +57,7 @@ function Avatarwidget(props) {
   }, [ws]);
 
   // Sending a message
- // Sending a message
- const sendMessage = (message) => {
+  const sendMessage = (message) => {
     if (ws && ws.readyState === WebSocket.OPEN) {
       ws.send(message);
 
@@ -54,8 +65,28 @@ function Avatarwidget(props) {
       console.error('Cannot send message: WebSocket is not open');
     }
   };
-
+  const buttonStyle = {
+    padding: '10px 20px',
+    marginLeft: '10px',
+    border: 'none',
+    backgroundColor: '#eee',
+    cursor: 'pointer',
+  };
   return (
+//     <div>
+//       <button onClick={handlePlayVideo} style={{ display: isPlaying ? 'none' : 'block' }}>
+//         Play Initial Message
+//       </button>
+//      {messageData&&( <video
+//         ref={videoRef}
+//         src={messageData.media_url}
+//         style={{ width: '50%', height: 'auto', display: isPlaying ? 'block' : 'none' }}
+//       />)}
+//     </div>
+//   );
+// }
+
+// export default Avatarwidget;
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
        < button  onClick={handlePlayVideo} style={{  display: isPlaying ? 'none' : 'block' ,    padding: '10px 20px',
     marginLeft: '10px',
@@ -73,6 +104,11 @@ function Avatarwidget(props) {
         src={messageData.media_url}
        style={{ width: '50%', height: 'auto', display: isPlaying ? 'block' : 'none' }}
       />
+
+
+          // {/* <video src={messageData.media_url} controls style={{ width: '50%', height: 'auto' }} /> */}
+          // {/* <video src={messageData.media_url}  autoPlay style={{ width: '50%', height: 'auto' }} /> */}
+          // {/* <video src={messageData.media_url}  autoPlay  controls style={{ width: '50%', height: 'auto' }} /> */}
       )}
  <Box ref={videoRef}
       component="form"

@@ -23,9 +23,49 @@ from persona_link import APIClient
 from persona_link.avatar.models import AvatarInput, WebhookResponseData
 
 app = FastAPI()
-
+import requests
+import json
 # add cors policy to allow localhost:3000 and localhost:9000
+def init_avatar():
+    url = 'http://localhost:9000/avatar/'
+    headers = {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        "avatar_settings": {
+            "name": "lisa",
+            "provider": "Azure",
+            "settings": {
+                "voice":"en-IN-NeerjaNeural",
+                "character":"lisa",
+                "style":"graceful",
+                "pose":"sitting",
+                "video_format":"mp4",
+                "background_color":"#ffffff",
+                "video_codec":"hevc"
+            }
+        },
+        "webhook_settings": {
+            "url": "http://localhost:8000/process/",
+            "headers": {},
+            "method": "POST",
+            "get_text": True,
+            "get_audio": False,
+            "get_video": False,
+            "video_width": 320,
+            "video_height": 240,
+            "video_frame_rate": 25,
+            "audio_bit_rate": 32,
+            "audio_sampling_rate": 22050
+        },
+        "initial_message": "Hello, I am Lisa. How can I help you?"
+    }
+    response = requests.put(url, headers=headers, data=json.dumps(data))
+    return response.json()
 
+# Call the function
+print(init_avatar())
 
 app.add_middleware(
     CORSMiddleware,
@@ -56,4 +96,4 @@ async def process(data: WebhookResponseData):
         text=data.text,
         personalize=False
     )
-    await APIClient().post_request(f"http://localhost:9000/conversation/{data.conversation_id}", input)
+    await APIClient().post_request(f"http://localhost:9000/conversation/{data.conversation_id}/", payload=input.dict())

@@ -293,7 +293,19 @@ async def construct_and_send(input: AvatarInput, websocket: WebSocket, conversat
     )
 
     # send the speech to websocket
-    await websocket.send_json(message.dict())
+    message_dict = {
+        "id": message.id,
+        "persona_type": message.persona_type.value,  # Convert enum to string
+        "text": message.text,
+        "media_url": message.media_url,
+        "visemes_url": message.visemes_url,
+        "word_timestamps_url": message.word_timestamps_url,
+        "metadata": message.metadata,
+        "media_type": message.media_type.value,  # Convert enum to string
+        "created_at": message.created_at.isoformat(),
+    }
+    print(message_dict)
+    await websocket.send_json(message_dict)
 
 async def get_message_count(conversation):
     existing_messages_count = await ConversationMessage.filter(
