@@ -1,7 +1,7 @@
 {
     "name": "persona-link-avatar",
     "version": "0.1.7",
-    "main": "./build/index.js",
+    "main": "./build/avatar-widget.js",
     "dependencies": {
         "@babel/core": "^7.24.6",
         "@babel/preset-env": "^7.24.6",

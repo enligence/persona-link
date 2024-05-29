@@ -65,7 +65,15 @@ def init_avatar():
     return response.json()
 
 # Call the function
-print(init_avatar())
+
+response= requests.get('http://localhost:9000/avatars/')
+if len(response.json()) ==0:
+    init_avatar()
+
+    
+
+
+# print(init_avatar())
 
 app.add_middleware(
     CORSMiddleware,
@@ -96,4 +104,4 @@ async def process(data: WebhookResponseData):
         text=data.text,
         personalize=False
     )
-    await APIClient().post_request(f"http://localhost:9000/conversation/{data.conversation_id}/", payload=input.dict())
+    await APIClient().post_request(f"http://localhost:9000/conversation/{data.conversation_id}/", payload=input.model_dump())
