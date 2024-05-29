@@ -30,7 +30,7 @@ We welcome contributions of all sorts to Persona Link. Whether you're improving 
 
 ## Installation and Usage
 
-Check [installation.md](installation.md) for the setup guide.
+Check [getting_started](getting_started.md) for the setup guide.
 
 ## License 
 
