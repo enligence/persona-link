@@ -12,10 +12,11 @@ To install the widget, do the following:
 ```
 function name() {
   return (
-
-     
-      {conversationId&&( <Avatarwidget conversationid= {conversationId} websocketadd="localhost:9000" />)}
-   
+      {
+        conversationId&&( 
+          <Avatarwidget conversationid= {conversationId} websocketadd="localhost:9000" />
+        )
+      }
   );
 }
 ```
