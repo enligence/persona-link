@@ -687,16 +687,18 @@
 <h2 id="installation">Installation</h2>
 <p>To install the widget, do the following:</p>
 <ol>
-<li><code>npm i avatar-widgets</code></li>
+<li><code>npm i persona-link-avatar --force</code></li>
 <li>Before using the avatar-widget please make sure that your backend example server must be serving on 8000 port</li>
-<li>After that import the widget into your React component: <code>import Avatarwidget from 'avatar-widgets';</code></li>
+<li>After that import the widget into your React component: <code>import Avatarwidget from 'persona-link-avatar';</code></li>
 <li>Then, you can use it in your component's render method like:</li>
 </ol>
-<pre><code>render() {
+<pre><code>function name() {
   return (
-
-      &lt;Avatarwidget message=&quot;nice to meet you mr. john&quot; /&gt;
-
+      {
+        conversationId&amp;&amp;( 
+          &lt;Avatarwidget conversationid= {conversationId} websocketadd=&quot;localhost:9000&quot; /&gt;
+        )
+      }
   );
 }
 </code></pre>

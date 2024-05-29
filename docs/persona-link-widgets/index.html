@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#frontend-widgets-for-persona-link" class="md-skip">
+        <a href="#persona-link-frontend-widgets" class="md-skip">
           Skip to content
         </a>
       
@@ -553,6 +553,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -562,6 +573,79 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-back-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to Back-end
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avatar-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avatar Rendering
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactive-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation and Usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -616,6 +700,68 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-back-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to Back-end
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avatar-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avatar Rendering
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactive-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation and Usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -629,22 +775,28 @@
                   
 
 
-<h1 id="frontend-widgets-for-persona-link">Frontend Widgets for Persona Link</h1>
-<p>Interaction is 2-way and thus to offer full potential of the goals of this project, the project includes front-end widgets that connect to the persona-link server. Each widget must provide:</p>
-<h1 id="react-components-for-supporting-interactive-avatars">React components for supporting interactive avatars</h1>
-<p>Persona link is a project where an AI agent can be linked to a persona. 
-A persona is full duplex i.e. it can not only speak but also listen.</p>
-<p>We have 2 types of personas</p>
-<ol>
-<li>Video based like from HeyGen D-iD etc.</li>
-<li>Audio based that will give audio and at least visemes (visual lip positions with timestamps)</li>
-</ol>
-<p>In future we can add text based too for full set of features.</p>
-<p>Any avatar component will connect with the backend api and get the avatar details for that id. The backend will be secured by ensuring that only allowed domains can request. The backend will give the necessary details like avatar type and other rendering related info e.g. whether it should collect user's video, audio or text. What should be the background etc. Whether interaction should be hands free, what gestures are allowed etc.</p>
-<p>Based upon the avatar type it will load appropriate reach sub component, e.g. for a  video based avatar, it will simply be playing a video from a url. However for a audio based sprite avatar it will play the sprite images in sequence of the given visemes. If text has to be displayed too and highlighted as it is being spoken, then the work timestamps returned can also be used.</p>
-<p>Based upon the settings, it will display text, record ot mic buttons. For hands free it will have appropriate UX and so on.</p>
-<p>This components will play the avatar as the backend requests (connection via a web socket) at the same time it will stream, audio, video or text. For a hands free mode (only for audio/video), when there is a pause of 2 sec, we can assume that user is done speaking and avatar can respond. We can also do fancier things later, about using LLMs to determine context of whether user is done or not and have avatar respond with fillers like "hmm". "i see", "carry on" etc.</p>
-<p>When user is done, the backend will either process the response or call a webhook for the calling app that is utilizing the avatar services. The app will have the logic to process the user's input and produce a response. It will ask the avatar to speak.</p>
+<h1 id="persona-link-frontend-widgets">Persona Link Frontend Widgets</h1>
+<p>This project aims to provide interactive avatars that connect to the Persona Link server. Each widget is designed to offer a full duplex interaction, where the AI agent, linked to a persona, can listen and respond according to the mode set.</p>
+<p>We provide frontend widgets for avatars that support:</p>
+<ul>
+<li>Video mode, e.g., from HeyGen, D-id, Azure etc.</li>
+<li>Sprite-based mode, where the avatar delivers audio and displays visemes (visual lip positions with timestamps)</li>
+<li>Audio mode, where the avatar only plays its audio</li>
+</ul>
+<p>A text-based mode might be introduced in the future for a full set of interactive features.</p>
+<h2 id="connecting-to-back-end">Connecting to Back-end</h2>
+<p>Each avatar component connects with the backend API and fetches avatar details using the unique ID. The back-end will give rendering-related instructions like the avatar type, whether it should collect user's video, audio, or text, the type of background, and also the nature and type of interaction.</p>
+<h2 id="avatar-rendering">Avatar Rendering</h2>
+<p>Based on the avatar type, the component will load the appropriate react sub-component. For a video avatar, the component will play the video from a given URL. For an audio-based sprite avatar, it will sequence the sprite images based on the returned visemes timestamps. If text has to be displayed and highlighted as it is spoken, the accompanying word timestamps can be used.</p>
+<h2 id="interactive-features">Interactive features</h2>
+<p>The component will use various settings to display, record, or send mic buttons. For hands-free UX, it will offer gesture-based interaction and other features like a pause of 2 sec to indicate the user has ended speaking and it's avatar's turn to reply.</p>
+<p>The backend will process the user’s response or trigger a webhook for the calling app that utilizes the avatar services. The app will contain the logic to process user's input and generate a response, which will then be delivered by the avatar.</p>
+<h2 id="contributing">Contributing</h2>
+<p>We welcome contributions of all sorts to Persona Link. Whether you're improving documentation, adding new features or simply reporting bugs, remember, any contribution can make a significant impact.</p>
+<h2 id="installation-and-usage">Installation and Usage</h2>
+<p>Check <a href="getting_started/">getting_started</a> for the setup guide.</p>
+<h2 id="license">License</h2>
+<p>This project is licensed under <a href="LICENSE">MIT</a>.</p>
 
 
 
