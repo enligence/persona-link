@@ -2,10 +2,10 @@ var path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./src/index.js",
+  entry: "./src/avatar-widget.js",
   output: {
     path: path.resolve("build"),
-    filename: "index.js",
+    filename: "avatar-widget.js",
     libraryTarget: "commonjs2"
   },
   module: {
