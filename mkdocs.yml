@@ -11,10 +11,17 @@ plugins:
     handlers:
       python:
         options:
+          summary: false
           allow_inspection: true
           show_source: false
           show_root_heading: false
-    enable_inventory: false
+          show_inheritance_diagram: true
+          show_root_toc_entry: false
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
+          enable_inventory: false
+          show_bases: false
+          modernize_annotations: true
 
 - monorepo
 
