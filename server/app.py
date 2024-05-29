@@ -4,6 +4,7 @@ Actual implementation my involve more complex logic,
 validation, security measures, and handling multiple tenants.
 """
 
+import json
 from typing import List
 
 from fastapi import FastAPI, WebSocket
@@ -21,6 +22,7 @@ from .models import (AvatarListModel, ConnectedAvatar, Conversation,
                      MessagePydantic, PersonaType)
 from .settings import TORTOISE_ORM
 from .ws import connections, router
+from .utils import DateTimeEncoder
 
 app = FastAPI()
 
@@ -292,9 +294,11 @@ async def construct_and_send(input: AvatarInput, websocket: WebSocket, conversat
         order=existing_messages_count + 1,  # this will be the new order
     )
 
+
     message_pydantic = await MessagePydantic.from_tortoise_orm(message)
-    # send the speech to websocket
-    await websocket.send_json(message_pydantic.model_dump())
+    message_json = json.dumps(message_pydantic.model_dump(), cls=DateTimeEncoder)
+    
+    await websocket.send_text(message_json)
 
 async def get_message_count(conversation):
     existing_messages_count = await ConversationMessage.filter(
