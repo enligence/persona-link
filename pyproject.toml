@@ -66,3 +66,9 @@ src_folder = "./."
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.extras]
+core = ["python-dotenv", "pydantic", "aiohttp"]
+server = ["fastapi"]
+azure = ["azure-storage-blob", "azure-cognitiveservices-speech"]
+postgres = ["tortoise-orm", "asyncpg", "aerich"]

@@ -16,9 +16,10 @@
 - [ ] Widget to consume visemes and playback rom sprite image.
 
 ## AI Features
-- [ ] We also need to develop a complete workflow to take any head-shot of a real or virtual character and create 21 viseme sprites as mentioned on [Azure Visemes Page]
+- [ ] Develop a complete workflow to take any head-shot of a real or virtual character and create 21 viseme sprites as mentioned on [Azure Visemes Page]
 (https://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-speech-synthesis-viseme?tabs=visemeid&pivots=programming-language-python).
 - [ ] Update architecture to offer pre-built agents using CrewAI / Langchain - e.g. QA Agent with RAG, Personalization Agent, Custom actions agent like appointment booking etc.
+- [ ] Multilingual support with automatic translation service
 
 ## New features
 - [ ] Add personalization layer logic
