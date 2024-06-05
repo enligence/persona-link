@@ -11,8 +11,8 @@ exclude=["tests/"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
-uvicorn = "^0.29.0"
 aerich = "^0.7.2"
+uvicorn = "^0.30.1"
 
 [tool.poetry.group.core.dependencies]
 python-dotenv = "^1.0.1"

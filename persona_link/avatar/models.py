@@ -42,6 +42,20 @@ class AvatarInput(BaseModel):
 
     text: str  # text to speak
     personalize: bool = False  # whether to personalize the avatar
+    
+class AvatarifyRequest(BaseModel):
+    """
+    A class that represents the request to the Avatarify API.
+
+    Attributes:
+        avatar_input (AvatarInput): Input to the Avatar.
+        callback_url (str): URL to send the response to once the Avatarify API has processed the request.
+        headers (Optional[dict]): Headers to send with the request.
+    """
+
+    avatar_input: AvatarInput
+    callback_url: str
+    headers: Optional[dict] = None
 
 
 class WebhookPydantic(BaseModel):

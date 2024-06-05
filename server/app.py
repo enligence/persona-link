@@ -7,12 +7,14 @@ validation, security measures, and handling multiple tenants.
 import json
 from typing import List
 
-from fastapi import FastAPI, WebSocket
+from fastapi import BackgroundTasks, FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from tortoise.contrib.fastapi import register_tortoise
 
+from persona_link.api_client import APIClient
 from persona_link.avatar import Avatar, AvatarInput, get_avatar_info, speak
-from persona_link.avatar.models import AvatarPydantic
+from persona_link.avatar.models import AvatarPydantic, AvatarifyRequest
+from persona_link.avatar.utils import call_webhook
 from persona_link.cache import AzureStorage, Cache, RelationalDB, md5hash
 from persona_link.persona_provider.models import SpeakingAvatarInstance
 
@@ -153,9 +155,27 @@ async def delete_avatar(avatar_slug: str) -> dict:
 # AVATAR Interaction Routes
 #################################################
 
+# create a background task to create avatar and call the webhook
+async def create_avatar_and_call_webhook(avatar_slug: str, request: AvatarifyRequest):
+    try:
+        avatar_instance: SpeakingAvatarInstance = await speak(avatar_slug, cache, request.avatar_input)
+        model_data = avatar_instance.model_dump()
+        data = {
+          "model": model_data,
+          "status": "success",
+          "error": None
+        }
+        await APIClient().post_request(request.callback_url, request.headers, data)
+    except Exception as e:
+        data = {
+          "model": None,
+          "status": "error",
+          "error": str(e)
+        }
+        await APIClient().post_request(request.callback_url, request.headers, data)
 
 @app.post("/avatar/{avatar_slug}/generate/")
-async def avatarify(avatar_slug: str, input: AvatarInput) -> SpeakingAvatarInstance:
+async def avatarify(avatar_slug: str, input: AvatarifyRequest, background_tasks: BackgroundTasks):
     """
     Generate the avatar for the given input
 
@@ -164,12 +184,13 @@ async def avatarify(avatar_slug: str, input: AvatarInput) -> SpeakingAvatarInsta
 
     Parameters:
         avatar_slug (str): The slug of the avatar to use
-        input (AvatarInput): The input text to speak
+        input (AvatarifyRequest): The input to generate the avatar
 
     Returns:
         SpeakingAvatarInstance: The instance of the speaking avatar
     """
-    return await speak(avatar_slug, cache, input)
+    background_tasks.add_task(create_avatar_and_call_webhook, avatar_slug, input)
+    return {"status": "Request received. Webhook will be called when the avatar is ready"}
 
 
 @app.get(

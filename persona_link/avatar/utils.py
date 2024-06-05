@@ -1,3 +1,4 @@
+from persona_link.api_client import APIClient
 from persona_link.cache import Cache
 from persona_link.persona_provider import PersonaBase
 from persona_link.persona_provider.models import (AudioProviderSettings,
@@ -57,7 +58,7 @@ async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingA
 
 async def call_webhook(avatar_slug: str, data: WebhookResponseData):
     """
-    Call the webhook of the avatar with the given slug. 
+    Call the user response webhook of the avatar with the given slug. 
     The calling app must handle the request and take appropriate action
     
     Parameters:
