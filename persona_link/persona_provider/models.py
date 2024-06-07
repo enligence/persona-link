@@ -18,6 +18,8 @@ class AvatarType(Enum):
 
     AUDIO = "audio"
     VIDEO = "video"
+    SPRITE = "sprite"
+    TEXT = "text"
 
 
 class Metadata(BaseModel):

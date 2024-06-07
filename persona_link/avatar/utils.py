@@ -3,7 +3,8 @@ from persona_link.cache import Cache
 from persona_link.persona_provider import PersonaBase
 from persona_link.persona_provider.models import (AudioProviderSettings,
                                                   AvatarType,
-                                                  SpeakingAvatarInstance)
+                                                  SpeakingAvatarInstance, VideoProviderSettings)
+from persona_link.persona_provider.sprite.models import SpriteAvatarSettings
 
 from .models import Avatar, AvatarInput, WebhookResponseData
 
@@ -28,10 +29,14 @@ async def get_avatar_info(avatar_slug: str) -> Avatar:
     if not settings:
         raise ValueError(f"Settings for provider '{avatar.provider}' are invalid")
     
-    if isinstance(settings, AudioProviderSettings):
-        return avatar, AvatarType.AUDIO.value
-    else:
-        return avatar, AvatarType.VIDEO.value
+
+    avatar_type = {
+        AudioProviderSettings: AvatarType.AUDIO.value,
+        VideoProviderSettings: AvatarType.VIDEO.value,
+        SpriteAvatarSettings: AvatarType.SPRITE.value
+    }.get(type(settings), AvatarType.TEXT.value)
+    
+    return avatar, avatar_type
     
 
 async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingAvatarInstance:
