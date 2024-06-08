@@ -54,7 +54,7 @@ class AvatarifyRequest(BaseModel):
     """
 
     avatar_input: AvatarInput
-    callback_url: str
+    callback_url: Optional[str] = None
     headers: Optional[dict] = None
 
 
