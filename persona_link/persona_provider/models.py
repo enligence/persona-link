@@ -72,6 +72,7 @@ class SpeakingAvatarInstance(BaseModel):
     provider: str
     urls: Urls
     metadata: Optional[Metadata] = None
+    from_cache: bool = False
 
 
 class VideoFormat(str, Enum):

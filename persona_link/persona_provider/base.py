@@ -79,7 +79,7 @@ class PersonaBase(ABC):
             urls: Urls = await cache.get_urls(record)
 
             instance = SpeakingAvatarInstance(
-                avatar_type=avatar_type, urls=urls, metadata=data.metadata, provider = provider
+                avatar_type=avatar_type, urls=urls, metadata=data.metadata, provider = provider, from_cache=True
             )
         else:
             instance = SpeakingAvatarInstance(
