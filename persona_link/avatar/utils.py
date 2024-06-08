@@ -29,14 +29,14 @@ async def get_avatar_info(avatar_slug: str) -> Avatar:
     if not settings:
         raise ValueError(f"Settings for provider '{avatar.provider}' are invalid")
     
-
-    avatar_type = {
-        AudioProviderSettings: AvatarType.AUDIO.value,
-        VideoProviderSettings: AvatarType.VIDEO.value,
-        SpriteAvatarSettings: AvatarType.SPRITE.value
-    }.get(type(settings), AvatarType.TEXT.value)
-    
-    return avatar, avatar_type
+    if isinstance(settings, AudioProviderSettings):
+        return avatar, AvatarType.AUDIO.value
+    elif isinstance(settings, VideoProviderSettings):
+        return avatar, AvatarType.VIDEO.value
+    elif isinstance(settings, SpriteAvatarSettings):
+        return avatar, AvatarType.SPRITE.value
+    else:
+        return avatar, AvatarType.TEXT.value
     
 
 async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingAvatarInstance:
@@ -59,7 +59,7 @@ async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingA
     if not settings:
         raise ValueError(f"Settings for provider '{avatar.provider}' are invalid")
     
-    return await instance.speak(cache, avatar.slug, input.text, settings)
+    return await instance.speak(cache, avatar.slug, input.text, settings, avatar.provider.value)
 
 async def call_webhook(avatar_slug: str, data: WebhookResponseData):
     """

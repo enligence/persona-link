@@ -69,6 +69,7 @@ class SpeakingAvatarInstance(BaseModel):
     """
 
     avatar_type: AvatarType = AvatarType.AUDIO
+    provider: str
     urls: Urls
     metadata: Optional[Metadata] = None
 

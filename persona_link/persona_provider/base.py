@@ -51,6 +51,7 @@ class PersonaBase(ABC):
         avatar_id: str,
         text: str,
         settings: AudioProviderSettings | VideoProviderSettings,
+        provider: str
     ) -> SpeakingAvatarInstance:
         """
         Speak the input text using the avatar with the given slug
@@ -78,11 +79,12 @@ class PersonaBase(ABC):
             urls: Urls = await cache.get_urls(record)
 
             instance = SpeakingAvatarInstance(
-                avatar_type=avatar_type, urls=urls, metadata=data.metadata
+                avatar_type=avatar_type, urls=urls, metadata=data.metadata, provider = provider
             )
         else:
             instance = SpeakingAvatarInstance(
                 avatar_type=avatar_type,
+                provider=provider,
                 urls=await cache.get_urls(record),
                 metadata=record.metadata,
             )
