@@ -6,7 +6,7 @@ from persona_link.avatar.models import Avatar, AvatarInput, AvatarPydantic
 from persona_link.cache.cache import Cache
 from persona_link.cache.db import RelationalDB
 from persona_link.cache.hashing import md5hash
-from persona_link.cache.storage import LocalStorage
+from persona_link.cache.storage import LocalStorage, AzureStorage
 from persona_link.persona_provider.models import SpeakingAvatarInstance
 
 load_dotenv()
@@ -14,10 +14,11 @@ load_dotenv()
 
 @pytest.fixture
 def cache():
-    local_storage = LocalStorage()
+    #local_storage = LocalStorage()
+    azure_storage = AzureStorage()
     sqlite_db = RelationalDB()
-    return Cache(local_storage, sqlite_db, md5hash)
-
+    #return Cache(local_storage, sqlite_db, md5hash)
+    return Cache(azure_storage, sqlite_db, md5hash)
 
 # @pytest.mark.asyncio
 # async def test_audio_avatar(cache):
@@ -88,7 +89,7 @@ async def test_sprite_avatar(cache):
     result: SpeakingAvatarInstance = await speak(
         avatar.slug, cache, AvatarInput(text="The quick brown fox jumps over the lazy dog. And the red goat jumps over the blue cow.")
     )
-
+    print(result)
     assert result is not None
     assert result.urls.media_url is not None
     assert result.urls.visemes_url is not None

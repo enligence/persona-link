@@ -30,8 +30,4 @@ class AzureTTSVoiceSettings(AudioProviderSettings):
         Returns:
             AudioProviderSettings: The validated settings
         """
-        try:
-            return cls(**settings)  # Attempts to parse and validate the passed in settings
-        except ValidationError:
-            return False
-    
+        return cls(**settings)  # Attempts to parse and validate the passed in settings

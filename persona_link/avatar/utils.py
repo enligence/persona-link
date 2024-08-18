@@ -9,7 +9,7 @@ from persona_link.persona_provider.sprite.models import SpriteAvatarSettings
 from .models import Avatar, AvatarInput, WebhookResponseData
 
 
-async def get_avatar_info(avatar_slug: str) -> Avatar:
+async def get_avatar_info(avatar_slug: str) -> tuple[Avatar, AvatarType]:
     """
     Get the avatar with the given slug
     
@@ -21,22 +21,22 @@ async def get_avatar_info(avatar_slug: str) -> Avatar:
             Avatar: The avatar with the given slug
             AvatarType: The type of the avatar
     """
-    avatar: Avatar = await Avatar.get_or_none(slug=avatar_slug)
+    avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
     instance: PersonaBase = avatar.instance()
-    settings = instance.validate(avatar.settings)
+    settings = instance.validate(avatar.settings) # type: ignore
     if not settings:
         raise ValueError(f"Settings for provider '{avatar.provider}' are invalid")
     
     if isinstance(settings, AudioProviderSettings):
-        return avatar, AvatarType.AUDIO.value
+        return avatar, AvatarType.AUDIO
     elif isinstance(settings, VideoProviderSettings):
-        return avatar, AvatarType.VIDEO.value
+        return avatar, AvatarType.VIDEO
     elif isinstance(settings, SpriteAvatarSettings):
-        return avatar, AvatarType.SPRITE.value
+        return avatar, AvatarType.SPRITE
     else:
-        return avatar, AvatarType.TEXT.value
+        return avatar, AvatarType.TEXT
     
 
 async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingAvatarInstance:
@@ -51,11 +51,11 @@ async def speak(avatar_slug: str, cache: Cache, input: AvatarInput) -> SpeakingA
     Returns:
         SpeakingAvatarInstance: The instance of the speaking avatar
     """
-    avatar: Avatar = await Avatar.get_or_none(slug=avatar_slug)
+    avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
     instance: PersonaBase = avatar.instance()
-    settings = instance.validate(avatar.settings)
+    settings = instance.validate(avatar.settings) # type: ignore
     if not settings:
         raise ValueError(f"Settings for provider '{avatar.provider}' are invalid")
     
@@ -70,7 +70,7 @@ async def call_webhook(avatar_slug: str, data: WebhookResponseData):
         avatar_slug (str): The slug of the avatar to use
         data (WebhookResponseData): The data to send to the webhook
     """
-    avatar: Avatar = await Avatar.get_or_none(slug=avatar_slug)
+    avatar = await Avatar.get_or_none(slug=avatar_slug)
     if avatar is None:
         raise ValueError(f"Avatar '{avatar_slug}' not found")
     

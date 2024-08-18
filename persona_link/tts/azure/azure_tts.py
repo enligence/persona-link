@@ -33,7 +33,7 @@ class AzureTTS(TTSBase):
     def getAudioFormat(
         self, settings: AzureTTSVoiceSettings
     ) -> SpeechSynthesisOutputFormat:
-        if settings.format == AudioFormat.MP3:
+        if settings.audio_format == AudioFormat.MP3:
             if settings.sampling_rate_hz == 16000 and settings.bit_rate_kbps == 32:
                 return SpeechSynthesisOutputFormat.Audio16Khz32KBitRateMonoMp3
             elif settings.sampling_rate_hz == 16000 and settings.bit_rate_kbps == 128:
@@ -50,7 +50,7 @@ class AzureTTS(TTSBase):
                 return SpeechSynthesisOutputFormat.Audio48Khz96KBitRateMonoMp3
             elif settings.sampling_rate_hz == 48000 and settings.bit_rate_kbps == 192:
                 return SpeechSynthesisOutputFormat.Audio48Khz192KBitRateMonoMp3
-        elif settings.format == AudioFormat.WAV:
+        elif settings.audio_format == AudioFormat.WAV:
             if settings.sampling_rate_hz == 8000:
                 return SpeechSynthesisOutputFormat.Riff8Khz16BitMonoPcm
             elif settings.sampling_rate_hz == 16000:
@@ -63,7 +63,7 @@ class AzureTTS(TTSBase):
                 return SpeechSynthesisOutputFormat.Riff22050Hz16BitMonoPcm
             elif settings.sampling_rate_hz == 44100:
                 return SpeechSynthesisOutputFormat.Riff44100Hz16BitMonoPcm
-        elif settings.format == AudioFormat.OPUS:
+        elif settings.audio_format == AudioFormat.OPUS:
             if settings.sampling_rate_hz == 16000:
                 return SpeechSynthesisOutputFormat.Ogg16Khz16BitMonoOpus
             elif settings.sampling_rate_hz == 24000:
@@ -128,7 +128,7 @@ class AzureTTS(TTSBase):
 
             result: SpeechSynthesisResult = speech_synthesizer.speak_text_async(
                 text
-            ).get()
+            ).get() # type: ignore
             if result.reason != ResultReason.SynthesizingAudioCompleted:
                 raise Exception(f"Speech synthesis failed: {result.reason}")
             
@@ -139,7 +139,7 @@ class AzureTTS(TTSBase):
                     result.audio_data
                     if not settings.streaming
                     else BytesIO(result.audio_data)
-                ),
+                ), # type: ignore
                 visemes=visemes if settings.visemes else None,
                 word_timestamps=word_timestamps if settings.word_timestamps else None,
             )
